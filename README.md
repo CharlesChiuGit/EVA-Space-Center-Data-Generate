@@ -50,7 +50,7 @@
     - `FOVY`: The field of view angle, in degrees, in the y direction.
     - `Z_NEAR`: The distance from the viewer to the near clipping plane (always positive).
     - `Z_FAR`: The distance from the viewer to the far clipping plane (always positive).
-<img src="https://github.com/charleschiu2012/EVA-Space-Center-Data-Generate/tree/master/src/Field_of_view_angle_in_view_frustum.png" height="100%" width="100%">
+<img src="https://github.com/charleschiu2012/EVA-Space-Center-Data-Generate/tree/master/src/Field_of_view_angle_in_view_frustum.png">
     - `LOWER_BOUND`: The lower bound of the `c_gamma`.
     - `UPPER_BOUND`: The upper bound of the `c_gamma`
 - PATH
@@ -76,14 +76,11 @@
 ## JSON File Format
 - Each JSON file contains 10,000 images/tagets.
 - imageX.json (X: 0~9):
-  """
   {
     'image_name': cv2 ndarray[height, width, channels] in list form.
     }
-  """
 - targetX.json (X: 0~9):
-  """
   {
     'image_name': [`c_gamma`, `c_theta`, `c_phi`, `p_gamma`, `p_thet`a, `p_phi`, `u_x`, `u_y`, `u_z`]
     }
-  """
+    
