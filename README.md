@@ -50,15 +50,15 @@
     - `FOVY`: The field of view angle, in degrees, in the y direction.
     - `Z_NEAR`: The distance from the viewer to the near clipping plane (always positive).
     - `Z_FAR`: The distance from the viewer to the far clipping plane (always positive).
-<img src="https://github.com/charleschiu2012/EVA-Space-Center-Data-Generate/blob/master/src/FOV.png" height="100%" width="100%">
+    <img src="https://github.com/charleschiu2012/EVA-Space-Center-Data-Generate/blob/master/src/FOV.png" height="50%" width="50%">
     - `LOWER_BOUND`: The lower bound of the `c_gamma`.
-    - `UPPER_BOUND`: The upper bound of the `c_gamma`
+    - `UPPER_BOUND`: The upper bound of the `c_gamma`.
 - PATH
     - The path you save your dataset.
 - hyperparameters
     - `IMAGE_INDEX`: How many image do you want in one part.
     - `PART_INDEX`: How many part do you want.
-    
+   
 ## Setting up OpenGL Envoriment
 - set_viewport():
     - Set view port.
