@@ -18,11 +18,10 @@ from objloader_adam import *
 from config import *
 
 def set_viewport(viewport_width, viewport_hight):
-    '''
-    :param view_port_width:
-    :param view_port_hight:
-    :return:
-    '''
+    """
+    Set view port.
+    :return: surface(PYGAME image)
+    """
     logging.info('Start setting viewport')
     viewport = (viewport_width, viewport_hight)
     srf = pygame.display.set_mode(viewport, OPENGL | DOUBLEBUF)
@@ -30,9 +29,9 @@ def set_viewport(viewport_width, viewport_hight):
 
 
 def set_light_property():
-    '''
-    :return:
-    '''
+    """
+    Set light poroperty.
+    """
     logging.info('Start setting light property')
     glLightfv(GL_LIGHT0, GL_POSITION, (-40, 200, 100, 0.0))
     glLightfv(GL_LIGHT0, GL_AMBIENT, (0.2, 0.2, 0.2, 1.0))
@@ -40,6 +39,13 @@ def set_light_property():
 
 
 def set_filed_of_vision(fovy, viewport, zNear, zFar):
+    """
+    Set FOV.
+    :param fovy: The field of view angle, in degrees, in the y direction.
+    :param viewport:
+    :param zNear: The distance from the viewer to the near clipping plane (always positive).
+    :param zFar: The distance from the viewer to the far clipping plane (always positive).
+    """
     logging.info('Start setting FOV')
     glMatrixMode(GL_PROJECTION)
     glLoadIdentity()
@@ -50,6 +56,9 @@ def set_filed_of_vision(fovy, viewport, zNear, zFar):
 
 
 def ball_coordinates_to_cassette_coordinates(gamma, theta, phi):
+    """
+    Transfer Ball coordinates to Cassette coordinates.
+    """
     x = gamma * math.sin(theta) * math.cos(phi)
     y = gamma * math.sin(theta) * math.sin(phi)
     z = gamma * math.cos(theta)
@@ -57,6 +66,9 @@ def ball_coordinates_to_cassette_coordinates(gamma, theta, phi):
 
 
 def set_camera_position(lower_bound, upper_bound):
+    """
+    Set camera position. c_gamma, c_theta, c_phi are sampled with random.uniform in their own range.
+    """
     c_gamma = random.uniform(lower_bound, upper_bound)
     c_theta = math.pi * random.uniform(0, 1)
     c_phi = 2 * math.pi * random.uniform(0, 1)
@@ -65,6 +77,9 @@ def set_camera_position(lower_bound, upper_bound):
 
 
 def set_optical_axis_look_at(moon_radius):
+    """
+    Set optical axis' end point. p_gamma, p_theta, p_phi are sampled with random.uniform in their own range.
+    """
     p_gamma = random.uniform(0, moon_radius)
     p_theta = math.acos(1 - 2 * random.uniform(0, 1))
     p_phi = 2 * math.pi * random.uniform(0, 1)
@@ -73,6 +88,9 @@ def set_optical_axis_look_at(moon_radius):
 
 
 def camera_direction(c_x, c_y, c_z, p_x, p_y, p_z):
+    """
+    Set direction of the camera.
+    """
     forward = [0, 0, 0]
     up = [0, 0, 0]
     camera_position = [c_x, c_y, c_z]
