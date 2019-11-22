@@ -33,8 +33,8 @@ def check_directory(directory):
 def compress_file(directory):
     archive_name = directory
     root_dir = os.path.join(PATH, directory)
-    shutil.make_archive(archive_name, 'gztar', root_dir)
-    # _ = shutil.move(archive_name + '.tar.gz', move_path)
+    gztar_file_name = shutil.make_archive(archive_name, 'gztar', root_dir)
+    _ = shutil.move(gztar_file_name, PATH)
 
 
 def set_viewport(viewport_width, viewport_hight):
