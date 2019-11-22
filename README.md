@@ -78,7 +78,7 @@
 ## JSON File Format
 - Each JSON file contains 10,000 images/tagets.
 - Hierarchy of the directory
-> Level 1 directory i:0 ~ 9
+> - Level 1 directory i:0 ~ 9
 >> - target_i.json 
 >> - i_j.targz
 >> - Level 2 directory i_j j:0 ~ 9
