@@ -23,6 +23,7 @@ UPPER_BOUND = MOON_RADIUS + (OPENGL_1_METER * 10000)   # 10,000m above moon surf
 # PATH
 PATH = os.path.join('/data/', DATASET_NAME)
 if not os.path.exists(PATH):
+    logging.info('Create dataset {}'.format(DATASET_NAME))
     os.makedirs(PATH)
 
 # hyperparameters
