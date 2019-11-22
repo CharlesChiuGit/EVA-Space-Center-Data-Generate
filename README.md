@@ -78,13 +78,12 @@
 ## JSON File Format
 - Each JSON file contains 10,000 images/tagets.
 - Hierarchy of the directory
-```
-- Level 1 directory i:0 ~ 9
-    - target_i.json 
-    - i_j.targz
-    - Level 2 directory i_j j:0 ~ 9
-        - 1,000 images in name of "DATASETNAME_XXXXX.png"
-```
+> Level 1 directory i:0 ~ 9
+>> - target_i.json 
+>> - i_j.targz
+>> - Level 2 directory i_j j:0 ~ 9
+>>> - 1,000 images in name of "DATASETNAME_XXXXX.png"
+
 - target_i.json:
 ```python
   {
@@ -93,11 +92,8 @@
 ```
 
 ## Sample
-- Dataset_all_random_98.png
-<p align="center">
-  <img width="100%" height="100%" src="https://github.com/charleschiu2012/EVA-Space-Center-Data-Generate/blob/master/src/Dataset_all_random_98.png">
-</p>
-- Dataset_all_random_1998.png
-<p align="center">
-  <img width="100%" height="100%" src="https://github.com/charleschiu2012/EVA-Space-Center-Data-Generate/blob/master/src/Dataset_all_random_1998.png">
-</p>
+|Dataset_all_random_98.png|Dataset_all_random_1998.png|
+|:---:|:---:|
+|<img src="https://github.com/charleschiu2012/EVA-Space-Center-Data-Generate/blob/master/src/Dataset_all_random_98.png"/>|<img src="https://github.com/charleschiu2012/EVA-Space-Center-Data-Generate/blob/master/src/Dataset_all_random_1998.png"/>|
+
+
