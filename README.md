@@ -91,4 +91,13 @@
     'image_name': [`c_gamma`, `c_theta`, `c_phi`, `p_gamma`, `p_thet`a, `p_phi`, `u_x`, `u_y`, `u_z`]
     }
 ```
-    
+
+## Sample
+- Dataset_all_random_98.png
+<p align="center">
+  <img width="100%" height="100%" src="https://github.com/charleschiu2012/EVA-Space-Center-Data-Generate/blob/master/src/Dataset_all_random_98.png">
+</p>
+- Dataset_all_random_1998.png
+<p align="center">
+  <img width="100%" height="100%" src="https://github.com/charleschiu2012/EVA-Space-Center-Data-Generate/blob/master/src/Dataset_all_random_1998.png">
+</p>
