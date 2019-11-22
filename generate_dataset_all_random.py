@@ -31,8 +31,8 @@ def check_directory(directory):
 
 
 def compress_file(directory):
-    archive_name = os.path.expanduser(directory)
-    root_dir = os.path.expanduser(PATH)
+    archive_name = directory
+    root_dir = PATH
     shutil.make_archive(archive_name, 'gztar', root_dir)
     # _ = shutil.move(archive_name + '.tar.gz', move_path)
 
