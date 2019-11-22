@@ -31,12 +31,11 @@
 
 ## Enviroment
 - Anaconda 2
-- python 3.7
+- python 3.6
 - pip install
-    - opencv-python==
-- conda install
-    - pygame==
-    - opengl==
+    - opencv-python==3.4.2
+    - pygame==1.9.4
+    - PyOpenGL==3.1.3b2
     
 ## Config
 > Before generating dataset, you have to adjust config.py.
