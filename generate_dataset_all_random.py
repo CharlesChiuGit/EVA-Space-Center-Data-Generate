@@ -175,7 +175,7 @@ if __name__ == '__main__':
                 glCallList(obj.gl_list)
 
                 # SAVE target and image
-                img_name = DATASET_NAME + '_{}'.format(i * (LEVEL_1_INDEX * 10000) + j * (LEVEL_2_INDEX * 1000) + k)
+                img_name = DATASET_NAME + '_{}'.format((i * 10000) + (j * 1000) + k)
                 # img = transfer_pygame_surface_to_cv2_ndarray(srf)
                 # sample_image[img_name] = img.tolist()
                 sample_target[img_name] = [c_gamma, c_theta, c_phi, p_gamma, p_theta, p_phi, u_x, u_y, u_z]
