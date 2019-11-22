@@ -154,10 +154,10 @@ if __name__ == '__main__':
     for i in range(LEVEL_1_INDEX):
         logging.info('Start creating Part_{}'.format(i))
         part_start = time.time()
-        level_l_directory = '/{}'.format(i)
+        level_l_directory = '{}'.format(i)
         check_directory(level_l_directory)
         for j in range(LEVEL_2_INDEX):
-            level_2_directory = os.path.join(level_l_directory, '/{}_{}'.format(i, j))
+            level_2_directory = os.path.join(level_l_directory, '{}_{}'.format(i, j))
             check_directory(level_2_directory)
             for k in range(IMAGE_INDEX):  # make 1000 images
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
@@ -183,6 +183,6 @@ if __name__ == '__main__':
 
         logging.info('Finish creating Part_{}, time = {}'.format(i, (time.time() - part_start)))
         logging.info('Start saving target_{}'.format(i))
-        with open(os.path.join(PATH, '/target_{}.json'.format(i)), 'a') as f:
+        with open(os.path.join(PATH, 'target_{}.json'.format(i)), 'a') as f:
             json.dump(sample_target, f)
         logging.info('Finish saving target_{}'.format(i))
