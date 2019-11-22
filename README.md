@@ -77,13 +77,15 @@
     
 ## JSON File Format
 - Each JSON file contains 10,000 images/tagets.
-- imageX.json (X: 0~9):
-```python
-{
-    'image_name': cv2 ndarray[height, width, channels] in list form.
-    }
+- Hierarchy of the directory
 ```
-- targetX.json (X: 0~9):
+- Level 1 directory i:0 ~ 9
+    - target_i.json 
+    - i_j.targz
+    - Level 2 directory i_j j:0 ~ 9
+        - 1,000 images in name of "DATASETNAME_XXXXX.png"
+```
+- target_i.json:
 ```python
   {
     'image_name': [`c_gamma`, `c_theta`, `c_phi`, `p_gamma`, `p_thet`a, `p_phi`, `u_x`, `u_y`, `u_z`]
