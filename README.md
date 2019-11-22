@@ -57,8 +57,9 @@
 - PATH
     - The path you save your dataset.
 - hyperparameters
-    - `IMAGE_INDEX`: How many image do you want in one part.
-    - `PART_INDEX`: How many part do you want.
+    - `LEVEL_1_INDEX`: How many part_1 do you want.
+    - `LEVEL_2_INDEX`: How many part_2 do you want.
+    - `IMAGE_INDEX`: How many images do you want in one part_2.
    
 ## Setting up OpenGL Envoriment
 - set_viewport():
