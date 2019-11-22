@@ -26,6 +26,7 @@ from pygame.locals import *
 def check_directory(directory):
     directory_path = os.path.join(PATH, directory)
     if not os.path.exists(directory_path):
+        logging.info('Create directory {}'.format(directory))
         os.makedirs(directory_path)
 
 
