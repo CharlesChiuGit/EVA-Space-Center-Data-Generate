@@ -25,8 +25,7 @@ from pygame.locals import *
 
 def check_directory(directory):
     directory_path = os.path.join(PATH, directory)
-    print(directory_path)
-    if not os.path.isdir(directory_path):
+    if not os.path.exists(directory_path):
         logging.info('Create directory {}'.format(directory))
         os.makedirs(directory_path)
 
@@ -180,7 +179,7 @@ if __name__ == '__main__':
                 # img = transfer_pygame_surface_to_cv2_ndarray(srf)
                 # sample_image[img_name] = img.tolist()
                 sample_target[img_name] = [c_gamma, c_theta, c_phi, p_gamma, p_theta, p_phi, u_x, u_y, u_z]
-                pygame.image.save(srf, os.path.expanduser(level_2_directory) + img_name + '.png')
+                pygame.image.save(srf, level_2_directory + '/' + img_name + '.png')
             compress_file(level_2_directory)
 
         logging.info('Finish creating Part_{}, time = {}'.format(i, (time.time() - part_start)))
