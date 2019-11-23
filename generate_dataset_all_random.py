@@ -151,7 +151,7 @@ if __name__ == '__main__':
     # create image
     for i in range(LEVEL_1_INDEX):
         sample_target = {}
-        sample_image = {}
+        # sample_image = {}
         logging.info('Start creating Part_{}'.format(i))
         part_start = time.time()
         level_l_directory = '{}'.format(i)
