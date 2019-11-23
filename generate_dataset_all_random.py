@@ -149,10 +149,9 @@ if __name__ == '__main__':
     glShadeModel(GL_SMOOTH)  # most obj files expect to be smooth-shaded
     set_filed_of_vision(FOVY, VIEWPORT, Z_NEAR, Z_FAR)
     # create image
-    sample_target = {}
-    sample_image = {}
-    counter = 0
     for i in range(LEVEL_1_INDEX):
+        sample_target = {}
+        sample_image = {}
         logging.info('Start creating Part_{}'.format(i))
         part_start = time.time()
         level_l_directory = '{}'.format(i)
