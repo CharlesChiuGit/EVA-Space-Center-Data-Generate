@@ -45,6 +45,7 @@ def set_viewport(viewport_width, viewport_hight):
     logging.info('Start setting viewport')
     viewport = (viewport_width, viewport_hight)
     srf = pygame.display.set_mode(viewport, OPENGL | DOUBLEBUF)
+
     return srf
 
 
@@ -82,6 +83,7 @@ def ball_coordinates_to_cassette_coordinates(gamma, theta, phi):
     x = gamma * math.sin(theta) * math.cos(phi)
     y = gamma * math.sin(theta) * math.sin(phi)
     z = gamma * math.cos(theta)
+
     return x, y, z
 
 
@@ -93,6 +95,7 @@ def set_camera_position(lower_bound, upper_bound):
     c_theta = math.pi * random.uniform(0, 1)
     c_phi = 2 * math.pi * random.uniform(0, 1)
     c_x, c_y, c_z = ball_coordinates_to_cassette_coordinates(c_gamma, c_theta, c_phi)
+
     return c_gamma, c_theta, c_phi, c_x, c_y, c_z
 
 
@@ -104,6 +107,7 @@ def set_optical_axis_look_at(moon_radius):
     p_theta = math.acos(1 - 2 * random.uniform(0, 1))
     p_phi = 2 * math.pi * random.uniform(0, 1)
     p_x, p_y, p_z = ball_coordinates_to_cassette_coordinates(p_gamma, p_theta, p_phi)
+
     return p_gamma, p_theta, p_phi, p_x, p_y, p_z
 
 
@@ -122,6 +126,7 @@ def camera_direction(c_x, c_y, c_z, p_x, p_y, p_z):
     norm_forward = normalize(forward)
     side = normalize(crossf(norm_forward, up))
     up = normalize(crossf(side, norm_forward))
+
     return up[0], up[1], up[2]
 
 
@@ -130,6 +135,7 @@ def transfer_pygame_surface_to_cv2_ndarray(surface):
     img = np.fromstring(pygame_string, dtype=np.uint8)
     img = img.reshape((VIEWPORT[1], VIEWPORT[0], 3))
     img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
+
     return img
 
 
