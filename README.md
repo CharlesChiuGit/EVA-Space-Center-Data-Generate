@@ -99,4 +99,8 @@
 |Dataset_all_random_29999.png|Dataset_all_random_35999.png|
 |<img src="https://github.com/charleschiu2012/EVA-Space-Center-Data-Generate/blob/master/src/Dataset_all_random_29999.png"/>|<img src="https://github.com/charleschiu2012/EVA-Space-Center-Data-Generate/blob/master/src/Dataset_all_random_35999.png"/>|
 
+## TODO
+- [ ] load images problem
+- [ ] adjustment constamt penalty 
+- [ ] Nan value
 
