@@ -156,6 +156,7 @@ if __name__ == '__main__':
     set_filed_of_vision(FOVY, VIEWPORT, Z_NEAR, Z_FAR)
     # create image
     sample_target = {}
+    part_start = time.time()
     logging.info('Start creating single image')
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     glLoadIdentity()
