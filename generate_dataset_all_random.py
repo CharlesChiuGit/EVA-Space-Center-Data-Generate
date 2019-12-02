@@ -78,6 +78,7 @@ def set_filed_of_vision(fovy, viewport, zNear, zFar):
 
 def ball_coordinates_to_cassette_coordinates(gamma, theta, phi):
     """
+    In physics order: (gamma, theta, phi)
     Transfer Ball coordinates to Cassette coordinates.
     """
     x = gamma * math.sin(theta) * math.cos(phi)
