@@ -8,7 +8,7 @@
 - 80,000 train data；10,000 test data；10,000 valid data.
 - The label(target/ground truth): `c_gamma`, `c_theta`, `c_phi`, `p_gamma`, `p_theta`, `p_phi`, `u_x`, `u_y`, `u_z`
 - If not mentioned, the world sphere coordinate(in physics order) is based on Moon center.  
-- <img src="https://github.com/charleschiu2012/EVA-Space-Center-Data-Generate/blob/master/src/360px-3D_Spherical.svg.png"  height="50%" width="50%">
+- <img src="https://github.com/charleschiu2012/EVA-Space-Center-Data-Generate/blob/master/src/360px-3D_Spherical.svg.png"  height="20%" width="20%">
 - The meaning of this 9 parameters list below:
     - `c_gamma`: gamma of the camera position.
     - `c_theta`: theta of the camera position.
