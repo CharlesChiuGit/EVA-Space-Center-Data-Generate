@@ -23,7 +23,7 @@
     - `c_gamma`: [1.74308766628, 1.75292031414] in OpenGL unit --> [1737.3,  1747.1] km, 200m ~ 10,000m above Moon surface.
     - `c_theta`: [0, 2pi] radian
     - `c_phi`: [0, pi] radian
-    - `p_gamma`: [0, 1.742887] in OpenGL unit --> [0, 1737.1] km, radius of the Moon.
+    - `p_gamma`: [0, 1.742887] in OpenGL unit --> [0, 1737.1] km, radius of the Moon. However, the setting of p_gamma doesn't cause any difference of where cemera look at nor the images, only the direction matters, you can see the experiment below.
     - `p_theta`: [0, 2pi] radian
     - `p_phi`: [0, pi] radian
     - `u_x`: [-1, 1] no unit, since the normal vector is normalized.
@@ -113,6 +113,14 @@
 |<img src="https://github.com/charleschiu2012/EVA-Space-Center-Data-Generate/blob/master/src/Dataset_all_random_999.png"/>|<img src="https://github.com/charleschiu2012/EVA-Space-Center-Data-Generate/blob/master/src/Dataset_all_random_9999.png"/>|
 |Dataset_all_random_29999.png|Dataset_all_random_35999.png|
 |<img src="https://github.com/charleschiu2012/EVA-Space-Center-Data-Generate/blob/master/src/Dataset_all_random_29999.png"/>|<img src="https://github.com/charleschiu2012/EVA-Space-Center-Data-Generate/blob/master/src/Dataset_all_random_35999.png"/>|
+
+## Experiment of p_gamma
+|Single_Image_center.png|Single_Image_infinite_far.png|
+|:---:|:---:|
+|<img src="https://github.com/charleschiu2012/EVA-Space-Center-Data-Generate/blob/master/src/Single_Image_center.png"/>|<img src="https://github.com/charleschiu2012/EVA-Space-Center-Data-Generate/blob/master/src/Single_Image_infinite_far.png"/>|
+|Single_Image_negative_surface.png|Single_Image_positive_surface.png|
+|<img src="https://github.com/charleschiu2012/EVA-Space-Center-Data-Generate/blob/master/src/Single_Image_negative_surface.png"/>|<img src="https://github.com/charleschiu2012/EVA-Space-Center-Data-Generate/blob/master/src/Single_Image_positive_surface.png"/>|
+- After comparing every pixel of these images, there is zero differeence between it.
 
 ## TODO
 - [ ] load images problem
