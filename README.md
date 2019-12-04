@@ -13,7 +13,7 @@
     - `c_gamma`: gamma of the camera position.
     - `c_theta`: theta of the camera position.
     - `c_phi`: phi of the camera position.
-    - `p_gamma`: gamma of the optical axis' end point.
+    - `p_gamma`: gamma of the optical axis' end point. However, the setting of p_gamma doesn't cause any difference of where cemera look at nor the images, only the direction matters, you can see the experiment below.
     - `p_theta`: theta of the optical axis' end point.
     - `p_phi`: phi of the optical axis' end pount.
     - `u_x`: x componet of camera pose's normal vecter.
@@ -23,7 +23,7 @@
     - `c_gamma`: [1.74308766628, 1.75292031414] in OpenGL unit --> [1737.3,  1747.1] km, 200m ~ 10,000m above Moon surface.
     - `c_theta`: [0, 2pi] radian
     - `c_phi`: [0, pi] radian
-    - `p_gamma`: [0, 1.742887] in OpenGL unit --> [0, 1737.1] km, radius of the Moon. However, the setting of p_gamma doesn't cause any difference of where cemera look at nor the images, only the direction matters, you can see the experiment below.
+    - `p_gamma`: [0, 1.742887] in OpenGL unit --> [0, 1737.1] km, radius of the Moon.
     - `p_theta`: [0, 2pi] radian
     - `p_phi`: [0, pi] radian
     - `u_x`: [-1, 1] no unit, since the normal vector is normalized.
