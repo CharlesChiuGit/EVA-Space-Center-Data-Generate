@@ -169,11 +169,11 @@ if __name__ == '__main__':
     # p_gamma, p_theta, p_phi, p_x, p_y, p_z = set_optical_axis_look_at(MOON_RADIUS)
     p_gamma, p_theta, p_phi = 1.742887, math.acos(1 - 2 * 0), 2 * math.pi * 0
     p_x, p_y, p_z = ball_coordinates_to_cassette_coordinates(p_gamma, p_theta, p_phi)
-    print(p_gamma, p_theta, p_phi, p_x, p_y, p_z)
     # DIRECTION of camera
     u_x, u_y, u_z = camera_direction(c_x, c_y, c_z, p_x, p_y, p_z)
 
     # take the shoot
+    print(c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z)
     gluLookAt(c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z)
     glCallList(obj.gl_list)
 

@@ -6,7 +6,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)-8s %(me
 
 # Dateset name
 DATASET_NAME = 'Single_Image'
-SINGLE_IMAGE = 'surface'
+SINGLE_IMAGE = '_positive_surface'
 
 # Units
 UNIT_REAL = 996.679647  # in km
