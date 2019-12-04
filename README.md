@@ -115,10 +115,10 @@
 |<img src="https://github.com/charleschiu2012/EVA-Space-Center-Data-Generate/blob/master/src/Dataset_all_random_29999.png"/>|<img src="https://github.com/charleschiu2012/EVA-Space-Center-Data-Generate/blob/master/src/Dataset_all_random_35999.png"/>|
 
 ## Experiment of p_gamma
-|Single_Image_center.png|Single_Image_infinite_far.png|
+|Set p_gamma at the center of the Moon|Set p_gamma at infinite far|
 |:---:|:---:|
 |<img src="https://github.com/charleschiu2012/EVA-Space-Center-Data-Generate/blob/master/src/Single_Image_center.png"/>|<img src="https://github.com/charleschiu2012/EVA-Space-Center-Data-Generate/blob/master/src/Single_Image_infinite_far.png"/>|
-|Single_Image_negative_surface.png|Single_Image_positive_surface.png|
+|Set p_gamma at the near surface of the Moon|Set p_gamma at the far surface of the Moon|
 |<img src="https://github.com/charleschiu2012/EVA-Space-Center-Data-Generate/blob/master/src/Single_Image_negative_surface.png"/>|<img src="https://github.com/charleschiu2012/EVA-Space-Center-Data-Generate/blob/master/src/Single_Image_positive_surface.png"/>|
 - After comparing every pixel of these images, there is zero differeence between it.
 
