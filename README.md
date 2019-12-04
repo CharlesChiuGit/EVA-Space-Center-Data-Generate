@@ -31,9 +31,9 @@
     - `u_z`: [-1, 1] no unit, since the normal vector is normalized.
 ```c++
     void gluLookAt(	GLdouble eyeX, GLdouble eyeY, GLdouble eyeZ,
-                    GLdouble centerX, GLdouble centerY, GLdouble centerZ,
-                    GLdouble upX, GLdouble upY, GLdouble upZ
-                            );
+                        GLdouble centerX, GLdouble centerY, GLdouble centerZ,
+                        GLdouble upX, GLdouble upY, GLdouble upZ
+                   );
 ```
 - gluLookAt Parameters Meaning:
     - eyeX, eyeY, eyeZ
