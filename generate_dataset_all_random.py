@@ -184,7 +184,9 @@ if __name__ == '__main__':
                 img_name = DATASET_NAME + '_{}'.format((i * 10000) + (j * 1000) + k)
                 # img = transfer_pygame_surface_to_cv2_ndarray(srf)
                 # sample_image[img_name] = img.tolist()
-                sample_target[img_name] = [c_gamma, c_theta, c_phi, p_gamma, p_theta, p_phi, u_x, u_y, u_z]
+                sample_target[img_name] = {}
+                sample_target[img_name]['spherical'] = [c_gamma, c_theta, c_phi, p_gamma, p_theta, p_phi, u_x, u_y, u_z]
+                sample_target[img_name]['cartesian'] = [c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z]
                 pygame.image.save(srf, os.path.join(PATH, level_2_directory, img_name + '.png'))
             compress_file(level_2_directory)
 

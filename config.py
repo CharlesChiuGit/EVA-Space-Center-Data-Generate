@@ -5,8 +5,8 @@ import logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)-8s %(message)s', datefmt='%m-%d %H:%M:%S')
 
 # Dateset name
-DATASET_NAME = 'Single_Image'
-SINGLE_IMAGE = '_infinite_near'
+DATASET_NAME = 'Dataset_all_random_2'
+# SINGLE_IMAGE = '_infinite_near'
 
 # Units
 UNIT_REAL = 996.679647  # in km
