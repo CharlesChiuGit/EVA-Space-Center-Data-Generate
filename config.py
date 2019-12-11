@@ -28,6 +28,6 @@ if not os.path.exists(PATH):
     os.makedirs(PATH)
 
 # hyperparameters
-LEVEL_1_INDEX = 10
-LEVEL_2_INDEX = 10
+LEVEL_1_INDEX = 1
+LEVEL_2_INDEX = 1
 IMAGE_INDEX = 1000
