@@ -103,7 +103,10 @@
 - target_i.json:
 ```python
   {
-    'image_name': [`c_gamma`, `c_theta`, `c_phi`, `p_gamma`, `p_thet`a, `p_phi`, `u_x`, `u_y`, `u_z`]
+    'image_name': {
+                     'spherical': [`c_gamma`, `c_theta`, `c_phi`, `p_gamma`, `p_thet`a, `p_phi`, `u_x`, `u_y`, `u_z`],
+                     'cartesian': [`c_x`, `c_y`, `c_z`, `p_x`, `p_y`, `p_z`, `u_x`, `u_y`, `u_z`]
+                    }
     }
 ```
 
