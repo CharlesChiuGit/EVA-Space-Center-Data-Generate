@@ -6,7 +6,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)-8s %(me
 
 # Dateset name
 DATASET_NAME = 'Dataset_all_random_2'
-# SINGLE_IMAGE = '_infinite_near'
+SINGLE_IMAGE = '_61957'
 
 # Units
 UNIT_REAL = 996.679647  # in km
@@ -22,7 +22,8 @@ LOWER_BOUND = MOON_RADIUS + (OPENGL_1_METER * 200)  # 200m above moon surface
 UPPER_BOUND = MOON_RADIUS + (OPENGL_1_METER * 10000)   # 10,000m above moon surface
 
 # PATH
-PATH = os.path.join('/data/', DATASET_NAME)
+PATH = "./Single_Image"
+# PATH = os.path.join('/data/', DATASET_NAME)
 if not os.path.exists(PATH):
     logging.info('Create dataset {}'.format(DATASET_NAME))
     os.makedirs(PATH)

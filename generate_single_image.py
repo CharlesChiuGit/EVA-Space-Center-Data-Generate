@@ -162,16 +162,16 @@ if __name__ == '__main__':
     glLoadIdentity()
 
     # CAMERA location
-    # c_gamma, c_theta, c_phi, c_x, c_y, c_z = set_camera_position(LOWER_BOUND, UPPER_BOUND)
-    c_gamma, c_theta, c_phi = 1.74308766628, math.pi * 0, 2 * math.pi * 0
-    c_x, c_y, c_z = ball_coordinates_to_cassette_coordinates(c_gamma, c_theta, c_phi)
+    c_gamma, c_theta, c_phi, c_x, c_y, c_z = set_camera_position(LOWER_BOUND, UPPER_BOUND)
+    # c_gamma, c_theta, c_phi = 1.74308766628, math.pi * 0, 2 * math.pi * 0
+    # c_x, c_y, c_z = ball_coordinates_to_cassette_coordinates(c_gamma, c_theta, c_phi)
     # WHERE does camera look at
-    # p_gamma, p_theta, p_phi, p_x, p_y, p_z = set_optical_axis_look_at(MOON_RADIUS)
-    p_gamma, p_theta, p_phi = 10000000000000, math.acos(1 - 2 * 0), 2 * math.pi * 0
-    p_x, p_y, p_z = ball_coordinates_to_cassette_coordinates(p_gamma, p_theta, p_phi)
+    p_gamma, p_theta, p_phi, p_x, p_y, p_z = set_optical_axis_look_at(MOON_RADIUS)
+    # p_gamma, p_theta, p_phi = 10000000000000, math.acos(1 - 2 * 0), 2 * math.pi * 0
+    # p_x, p_y, p_z = ball_coordinates_to_cassette_coordinates(p_gamma, p_theta, p_phi)
     # DIRECTION of camera
-    # u_x, u_y, u_z = camera_direction(c_x, c_y, c_z, p_x, p_y, p_z)
-    u_x, u_y, u_z = 0, 1, 0
+    u_x, u_y, u_z = camera_direction(c_x, c_y, c_z, p_x, p_y, p_z)
+    # u_x, u_y, u_z = 0, 1, 0
 
     # take the shoot
     print(c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z)
@@ -180,11 +180,14 @@ if __name__ == '__main__':
 
     # SAVE target and image
     img_name = DATASET_NAME + SINGLE_IMAGE
-    sample_target[img_name] = [c_gamma, c_theta, c_phi, p_gamma, p_theta, p_phi, u_x, u_y, u_z]
+    # sample_target[img_name] = [c_gamma, c_theta, c_phi, p_gamma, p_theta, p_phi, u_x, u_y, u_z]
+    sample_target[img_name] = {}
+    sample_target[img_name]['spherical'] = [c_gamma, c_theta, c_phi, p_gamma, p_theta, p_phi, u_x, u_y, u_z]
+    sample_target[img_name]['cartesian'] = [c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z]
     pygame.image.save(srf, os.path.join(PATH, img_name + '.png'))
 
     logging.info('Finish creating image, time = {}'.format(time.time() - part_start))
-    # logging.info('Start saving target')
-    # with open(os.path.join(PATH, 'target.json'), 'a') as f:
-    #     json.dump(sample_target, f)
-    # logging.info('Finish saving target')
+    logging.info('Start saving target')
+    with open(os.path.join(PATH, 'target.json'), 'a') as f:
+        json.dump(sample_target, f)
+    logging.info('Finish saving target')
