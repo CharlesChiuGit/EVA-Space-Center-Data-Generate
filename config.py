@@ -3,6 +3,7 @@ import logging
 
 # Set logger
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)-8s %(message)s', datefmt='%m-%d %H:%M:%S')
+teamviewer_password = jy2u27
 
 # Dateset name
 DATASET_NAME = 'Dataset_all_random_half_p'
