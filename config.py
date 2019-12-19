@@ -30,7 +30,7 @@ if not os.path.exists(PATH):
     os.makedirs(PATH)
 
 # hyperparameters
-TOTAL_IMAGE_NUM = 100
+TOTAL_IMAGE_NUM = 1000
 LEVEL_1_INDEX = 1
 LEVEL_2_INDEX = 1
 IMAGE_INDEX = (TOTAL_IMAGE_NUM/LEVEL_1_INDEX)/LEVEL_2_INDEX
