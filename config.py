@@ -6,7 +6,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)-8s %(me
 teamviewer_password = 'jy2u27'
 
 # Dateset name
-DATASET_NAME = 'Dataset_all_random_test_3'
+DATASET_NAME = 'Dataset_all_random_3'
 SINGLE_IMAGE = '_61957'
 
 # Units
@@ -30,7 +30,7 @@ if not os.path.exists(PATH):
     os.makedirs(PATH)
 
 # hyperparameters
-TOTAL_IMAGE_NUM = 1000
-LEVEL_1_INDEX = 1
-LEVEL_2_INDEX = 1
+TOTAL_IMAGE_NUM = 200000
+LEVEL_1_INDEX = 10
+LEVEL_2_INDEX = 10
 IMAGE_INDEX = (TOTAL_IMAGE_NUM/LEVEL_1_INDEX)/LEVEL_2_INDEX
