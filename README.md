@@ -93,12 +93,41 @@
 ## JSON File Format
 - Each JSON file contains 10,000 images/tagets.
 - Hierarchy of the directory
-> - Dataset
+> - Dataset_all_random
 >> - Level 1 directory i: 0 ~ 9
 >> - i_j.targz
 >> - target_i.json 
 >>> - Level 2 directory i_j j: 0 ~ 9
 >>>> - 1,000 images in name of "DATASETNAME_XXXXX.png"
+
+- target_i.json:
+```python
+  {
+    'image_name': [`c_gamma`, `c_theta`, `c_phi`, `p_gamma`, `p_thet`a, `p_phi`, `u_x`, `u_y`, `u_z`]
+    }
+```
+> - Dataset_all_random_2
+>> - Level 1 directory i: 0 ~ 9
+>> - i_j.targz
+>> - target_i.json 
+>>> - Level 2 directory i_j j: 0 ~ 9
+>>>> - 1,000 images in name of "DATASETNAME_XXXXX.png"
+
+- target_i.json:
+```python
+  {
+    'image_name': {
+                     'spherical': [`c_gamma`, `c_theta`, `c_phi`, `p_gamma`, `p_thet`a, `p_phi`, `u_x`, `u_y`, `u_z`],
+                     'cartesian': [`c_x`, `c_y`, `c_z`, `p_x`, `p_y`, `p_z`, `u_x`, `u_y`, `u_z`]
+                    }
+    }
+```
+> - Dataset_six_random (fix Up vector with (0, 1, 0))
+>> - Level 1 directory i: 0 ~ 9
+>> - i_j.targz
+>> - target_i.json 
+>>> - Level 2 directory i_j j: 0 ~ 9
+>>>> - 2,000 images in name of "DATASETNAME_XXXXX.png"
 
 - target_i.json:
 ```python

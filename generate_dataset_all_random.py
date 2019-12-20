@@ -5,7 +5,6 @@
 # Scroll wheel: zoom in/out
 import cv2
 import json
-import logging
 import math
 import numpy as np
 import os
@@ -18,7 +17,7 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 from config import *
 # IMPORT OBJECT LOADER
-from objloader_adam import *
+from objloader import OBJ
 from pygame.constants import *
 from pygame.locals import *
 
@@ -35,6 +34,26 @@ def compress_file(directory):
     root_dir = os.path.join(PATH, directory)
     gztar_file_name = shutil.make_archive(archive_name, 'gztar', root_dir)
     _ = shutil.move(gztar_file_name, PATH)
+
+
+def normalize(coord):
+    temp = [0,0,0]
+    temp[0] = coord[0]
+    temp[1] = coord[1]
+    temp[2] = coord[2]
+    l = (temp[0]**2 + temp[1]**2 + temp[2]**2) ** 0.5
+    temp[0] /= l
+    temp[1] /= l
+    temp[2] /= l
+    return temp
+
+
+def crossf(a,b):
+    temp = [0,0,0]
+    temp[0] = a[1]*b[2] - a[2]*b[1]
+    temp[1] = a[2]*b[0] - a[0]*b[2]
+    temp[2] = a[0]*b[1] - a[1]*b[0]
+    return temp
 
 
 def set_viewport(viewport_width, viewport_hight):
@@ -122,7 +141,8 @@ def camera_direction(c_x, c_y, c_z, p_x, p_y, p_z):
     optical_axis_position = [p_x, p_y, p_z]
     for i in range(3):
         forward[i] = optical_axis_position[i] - camera_position[i]
-        up[i] = random.uniform(0, 1)
+        # up[i] = random.uniform(0, 1)
+    up = [0, 1, 0]  # for Dataset_six_random
 
     norm_forward = normalize(forward)
     side = normalize(crossf(norm_forward, up))

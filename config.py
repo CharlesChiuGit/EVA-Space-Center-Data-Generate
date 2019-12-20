@@ -6,7 +6,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)-8s %(me
 teamviewer_password = 'jy2u27'
 
 # Dateset name
-DATASET_NAME = 'Dataset_all_random_3'
+DATASET_NAME = 'Dataset_six_random'
 SINGLE_IMAGE = '_61957'
 
 # Units
