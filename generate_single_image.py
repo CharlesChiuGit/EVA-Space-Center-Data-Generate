@@ -195,7 +195,7 @@ if __name__ == '__main__':
     glCallList(obj.gl_list)
 
     # SAVE target and image
-    img_name = DATASET_NAME + SINGLE_IMAGE
+    img_name = SINGLE_IMAGE
     sample_target[img_name] = {}
     sample_target[img_name]['spherical'] = [c_gamma, c_theta, c_phi, p_gamma, p_theta, p_phi, u_x, u_y, u_z]
     sample_target[img_name]['cartesian'] = [c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z]
