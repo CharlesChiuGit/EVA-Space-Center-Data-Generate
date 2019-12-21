@@ -16,9 +16,8 @@ do
       retval=$?
       if [ $retval -ne 0 ]; then
         echo "${img}"
+        python generate_single_image.py -s ${img}
       fi
-      python generate_single_image.py  ${object} -s ${img}
-
     done
   done
 done
