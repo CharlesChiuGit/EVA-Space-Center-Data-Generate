@@ -6,9 +6,9 @@ single_img_folder='/home/eva/space_center/moon_8K/Single_Image/'
 echo 'Start checking original dataset'
 
 #for i in $(seq 0 9)
-for i in $(seq 5 )
+for i in $(seq 5 5)
 do
-  for j in $(seq 0 )
+  for j in $(seq 0 0)
   do
     for img in $(ls "${local_dataset_path}/$i/${i}_$j/")
     do
