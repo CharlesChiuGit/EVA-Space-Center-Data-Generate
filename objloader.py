@@ -2,6 +2,7 @@ import pygame
 import numpy as np
 from OpenGL.GL import *
 
+
 def MTL(filename):
     contents = {}
     mtl = None
@@ -30,6 +31,7 @@ def MTL(filename):
         else:
             mtl[values[0]] = map(float, values[1:])
     return contents
+
 
 class OBJ:
     def __init__(self, filename, swapyz=False):

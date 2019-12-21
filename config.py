@@ -7,7 +7,7 @@ teamviewer_password = 'jy2u27'
 
 # Dateset name
 DATASET_NAME = 'Dataset_six_random'
-SINGLE_IMAGE = '_61957'
+SINGLE_IMAGE = '_75'
 
 # Units
 UNIT_REAL = 996.679647  # in km

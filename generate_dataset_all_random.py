@@ -141,8 +141,7 @@ def camera_direction(c_x, c_y, c_z, p_x, p_y, p_z):
     optical_axis_position = [p_x, p_y, p_z]
     for i in range(3):
         forward[i] = optical_axis_position[i] - camera_position[i]
-        # up[i] = random.uniform(0, 1)
-    up = [0, 1, 0]  # for Dataset_six_random
+        up[i] = random.uniform(0, 1)
 
     norm_forward = normalize(forward)
     side = normalize(crossf(norm_forward, up))
@@ -196,6 +195,7 @@ if __name__ == '__main__':
                 p_gamma, p_theta, p_phi, p_x, p_y, p_z = set_optical_axis_look_at(MOON_RADIUS)
                 # DIRECTION of camera
                 u_x, u_y, u_z = camera_direction(c_x, c_y, c_z, p_x, p_y, p_z)
+                u_x, u_y, u_z = 0, 1, 0  # for Dataset_six_random
                 # take the shoot
                 gluLookAt(c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z)
                 glCallList(obj.gl_list)

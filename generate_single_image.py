@@ -18,7 +18,7 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 from config import *
 # IMPORT OBJECT LOADER
-from objloader_adam import *
+from objloader import OBJ
 from pygame.constants import *
 from pygame.locals import *
 
@@ -35,6 +35,26 @@ def compress_file(directory):
     root_dir = os.path.join(PATH, directory)
     gztar_file_name = shutil.make_archive(archive_name, 'gztar', root_dir)
     _ = shutil.move(gztar_file_name, PATH)
+
+
+def normalize(coord):
+    temp = [0,0,0]
+    temp[0] = coord[0]
+    temp[1] = coord[1]
+    temp[2] = coord[2]
+    l = (temp[0]**2 + temp[1]**2 + temp[2]**2) ** 0.5
+    temp[0] /= l
+    temp[1] /= l
+    temp[2] /= l
+    return temp
+
+
+def crossf(a,b):
+    temp = [0,0,0]
+    temp[0] = a[1]*b[2] - a[2]*b[1]
+    temp[1] = a[2]*b[0] - a[0]*b[2]
+    temp[2] = a[0]*b[1] - a[1]*b[0]
+    return temp
 
 
 def set_viewport(viewport_width, viewport_hight):
@@ -92,7 +112,7 @@ def set_camera_position(lower_bound, upper_bound):
     Set camera position. c_gamma, c_theta, c_phi are sampled with random.uniform in their own range.
     """
     c_gamma = random.uniform(lower_bound, upper_bound)
-    c_theta = math.pi * random.uniform(0, 1)
+    c_theta = math.acos(1 - 2 * random.uniform(0, 1))
     c_phi = 2 * math.pi * random.uniform(0, 1)
     c_x, c_y, c_z = ball_coordinates_to_cassette_coordinates(c_gamma, c_theta, c_phi)
 
@@ -103,7 +123,7 @@ def set_optical_axis_look_at(moon_radius):
     """
     Set optical axis' end point. p_gamma, p_theta, p_phi are sampled with random.uniform in their own range.
     """
-    p_gamma = random.uniform(0, moon_radius)
+    p_gamma = random.uniform(0, 0.5 * moon_radius)
     p_theta = math.acos(1 - 2 * random.uniform(0, 1))
     p_phi = 2 * math.pi * random.uniform(0, 1)
     p_x, p_y, p_z = ball_coordinates_to_cassette_coordinates(p_gamma, p_theta, p_phi)
@@ -171,7 +191,7 @@ if __name__ == '__main__':
     # p_x, p_y, p_z = ball_coordinates_to_cassette_coordinates(p_gamma, p_theta, p_phi)
     # DIRECTION of camera
     u_x, u_y, u_z = camera_direction(c_x, c_y, c_z, p_x, p_y, p_z)
-    # u_x, u_y, u_z = 0, 1, 0
+    u_x, u_y, u_z = 0, 1, 0  # for Dataset_six_random
 
     # take the shoot
     print(c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z)
@@ -180,7 +200,6 @@ if __name__ == '__main__':
 
     # SAVE target and image
     img_name = DATASET_NAME + SINGLE_IMAGE
-    # sample_target[img_name] = [c_gamma, c_theta, c_phi, p_gamma, p_theta, p_phi, u_x, u_y, u_z]
     sample_target[img_name] = {}
     sample_target[img_name]['spherical'] = [c_gamma, c_theta, c_phi, p_gamma, p_theta, p_phi, u_x, u_y, u_z]
     sample_target[img_name]['cartesian'] = [c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z]
@@ -188,6 +207,6 @@ if __name__ == '__main__':
 
     logging.info('Finish creating image, time = {}'.format(time.time() - part_start))
     logging.info('Start saving target')
-    with open(os.path.join(PATH, 'target.json'), 'a') as f:
+    with open(os.path.join(PATH, 'target' + SINGLE_IMAGE + '.json'), 'a') as f:
         json.dump(sample_target, f)
     logging.info('Finish saving target')
