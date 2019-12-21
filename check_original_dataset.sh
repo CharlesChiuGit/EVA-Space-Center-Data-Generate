@@ -24,9 +24,9 @@ echo 'Start checking original dataset'
 #done
 #
 #echo 'End checking original dataset'
-
-pngcheck -q "${local_dataset_path}/5/5_0/Dataset_all_random_50377.png"
+img="Dataset_all_random_50377.png"
+pngcheck -q "${local_dataset_path}/5/5_0/${img}"
 retval=$?
 if [ $retval -ne 0 ]; then
-  echo "rrrrrrrr"$retval
+  echo "${img}"
 fi
