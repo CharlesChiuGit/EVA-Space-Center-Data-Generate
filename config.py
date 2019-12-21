@@ -1,13 +1,26 @@
 import os
 import logging
+import argparse
+
+
+def set_argument_parser():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-s', '--single_image_name', help='Give the defect image name')
+
+    return parser.parse_args()
+
 
 # Set logger
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)-8s %(message)s', datefmt='%m-%d %H:%M:%S')
 teamviewer_password = 'jy2u27'
+args = set_argument_parser()
 
 # Dateset name
 DATASET_NAME = 'Dataset_six_random'
-SINGLE_IMAGE = '_75'
+if args.single_image_name:
+    SINGLE_IMAGE = args.single_image_name
+else:
+    SINGLE_IMAGE = "Dataset_all_random_test.png"
 
 # Units
 UNIT_REAL = 996.679647  # in km

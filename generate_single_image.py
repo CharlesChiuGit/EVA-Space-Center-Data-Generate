@@ -14,6 +14,7 @@ import random
 import shutil
 import sys
 import time
+import ntpath
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from config import *
@@ -28,6 +29,18 @@ def check_directory(directory):
     if not os.path.exists(directory_path):
         logging.info('Create directory {}'.format(directory))
         os.makedirs(directory_path)
+
+
+def path_leaf(path):
+    head, tail = ntpath.split(path)
+
+    return tail or ntpath.basename(head)
+
+
+def remove_filename_extension(base_name):
+    file_name = os.path.splitext(base_name)[0]
+
+    return file_name
 
 
 def compress_file(directory):
@@ -195,7 +208,7 @@ if __name__ == '__main__':
     glCallList(obj.gl_list)
 
     # SAVE target and image
-    img_name = SINGLE_IMAGE
+    img_name = remove_filename_extension(SINGLE_IMAGE)
     sample_target[img_name] = {}
     sample_target[img_name]['spherical'] = [c_gamma, c_theta, c_phi, p_gamma, p_theta, p_phi, u_x, u_y, u_z]
     sample_target[img_name]['cartesian'] = [c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z]
