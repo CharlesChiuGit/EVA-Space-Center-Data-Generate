@@ -142,7 +142,7 @@ def camera_direction(c_x, c_y, c_z, p_x, p_y, p_z):
     for i in range(3):
         forward[i] = optical_axis_position[i] - camera_position[i]
         # up[i] = random.uniform(0, 1)
-    up = [0, 0, 0]  # for Dataset_six_random
+    up = [0, 1, 0]  # for Dataset_six_random
 
     norm_forward = normalize(forward)
     side = normalize(crossf(norm_forward, up))
