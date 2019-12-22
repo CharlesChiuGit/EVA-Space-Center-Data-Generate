@@ -20,14 +20,13 @@ do
       pngcheck -q "${img}"
       retval=$?
       if [ $retval -ne 0 ]; then
-#        echo "${img}"
         OIFS="$IFS"
         IFS='/'
         read -r -a new_string <<< "${img}"
         IFS="$OIFS"
         cd "../" && python "generate_single_image.py" "${object}" "${new_string[5]}"
-#        rm "${local_dataset_path}/$i/${i}_$j/$img"
-#        cp "${single_img_folder}/$img" "${local_dataset_path}/$i/${i}_$j/"
+        cp "${img}" "${single_img_folder}/defect_image"
+        cp "${single_img_folder}/${new_string[5]}" "${img}"
       fi
     done
   done
