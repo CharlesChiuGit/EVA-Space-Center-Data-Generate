@@ -178,7 +178,7 @@ if __name__ == '__main__':
     pygame.init()
     srf = set_viewport(VIEWPORT[0], VIEWPORT[1])
     # LOAD OBJECT AFTER PYGAME INIT
-    obj = OBJ(sys.argv[3], swapyz=True)
+    obj = OBJ(sys.argv[1], swapyz=True)
     clock = pygame.time.Clock()
     # set up OPENGL env
     set_light_property()
