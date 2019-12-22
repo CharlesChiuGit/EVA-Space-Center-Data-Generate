@@ -17,6 +17,7 @@ cp "generate_single_image.py" ".."
 # ----------------------------------------------
 
 echo 'Start creating original dataset'
+conda activate space
 cd "$HOME/space_center/moon_8K/" && python "generate_dataset.py" -o "${object}" -dn "${dataset_name}" -n "${total_number}" -lv1 "${lv1_index}" -lv2 "${lv2_index}"
 echo 'End creating original dataset'
 # ----------------------------------------------
