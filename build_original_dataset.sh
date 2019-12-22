@@ -49,12 +49,11 @@ do
 done
 cd "${git_folder}" && python "compress_file.py" -dn "${dataset_name}" -n "${total_number}" -lv1 "${lv1_index}" -lv2 "${lv2_index}"
 echo 'End checking original dataset'
+# ----------------------------------------------
 
-#echo 'End checking original dataset'
-#
-#img="Dataset_all_random_50377.png"
-#pngcheck -q "${local_dataset_path}/5/5_0/${img}"
-#retval=$?
-#if [ $retval -ne 0 ]; then
-#  echo "${img}"
-#fi
+# build remote dataset after creat original dataset
+local_private_key="$HOME/.ssh/eva_59"
+remote_IP='charleschiu@140.113.86.58'
+git_folder="$HOME/EVA-Space-Center-Data-Generate"
+ssh -i "${local_private_key}" "${remote_IP}"
+cd "${git_folder}" || git pull
