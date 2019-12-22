@@ -216,6 +216,6 @@ if __name__ == '__main__':
 
     logging.info('Finish creating image, time = {}'.format(time.time() - part_start))
     logging.info('Start saving target')
-    with open(os.path.join(PATH, 'target' + SINGLE_IMAGE + '.json'), 'a') as f:
+    with open(os.path.join(PATH, 'target' + img_name + '.json'), 'a') as f:
         json.dump(sample_target, f)
     logging.info('Finish saving target')

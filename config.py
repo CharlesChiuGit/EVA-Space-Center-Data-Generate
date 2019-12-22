@@ -11,7 +11,7 @@ DATASET_NAME = 'Dataset_six_random'
 if sys.argv[2]:
     SINGLE_IMAGE = sys.argv[2]
 else:
-    SINGLE_IMAGE = "Dataset_all_random_test.png"
+    print("ERROR: SINGLE_IMAGE is not given!")
 
 # Units
 UNIT_REAL = 996.679647  # in km
@@ -27,11 +27,13 @@ LOWER_BOUND = MOON_RADIUS + (OPENGL_1_METER * 200)  # 200m above moon surface
 UPPER_BOUND = MOON_RADIUS + (OPENGL_1_METER * 10000)   # 10,000m above moon surface
 
 # PATH
-# PATH = "./Single_Image"
-PATH = os.path.join('/data/', DATASET_NAME)
-if not os.path.exists(PATH):
-    logging.info('Create dataset {}'.format(DATASET_NAME))
-    os.makedirs(PATH)
+if sys.argv[2]:
+    PATH = "../Single_Image"
+else:
+    PATH = os.path.join('/data/', DATASET_NAME)
+    if not os.path.exists(PATH):
+        logging.info('Create dataset {}'.format(DATASET_NAME))
+        os.makedirs(PATH)
 
 # hyperparameters
 TOTAL_IMAGE_NUM = 200000
