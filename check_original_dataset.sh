@@ -27,6 +27,7 @@ do
         cd "../" && python "generate_single_image.py" "${object}" "${new_string[5]}"
         cp "${img}" "${single_img_folder}/defect_image"
         cp "${single_img_folder}/${new_string[5]}" "${img}"
+        python "replace_target.py" 0 "$i"
       fi
     done
   done

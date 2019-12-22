@@ -21,17 +21,17 @@ def read_json(file_path):
     with open(file_path, 'r') as reader:
         data = json.loads(reader.read())
 
-    print(data.keys()[0])
-    return data
+    return data.keys(), data
 
 
 if __name__ == '__main__':
     local_dataset_path = '/data/Dataset_all_random'
     patch_path = '/home/eva/space_center/moon_8K/Single_Image/'
-    image_path = os.path.join(patch_path, DATASET_NAME + '_*.png')
-    image_files = sorted(glob(image_path))
-    labels_path = os.path.join(patch_path, 'target_' + DATASET_NAME + '_*.json')
-    label_files = sorted(glob(labels_path))
-    print(label_files)
-    print(label_files[0])
-    data = read_json(label_files[0])
+    new_labels_path = os.path.join(patch_path, 'target_' + DATASET_NAME + '_*.json')
+    new_label_files = sorted(glob(new_labels_path))
+    old_labels_path = os.path.join(local_dataset_path, 'target_' + sys.argv[2] + '.json')
+    print(new_label_files)
+    key, data = read_json(old_labels_path)
+    for i in range(len(new_label_files)):
+        [key], data = read_json(new_label_files[i])
+
