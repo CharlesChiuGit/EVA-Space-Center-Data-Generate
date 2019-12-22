@@ -55,5 +55,4 @@ echo 'End checking original dataset'
 local_private_key="$HOME/.ssh/eva_59"
 remote_IP='charleschiu@140.113.86.58'
 git_folder="$HOME/EVA-Space-Center-Data-Generate"
-ssh -i "${local_private_key}" "${remote_IP}"
-cd "${git_folder}" || git pull
+ssh -i "${local_private_key}" "${remote_IP}" && cd "${git_folder}" && git pull
