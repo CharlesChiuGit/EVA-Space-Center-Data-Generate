@@ -40,12 +40,12 @@ if __name__ == '__main__':
     #     logging.info('Finish saving {}'.format(old_label_path))
 
     # sys.argv[2] = '2'
-    local_dataset_path = '/data/' + DATASET_NAME + '/train/labels/'
+    local_dataset_path = '/data/space/' + DATASET_NAME + '/train/labels/'
     PATCH_PATH = '/home/charleschiu/'
     new_labels_path = os.path.join(PATCH_PATH, 'target_' + DATASET_NAME + '_*.json')
     new_label_files = sorted(glob(new_labels_path))
     old_label_path = os.path.join(local_dataset_path, 'target_' + sys.argv[2] + '.json')
-    sys.argv[1] = 'Dataset_six_random_51643.png'
+    # sys.argv[1] = 'Dataset_six_random_51643.png'
     print(new_label_files)
     print(old_label_path)
     keys, datas = read_json(old_label_path)
