@@ -31,13 +31,16 @@ if __name__ == '__main__':
     new_label_files = sorted(glob(new_labels_path))
     old_labels_path = os.path.join(local_dataset_path, 'target_' + sys.argv[2] + '.json')
     print(new_label_files)
-    key, data = read_json(old_labels_path)
-    print(data['Dataset_all_random_50377'])
+    keys, datas = read_json(old_labels_path)
+    print(datas['Dataset_all_random_50377'])
     # print(data)
     for i in range(len(new_label_files)):
         [new_key], new_data = read_json(new_label_files[i])
         print(new_data[new_key]['spherical'])
-        data[new_key] = new_data[new_key]['spherical']
-    print(data[new_key])
+        for key in keys:
+            if key == new_key:
+                datas[new_key] = new_data[new_key]['spherical']
+    print(datas[new_key])
+
 
 
