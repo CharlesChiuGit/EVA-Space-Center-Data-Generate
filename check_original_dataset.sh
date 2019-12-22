@@ -13,6 +13,7 @@ cp "config.py" "../"
 
 for i in $(seq 0 9)
 do
+  echo "${i}"
   for j in $(seq 0 9)
   do
     for img in "${local_dataset_path}/$i/${i}_$j"/*.png
