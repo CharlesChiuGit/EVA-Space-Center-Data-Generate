@@ -18,7 +18,11 @@ do
     for img in "${local_dataset_path}/$i/${i}_$j"/*.png
 #    for img in $(ls "${local_dataset_path}/$i/${i}_$j/")
     do
-      pngcheck -q "$img"
+      OIFS="$IFS"
+      IFS=' '
+      read -r -a new_string <<< "${img}"
+      IFS="$OIFS"
+      pngcheck -q "${new_string[4]}"
       retval=$?
       if [ $retval -ne 0 ]; then
         echo "${img}"
