@@ -1,13 +1,18 @@
 import os
 import logging
 import argparse
+# set SDL to use the dummy NULL video driver,
+#   so it doesn't need a windowing system.
+os.environ["SDL_VIDEODRIVER"] = "dummy"
 
 
 def set_argument_parser():
     parser = argparse.ArgumentParser()
+    parser.add_argument('-dn', '--dataset_name', help='Set Dataset name')
     parser.add_argument('-o', '--object', help='Choose a object model')
     parser.add_argument('-d', '--defect_img_name', help='Give the defect image name')
     parser.add_argument('-i', '--target_index', help='Set target index')
+    parser.add_argument('-n', '--total_number', help='Set total number of dataset')
 
     return parser.parse_args()
 
@@ -15,16 +20,15 @@ def set_argument_parser():
 # Set logger
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)-8s %(message)s', datefmt='%m-%d %H:%M:%S')
 teamviewer_password = 'jy2u27'
-args = set_argument_parser()
 
 # Dateset name
-DATASET_NAME = 'Dataset_test'
+args = set_argument_parser()
+DATASET_NAME = args.dataset_name
 SINGLE_IMAGE = args.defect_img_name
 if args.defect_img_name:
     logging.info('Defect Image Name: {}'.format(args.defect_img_name))
 TARGET_INDEX = args.target_index
 OBJECT = args.object
-
 
 # Units
 UNIT_REAL = 996.679647  # in km
@@ -47,7 +51,7 @@ if not os.path.exists(PATH):
 PATCH_PATH = '/home/eva/space_center/moon_8K/Single_Image/'
 
 # hyperparameters
-TOTAL_IMAGE_NUM = 200
+TOTAL_IMAGE_NUM = args.total_number
 LEVEL_1_INDEX = 10
 LEVEL_2_INDEX = 10
 IMAGE_INDEX = (TOTAL_IMAGE_NUM / LEVEL_1_INDEX) / LEVEL_2_INDEX

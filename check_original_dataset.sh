@@ -1,15 +1,27 @@
 #!/bin/bash
 
-local_dataset_path='/data/Dataset_test'
-single_img_folder='/home/eva/space_center/moon_8K/Single_Image/'
+dataset_name='Dataset_test_1'
+total_number='100'
+local_dataset_path="/data/${dataset_name}"
+single_img_folder="$HOME/eva/space_center/moon_8K/Single_Image/"
 object="Moon_8K.obj"
+git_folder="$HOME/eva/space_center/moon_8K/EVA-Space-Center-Data-Generate"
+# ----------------------------------------------
 
 git pull
+# ----------------------------------------------
+
+rm "../config.py" && cp "config.py"  "../"
+rm "../generate_dataset.py" && cp "generate_dataset'.py"  "../"
+rm "../generate_single_image.py" && cp "generate_single_image.py" "../"
+# ----------------------------------------------
+
+echo 'Start creating original dataset'
+cd "../" && python "generate_dataset'.py" -o "${object}" -dn "${dataset_name}" -n "${total_number}"
+echo 'End creating original dataset'
+# ----------------------------------------------
+
 echo 'Start checking original dataset'
-rm "../generate_single_image.py"
-cp "generate_single_image.py" "../"
-rm "../config.py"
-cp "config.py" "../"
 
 for i in $(seq 0 9)
 do
@@ -25,11 +37,11 @@ do
         IFS='/'
         read -r -a new_string <<< "${img}"
         IFS="$OIFS"
-        cd "../" && python "generate_single_image.py" "-o" "${object}" "-d" "${new_string[5]}"
+        python "generate_single_image.py" -o "${object}" -d "${new_string[5]}"
         cp "${img}" "${single_img_folder}/defect_image"
         cp "${local_dataset_path}/target_$i.json" "${single_img_folder}/defect_image/target_${i}_${new_string[5]}.json"
         cp "${single_img_folder}/${new_string[5]}" "${img}"
-        cd "EVA-Space-Center-Data-Generate" && python "replace_target.py" "-d" "${new_string[5]}" "-i" "$i"
+        cd "${git_folder}" && python "replace_target.py" -d "${new_string[5]}" -i "$i"
       fi
     done
   done
