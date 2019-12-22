@@ -17,7 +17,7 @@ do
       retval=$?
       if [ $retval -ne 0 ]; then
         echo "${img}"
-        cd ".." || python generate_single_image.py ${object} ${img}
+        cd "../" && python generate_single_image.py ${object} ${img}
       fi
     done
   done
