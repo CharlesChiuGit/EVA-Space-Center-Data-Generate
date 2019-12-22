@@ -15,13 +15,16 @@ for i in $(seq 5 5)
 do
   for j in $(seq 0 0)
   do
-    for img in $(ls "${local_dataset_path}/$i/${i}_$j/")
+    for img in "${local_dataset_path}/$i/${i}_$j"/*.png
+#    for img in $(ls "${local_dataset_path}/$i/${i}_$j/")
     do
       pngcheck -q "${local_dataset_path}/$i/${i}_$j/$img"
       retval=$?
       if [ $retval -ne 0 ]; then
         echo "${img}"
-        cd "../" && python generate_single_image.py ${object} ${img}
+        cd "../" && python "generate_single_image.py ${object} ${img}"
+#        rm "${local_dataset_path}/$i/${i}_$j/$img"
+#        cp "${single_img_folder}/$img" "${local_dataset_path}/$i/${i}_$j/"
       fi
     done
   done
