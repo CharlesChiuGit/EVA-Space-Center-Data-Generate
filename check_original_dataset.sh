@@ -18,16 +18,16 @@ do
     for img in "${local_dataset_path}/$i/${i}_$j"/*.png
 #    for img in $(ls "${local_dataset_path}/$i/${i}_$j/")
     do
-      OIFS="$IFS"
-      IFS='/'
-      read -r -a new_string <<< "${img}"
-      IFS="$OIFS"
-      echo "${new_string[5]}"
-      pngcheck -q "${new_string[5]}"
+      pngcheck -q "${img}"
       retval=$?
       if [ $retval -ne 0 ]; then
-        echo "${img}"
-        cd "../" && python "generate_single_image.py ${object} ${img}"
+#        echo "${img}"
+        OIFS="$IFS"
+        IFS='/'
+        read -r -a new_string <<< "${img}"
+        IFS="$OIFS"
+        echo "${new_string[5]}"
+        cd "../" && python "generate_single_image.py ${object} ${new_string[5]}"
 #        rm "${local_dataset_path}/$i/${i}_$j/$img"
 #        cp "${single_img_folder}/$img" "${local_dataset_path}/$i/${i}_$j/"
       fi
