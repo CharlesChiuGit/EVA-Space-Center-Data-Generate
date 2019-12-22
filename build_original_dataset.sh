@@ -2,8 +2,8 @@
 
 dataset_name='Dataset_test_1'
 total_number=10
-lv1_index=1
-lv2_index=1
+lv1_index=2
+lv2_index=2
 local_dataset_path="/data/${dataset_name}"
 regen_img_folder="$HOME/space_center/moon_8K/Regen_Image/"
 object="Moon_8K.obj"
@@ -21,7 +21,7 @@ cd "$HOME/space_center/moon_8K/" && python "generate_dataset.py" -o "${object}" 
 echo 'End creating original dataset'
 # ----------------------------------------------
 
-echo 'Start checking original dataset'
+echo 'Start checking original dataset ${dataset_name}'
 
 for i in $(seq 0 "${lv1_index} - 1")
 do
@@ -46,7 +46,7 @@ do
     done
   done
 done
-python "compress_file.py"
+cd "${git_folder}" && python "compress_file.py"
 echo 'End checking original dataset'
 
 #echo 'End checking original dataset'
