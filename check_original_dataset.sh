@@ -4,6 +4,7 @@ local_dataset_path='/data/Dataset_all_random'
 single_img_folder='/home/eva/space_center/moon_8K/Single_Image/'
 object="Moon_8K.obj"
 
+git pull
 echo 'Start checking original dataset'
 rm "../generate_single_image.py"
 cp "generate_single_image.py" "../"
