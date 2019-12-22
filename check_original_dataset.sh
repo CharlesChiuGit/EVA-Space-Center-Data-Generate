@@ -31,6 +31,7 @@ do
     done
   done
 done
+echo 'End checking original dataset'
 
 #echo 'End checking original dataset'
 #
