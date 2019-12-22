@@ -12,7 +12,7 @@ git pull
 # ----------------------------------------------
 #rm "../config.py"
 cp "config.py"  ".."
-cp "generate_dataset'.py"  ".."
+cp "generate_dataset.py"  ".."
 cp "generate_single_image.py" ".."
 # ----------------------------------------------
 
