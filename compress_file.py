@@ -12,8 +12,7 @@ def check_directory(directory):
 
 def compress_file(directory):
     archive_name = os.path.expanduser(os.path.join(PATH, 'compress_file', directory))
-    lv1_dir = directory.split('_')[0]
-    root_dir = os.path.join(PATH, lv1_dir, directory)
+    root_dir = os.path.join(PATH, directory)
     gztar_file_name = shutil.make_archive(archive_name, 'gztar', root_dir)
     print(gztar_file_name)
 
