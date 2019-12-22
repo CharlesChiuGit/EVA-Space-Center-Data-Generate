@@ -30,11 +30,11 @@ do
         cp "${local_dataset_path}/target_$i.json" "${single_img_folder}/defect_image/target_${i}_${new_string[5]}.json"
         cp "${single_img_folder}/${new_string[5]}" "${img}"
         cd "EVA-Space-Center-Data-Generate" && python "replace_target.py" "-d" "${new_string[5]}" "-i" "$i"
-        cd "EVA-Space-Center-Data-Generate" && python "compress_file.py"
       fi
     done
   done
 done
+cd "EVA-Space-Center-Data-Generate" && python "compress_file.py"
 echo 'End checking original dataset'
 
 #echo 'End checking original dataset'
