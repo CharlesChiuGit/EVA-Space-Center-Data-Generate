@@ -21,7 +21,7 @@ def read_json(file_path):
     with open(file_path, 'r') as reader:
         data = json.loads(reader.read())
 
-    print(data.keys())
+    print(data.keys()[0])
     return data
 
 
