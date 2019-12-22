@@ -21,9 +21,9 @@ cd "$HOME/space_center/moon_8K/" && python "generate_dataset.py" -o "${object}" 
 echo 'End creating original dataset'
 # ----------------------------------------------
 
-echo 'Start checking original dataset ${dataset_name}'
-lv1_dummy=$(${lv1_index} - 1)
-lv2_dummy=$(${lv2_index} - 1)
+echo "Start checking original dataset ${dataset_name}"
+lv1_dummy="$(${lv1_index} - 1)"
+lv2_dummy="$(${lv2_index} - 1)"
 for i in $(seq 0 "${lv1_dummy}")
 do
   echo "${i}"
