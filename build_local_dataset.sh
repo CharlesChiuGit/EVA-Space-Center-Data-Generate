@@ -31,7 +31,7 @@ do
   do
     mkdir -m 777 -v "${train_image_file}/$i/${i}_$j"
     tar -C "${train_image_file}/$i/${i}_$j" -zxf "${local_dataset_path}/${file_type[3]}/${i}_$j.tar.gz"
-    for img in $(ls "${train_image_file}/$i/${i}_$j/")
+    for img in "${train_image_file}/$i/${i}_$j"/*.png
     do
 #      echo "${train_image_file}/$i/${i}_$j/$img"
       pngcheck -q "${train_image_file}/$i/${i}_$j/$img"
@@ -47,7 +47,7 @@ for j in $(seq 0 9)
 do
   mkdir -m 777 -v "${test_image_file}/0/0_$j"
   tar -C "${test_image_file}/0/0_$j" -zxf "${local_dataset_path}/${file_type[3]}/8_$j.tar.gz"
-  for img in $(ls "${test_image_file}/0/0_$j/")
+  for img in "${test_image_file}/0/0_$j"/*.png
   do
 #    echo "${test_image_file}/0/0_$j/$img"
     pngcheck -q "${test_image_file}/0/0_$j/$img"
@@ -62,7 +62,7 @@ for j in $(seq 0 9)
 do
   mkdir -m 777 -v "${validation_image_file}/0/0_$j"
   tar -C "${validation_image_file}/0/0_$j" -zxf "${local_dataset_path}/${file_type[3]}/9_$j.tar.gz"
-  for img in $(ls "${validation_image_file}/0/0_$j/")
+  for img in "${validation_image_file}/0/0_$j"/*.png
   do
 #    echo "${validation_image_file}/0/0_$j/$img"
     pngcheck -q "${validation_image_file}/0/0_$j/$img"
