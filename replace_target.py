@@ -31,6 +31,6 @@ if __name__ == '__main__':
     patch_path = '/home/eva/space_center/moon_8K/Single_Image/'
     image_path = os.path.join(patch_path, DATASET_NAME + '_*.png')
     image_files = sorted(glob(image_path))
-    labels_path = os.path.join(patch_path, 'target' + DATASET_NAME + '_*.json')
+    labels_path = os.path.join(patch_path, 'target_' + DATASET_NAME + '_*.json')
     label_files = sorted(glob(labels_path))
     print(label_files)
