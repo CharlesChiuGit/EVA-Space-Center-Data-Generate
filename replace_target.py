@@ -17,16 +17,15 @@ if __name__ == '__main__':
     new_label_files = sorted(glob(new_labels_path))
     old_label_path = os.path.join(local_dataset_path, 'target_' + sys.argv[2] + '.json')
     print(new_label_files)
+    print(old_label_path)
     keys, datas = read_json(old_label_path)
-    print(datas['Dataset_all_random_50377'])
-    # print(data)
     for i in range(len(new_label_files)):
         [new_key], new_data = read_json(new_label_files[i])
-        print(new_data[new_key]['spherical'])
+        print('New data: ', new_data[new_key]['spherical'])
         for key in keys:
             if key == new_key:
                 datas[new_key] = new_data[new_key]['spherical']
-    print(datas[new_key])
+    print('Renew data: ', datas[new_key])
     with open(old_label_path, 'w') as f:
         json.dump(datas, f)
         logging.info('Finish saving {}'.format(old_label_path))
