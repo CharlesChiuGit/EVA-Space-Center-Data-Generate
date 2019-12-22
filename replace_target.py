@@ -36,6 +36,8 @@ if __name__ == '__main__':
     # print(data)
     for i in range(len(new_label_files)):
         [new_key], new_data = read_json(new_label_files[i])
-        print(new_data[new_key]['cartesian'])
+        print(new_data[new_key]['spherical'])
+        data[new_key] = new_data[new_key]['spherical']
+    print(data[new_key])
 
 
