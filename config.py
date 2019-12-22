@@ -27,13 +27,11 @@ LOWER_BOUND = MOON_RADIUS + (OPENGL_1_METER * 200)  # 200m above moon surface
 UPPER_BOUND = MOON_RADIUS + (OPENGL_1_METER * 10000)  # 10,000m above moon surface
 
 # PATH
-if sys.argv[2]:
-    PATH = '/home/eva/space_center/moon_8K/Single_Image/'
-else:
-    PATH = os.path.join('/data/', DATASET_NAME)
-    if not os.path.exists(PATH):
-        logging.info('Create dataset {}'.format(DATASET_NAME))
-        os.makedirs(PATH)
+PATH = os.path.join('/data/', DATASET_NAME)
+if not os.path.exists(PATH):
+    logging.info('Create dataset {}'.format(DATASET_NAME))
+    os.makedirs(PATH)
+PATCH_PATH = '/home/eva/space_center/moon_8K/Single_Image/'
 
 # hyperparameters
 TOTAL_IMAGE_NUM = 200000

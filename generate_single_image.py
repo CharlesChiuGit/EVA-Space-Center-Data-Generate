@@ -25,7 +25,7 @@ from pygame.locals import *
 
 
 def check_directory(directory):
-    directory_path = os.path.join(PATH, directory)
+    directory_path = os.path.join(PATCH_PATH, directory)
     if not os.path.exists(directory_path):
         logging.info('Create directory {}'.format(directory))
         os.makedirs(directory_path)
@@ -45,9 +45,9 @@ def remove_filename_extension(base_name):
 
 def compress_file(directory):
     archive_name = directory
-    root_dir = os.path.join(PATH, directory)
+    root_dir = os.path.join(PATCH_PATH, directory)
     gztar_file_name = shutil.make_archive(archive_name, 'gztar', root_dir)
-    _ = shutil.move(gztar_file_name, PATH)
+    _ = shutil.move(gztar_file_name, PATCH_PATH)
 
 
 def normalize(coord):
@@ -212,10 +212,10 @@ if __name__ == '__main__':
     sample_target[img_name] = {}
     sample_target[img_name]['spherical'] = [c_gamma, c_theta, c_phi, p_gamma, p_theta, p_phi, u_x, u_y, u_z]
     sample_target[img_name]['cartesian'] = [c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z]
-    pygame.image.save(srf, os.path.join(PATH, img_name + '.png'))
+    pygame.image.save(srf, os.path.join(PATCH_PATH, img_name + '.png'))
 
     logging.info('Finish creating image, time = {}'.format(time.time() - part_start))
     logging.info('Start saving target')
-    with open(os.path.join(PATH, 'target_' + img_name + '.json'), 'a') as f:
+    with open(os.path.join(PATCH_PATH, 'target_' + img_name + '.json'), 'a') as f:
         json.dump(sample_target, f)
     logging.info('Finish saving target')
