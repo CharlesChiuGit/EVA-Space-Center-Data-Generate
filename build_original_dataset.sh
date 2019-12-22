@@ -11,9 +11,9 @@ git_folder="$HOME/space_center/moon_8K/EVA-Space-Center-Data-Generate"
 git pull
 # ----------------------------------------------
 #rm "../config.py"
-cp "config.py"  "../"
-cp "generate_dataset'.py"  "../"
-cp "generate_single_image.py" "../"
+cp "config.py"  ".."
+cp "generate_dataset'.py"  ".."
+cp "generate_single_image.py" ".."
 # ----------------------------------------------
 
 echo 'Start creating original dataset'
