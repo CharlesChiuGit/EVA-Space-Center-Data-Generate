@@ -6,8 +6,6 @@ local_dataset_path="/data/${dataset_name}"
 single_img_folder="$HOME/eva/space_center/moon_8K/Single_Image/"
 object="Moon_8K.obj"
 git_folder="$HOME/eva/space_center/moon_8K/EVA-Space-Center-Data-Generate"
-# ----------------------------------------------
-
 git pull
 # ----------------------------------------------
 

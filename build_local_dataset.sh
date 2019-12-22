@@ -7,6 +7,7 @@ local_dataset_path="/data/space/${dataset_name}"
 local_private_key="$HOME/charleschiu/.ssh/eva_58"
 file_type=('train' 'test' 'validation' 'compressed_file')
 data_type=('images' 'labels')
+git pull
 # ----------------------------------------------
 
 chech_partical_dataset(){
