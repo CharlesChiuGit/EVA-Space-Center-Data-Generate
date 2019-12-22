@@ -49,7 +49,7 @@ if __name__ == '__main__':
     print(new_label_files)
     print(old_label_path)
     keys, datas = read_json(old_label_path)
-    print('Old data: ', datas[sys.argv[1]])
+    print('Old data: ', datas[remove_filename_extension(sys.argv[1])])
     for i in range(len(new_label_files)):
         [new_key], new_data = read_json(new_label_files[i])
         true_new_key = remove_filename_extension(sys.argv[1])
