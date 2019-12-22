@@ -22,6 +22,7 @@ do
       IFS=' '
       read -r -a new_string <<< "${img}"
       IFS="$OIFS"
+      echo "${new_string[4]}"
       pngcheck -q "${new_string[4]}"
       retval=$?
       if [ $retval -ne 0 ]; then
