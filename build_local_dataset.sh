@@ -26,13 +26,14 @@ chech_partical_dataset(){
   for j in $(seq 0 "$((lv2_index - 1))")
   do
     mkdir -m 777 -v "${image_file}/${counter}/${counter}_$j"
-    tar -C "${image_file}/${counter}/${counter}_$j" -zxf "${local_dataset_path}/${file_type[3]}/${counter}_$j.tar.gz"
+    tar -C "${image_file}/${counter}/${counter}_$j" -xzf "${local_dataset_path}/${file_type[3]}/${counter}_$j.tar.gz"
     for img in "${image_file}/${counter}/${counter}_$j"/*.png
     do
       echo "$img"
       pngcheck -q "$img"
       retval=$?
       if [ $retval -ne 0 ]; then
+        echo "Error: Defect Image"
         replace_defect_img_name "$img"
       fi
     done
