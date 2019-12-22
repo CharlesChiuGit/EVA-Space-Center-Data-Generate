@@ -17,8 +17,7 @@ def path_leaf(path):
     return tail or ntpath.basename(head)
 
 
-def read_json(path, file):
-    file_path = os.path.join(path, file)
+def read_json(file_path):
     with open(file_path, 'r') as reader:
         data = json.loads(reader.read())
 
@@ -34,3 +33,4 @@ if __name__ == '__main__':
     labels_path = os.path.join(patch_path, 'target_' + DATASET_NAME + '_*.json')
     label_files = sorted(glob(labels_path))
     print(label_files)
+    read_json(label_files)
