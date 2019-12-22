@@ -26,8 +26,9 @@ do
         IFS="$OIFS"
         cd "../" && python "generate_single_image.py" "${object}" "${new_string[5]}"
         cp "${img}" "${single_img_folder}/defect_image"
+        cp "${local_dataset_path}/target_$i.json" "${single_img_folder}/defect_image"
         cp "${single_img_folder}/${new_string[5]}" "${img}"
-        cd "EVA-Space-Center-Data-Generate" && python "replace_target.py" "None" "$i"
+        cd "EVA-Space-Center-Data-Generate" && python "replace_target.py" "${new_string[5]}" "$i"
       fi
     done
   done

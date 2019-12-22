@@ -3,6 +3,11 @@ from glob import glob
 from config import *
 
 
+def remove_filename_extension(base_name):
+    file_name = os.path.splitext(base_name)[0]
+
+    return file_name
+
 def read_json(file_path):
     with open(file_path, 'r') as reader:
         data = json.loads(reader.read())
@@ -21,10 +26,14 @@ if __name__ == '__main__':
     keys, datas = read_json(old_label_path)
     for i in range(len(new_label_files)):
         [new_key], new_data = read_json(new_label_files[i])
-        print('New data: ', new_data[new_key]['spherical'])
-        for key in keys:
-            if key == new_key:
-                datas[new_key] = new_data[new_key]['spherical']
+        true_new_key = remove_filename_extension(sys.argv[1])
+        if true_new_key == new_key:
+            print('New data: ', new_data[new_key]['spherical'])
+            for key in keys:
+                if key == new_key:
+                    datas[new_key] = new_data[new_key]['spherical']
+        else:
+            logging.error('keys doesnot match!')
     print('Renew data: ', datas[new_key])
     with open(old_label_path, 'w') as f:
         json.dump(datas, f)
