@@ -28,7 +28,7 @@ UPPER_BOUND = MOON_RADIUS + (OPENGL_1_METER * 10000)   # 10,000m above moon surf
 
 # PATH
 if sys.argv[2]:
-    PATH = "../Single_Image"
+    PATH = '/home/eva/space_center/moon_8K/Single_Image/'
 else:
     PATH = os.path.join('/data/', DATASET_NAME)
     if not os.path.exists(PATH):
