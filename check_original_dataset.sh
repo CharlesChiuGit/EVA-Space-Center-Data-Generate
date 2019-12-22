@@ -27,7 +27,7 @@ do
         cd "../" && python "generate_single_image.py" "${object}" "${new_string[5]}"
         cp "${img}" "${single_img_folder}/defect_image"
         cp "${single_img_folder}/${new_string[5]}" "${img}"
-        python "replace_target.py" "None" "$i"
+        cd "EVA-Space-Center-Data-Generate" && python "replace_target.py" "None" "$i"
       fi
     done
   done
