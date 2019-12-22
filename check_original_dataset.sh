@@ -34,7 +34,7 @@ do
     done
   done
 done
-cd "EVA-Space-Center-Data-Generate" && python "compress_file.py"
+python "compress_file.py"
 echo 'End checking original dataset'
 
 #echo 'End checking original dataset'
