@@ -1,17 +1,30 @@
 import os
-import sys
 import logging
+import argparse
+
+
+def set_argument_parser():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-o', '--object', help='Choose a object model')
+    parser.add_argument('-d', '--defect_img_name', help='Give the defect image name')
+    parser.add_argument('-i', '--target_index', help='Set target index')
+
+    return parser.parse_args()
+
 
 # Set logger
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)-8s %(message)s', datefmt='%m-%d %H:%M:%S')
 teamviewer_password = 'jy2u27'
+args = set_argument_parser()
 
 # Dateset name
-DATASET_NAME = 'Dataset_six_random'
-if sys.argv[2]:
-    SINGLE_IMAGE = sys.argv[2]
-else:
-    print("ERROR: SINGLE_IMAGE is not given!")
+DATASET_NAME = 'Dataset_test'
+SINGLE_IMAGE = args.defect_img_name
+if args.defect_img_name:
+    logging.info('Defect Image Name: {}'.format(args.defect_img_name))
+TARGET_INDEX = args.target_index
+OBJECT = args.object
+
 
 # Units
 UNIT_REAL = 996.679647  # in km

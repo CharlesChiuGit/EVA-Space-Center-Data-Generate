@@ -7,11 +7,8 @@ import cv2
 import json
 import math
 import numpy as np
-import os
 import pygame
 import random
-import shutil
-import sys
 import time
 from OpenGL.GL import *
 from OpenGL.GLU import *
@@ -27,13 +24,6 @@ def check_directory(directory):
     if not os.path.exists(directory_path):
         logging.info('Create directory {}'.format(directory))
         os.makedirs(directory_path)
-
-
-def compress_file(directory):
-    archive_name = directory
-    root_dir = os.path.join(PATH, directory)
-    gztar_file_name = shutil.make_archive(archive_name, 'gztar', root_dir)
-    _ = shutil.move(gztar_file_name, PATH)
 
 
 def normalize(coord):
@@ -165,7 +155,7 @@ if __name__ == '__main__':
     pygame.init()
     srf = set_viewport(VIEWPORT[0], VIEWPORT[1])
     # LOAD OBJECT AFTER PYGAME INIT
-    obj = OBJ(sys.argv[1], swapyz=True)
+    obj = OBJ(OBJECT, swapyz=True)
     clock = pygame.time.Clock()
     # set up OPENGL env
     set_light_property()
@@ -208,7 +198,6 @@ if __name__ == '__main__':
                 sample_target[img_name]['spherical'] = [c_gamma, c_theta, c_phi, p_gamma, p_theta, p_phi, u_x, u_y, u_z]
                 sample_target[img_name]['cartesian'] = [c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z]
                 pygame.image.save(srf, os.path.join(PATH, level_2_directory, img_name + '.png'))
-            compress_file(level_2_directory)
 
         logging.info('Finish creating Part_{}, time = {}'.format(i, (time.time() - part_start)))
         logging.info('Start saving target_{}'.format(i))

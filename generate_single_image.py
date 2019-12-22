@@ -5,14 +5,10 @@
 # Scroll wheel: zoom in/out
 import cv2
 import json
-import logging
 import math
 import numpy as np
-import os
 import pygame
 import random
-import shutil
-import sys
 import time
 import ntpath
 from OpenGL.GL import *
@@ -41,13 +37,6 @@ def remove_filename_extension(base_name):
     file_name = os.path.splitext(base_name)[0]
 
     return file_name
-
-
-def compress_file(directory):
-    archive_name = directory
-    root_dir = os.path.join(PATCH_PATH, directory)
-    gztar_file_name = shutil.make_archive(archive_name, 'gztar', root_dir)
-    _ = shutil.move(gztar_file_name, PATCH_PATH)
 
 
 def normalize(coord):
@@ -178,7 +167,7 @@ if __name__ == '__main__':
     pygame.init()
     srf = set_viewport(VIEWPORT[0], VIEWPORT[1])
     # LOAD OBJECT AFTER PYGAME INIT
-    obj = OBJ(sys.argv[1], swapyz=True)
+    obj = OBJ(OBJECT, swapyz=True)
     clock = pygame.time.Clock()
     # set up OPENGL env
     set_light_property()
