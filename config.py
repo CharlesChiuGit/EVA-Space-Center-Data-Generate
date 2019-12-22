@@ -8,7 +8,7 @@ teamviewer_password = 'jy2u27'
 
 # Dateset name
 DATASET_NAME = 'Dataset_all_random'
-if sys.argv[2] == True:
+if sys.argv[2]:
     SINGLE_IMAGE = sys.argv[2]
 else:
     print("ERROR: SINGLE_IMAGE is not given!")
