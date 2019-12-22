@@ -19,7 +19,7 @@ do
 #    for img in $(ls "${local_dataset_path}/$i/${i}_$j/")
     do
       OIFS="$IFS"
-      IFS=' '
+      IFS='/'
       read -r -a new_string <<< "${img}"
       IFS="$OIFS"
       echo "${new_string[4]}"
