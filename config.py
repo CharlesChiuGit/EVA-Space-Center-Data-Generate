@@ -47,7 +47,7 @@ if not os.path.exists(PATH):
 PATCH_PATH = '/home/eva/space_center/moon_8K/Single_Image/'
 
 # hyperparameters
-TOTAL_IMAGE_NUM = 200000
+TOTAL_IMAGE_NUM = 200
 LEVEL_1_INDEX = 10
 LEVEL_2_INDEX = 10
 IMAGE_INDEX = (TOTAL_IMAGE_NUM / LEVEL_1_INDEX) / LEVEL_2_INDEX
