@@ -22,17 +22,15 @@ echo 'End creating original dataset'
 # ----------------------------------------------
 
 echo "Start checking original dataset ${dataset_name}"
-lv1_dummy="$((lv1_index - 1))"
-echo "${lv1_dummy}"
-lv2_dummy="$((lv2_index - 1))"
-echo "${lv2_dummy}"
-for i in $(seq 0 "${lv1_dummy}")
+
+for i in $(seq 0 "$((lv1_index - 1))")
 do
   echo "${i}"
-  for j in $(seq 0 "${lv2_dummy}")
+  for j in $(seq 0 "$((lv2_index - 1))")
   do
     for img in "${local_dataset_path}/$i/${i}_$j"/*.png
     do
+      echo "${img}"
       pngcheck -q "${img}"
       retval=$?
       if [ $retval -ne 0 ]; then
