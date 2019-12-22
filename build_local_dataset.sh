@@ -4,7 +4,7 @@ dataset_name='Dataset_test_1'
 total_number=100
 lv1_index=10
 lv2_index=10
-start="0"
+counter=0
 remote_dataset_path="/data/${dataset_name}"
 remote_IP='eva@140.113.86.59'
 local_dataset_path="/data/space/${dataset_name}"
@@ -17,17 +17,17 @@ git pull
 chech_partical_dataset(){
   type=$1
   index=$2
-  start=$3
+  counter=$3
   image_file="${local_dataset_path}/${type}/${data_type[0]}"
-  mkdir -m 777 -v "${image_file}/${start}"
+  mkdir -m 777 -v "${image_file}/${counter}"
   label_file="${local_dataset_path}/${type}/${data_type[1]}"
   mv "${local_dataset_path}/target_${index}.json"  "${label_file}"
   echo "${index}"
   for j in $(seq 0 "$((lv2_index - 1))")
   do
-    mkdir -m 777 -v "${image_file}/${start}/${start}_$j"
-    tar -C "${image_file}/${start}/${start}_$j" -zxf "${local_dataset_path}/${file_type[3]}/${start}_$j.tar.gz"
-    for img in "${image_file}/${start}/${start}_$j"/*.png
+    mkdir -m 777 -v "${image_file}/${counter}/${counter}_$j"
+    tar -C "${image_file}/${counter}/${counter}_$j" -zxf "${local_dataset_path}/${file_type[3]}/${counter}_$j.tar.gz"
+    for img in "${image_file}/${counter}/${counter}_$j"/*.png
     do
       pngcheck -q "$img"
       retval=$?
@@ -68,13 +68,13 @@ do
 done
 
 echo "checking train dataset"
-for i in $(seq 0 "$((lv1_index - 3))"); do chech_partical_dataset "${file_type[0]}" "$i" "${start}" && "${start}"++; done
+for i in $(seq 0 "$((lv1_index - 3))"); do chech_partical_dataset "${file_type[0]}" "$i" "${counter}" && counter=$((counter+1)); done
 
 echo "checking test dataset"
-chech_partical_dataset "${file_type[1]}" "$((lv1_index - 2))" "${start}"
+chech_partical_dataset "${file_type[1]}" "$((lv1_index - 2))" "${counter}"
 
 echo "checking validation dataset"
-chech_partical_dataset "${file_type[2]}" "$((lv1_index - 1))" "${start}"
+chech_partical_dataset "${file_type[2]}" "$((lv1_index - 1))" "${counter}"
 
 echo 'End decompressing'
 echo 'End building local dataset'
