@@ -74,17 +74,6 @@ done
 echo 'End decompressing'
 echo 'End building local dataset'
 
-echo 'Start checking dataset'
-image_file="${local_dataset_path}/${file_type[1]}/${data_type[0]}"
-for j in $(seq 0 9)
-do
-    for img in $(ls "${image_file}/0/0_$j/")
-    do
-      echo "${image_file}/0/0_$j/$img"
-      pngcheck -q "${image_file}/0/0_$j/$img"
-    done
-done
-echo 'End checking dataset'
 #train_image_file="${local_dataset_path}/${file_type[0]}/${data_type[0]}"
 #tar -C "${train_image_file}/4/4_6" -zxf "${local_dataset_path}/compressed_file/4_6.tar.gz"
 #tar -C "${train_image_file}/7/7_6" -zxf "${local_dataset_path}/compressed_file/7_6.tar.gz"
