@@ -3,9 +3,9 @@
 dataset_name='Dataset_test_1'
 total_number='100'
 local_dataset_path="/data/${dataset_name}"
-regen_img_folder="$HOME/eva/space_center/moon_8K/Regen_Image/"
+regen_img_folder="$HOME/space_center/moon_8K/Regen_Image/"
 object="Moon_8K.obj"
-git_folder="$HOME/eva/space_center/moon_8K/EVA-Space-Center-Data-Generate"
+git_folder="$HOME/space_center/moon_8K/EVA-Space-Center-Data-Generate"
 git pull
 # ----------------------------------------------
 #rm "../config.py"
@@ -15,7 +15,7 @@ cp "generate_single_image.py" "../generate_single_image.py"
 # ----------------------------------------------
 
 echo 'Start creating original dataset'
-cd "$HOME/eva/space_center/moon_8K/" && python "generate_dataset'.py" -o "${object}" -dn "${dataset_name}" -n "${total_number}"
+cd "$HOME/space_center/moon_8K/" && python "generate_dataset'.py" -o "${object}" -dn "${dataset_name}" -n "${total_number}"
 echo 'End creating original dataset'
 # ----------------------------------------------
 

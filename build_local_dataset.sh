@@ -4,7 +4,7 @@ dataset_name='Dataset_test_1'
 remote_dataset_path="/data/${dataset_name}"
 remote_IP='eva@140.113.86.59'
 local_dataset_path="/data/space/${dataset_name}"
-local_private_key="$HOME/charleschiu/.ssh/eva_58"
+local_private_key="$HOME/.ssh/eva_58"
 file_type=('train' 'test' 'validation' 'compressed_file')
 data_type=('images' 'labels')
 git pull
