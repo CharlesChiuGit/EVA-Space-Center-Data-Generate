@@ -33,4 +33,5 @@ if __name__ == '__main__':
     labels_path = os.path.join(patch_path, 'target_' + DATASET_NAME + '_*.json')
     label_files = sorted(glob(labels_path))
     print(label_files)
+    print(label_files[0])
     data = read_json(label_files[0])
