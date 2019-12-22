@@ -27,6 +27,7 @@ do
 #  mkdir -m 777 -v "${train_image_file}/$i"
   train_label_file="${local_dataset_path}/${file_type[0]}/${data_type[1]}"
 #  mv "${local_dataset_path}/target_$i.json"  "${train_label_file}"
+  echo "$i"
   for j in $(seq 0 9)
   do
 #    mkdir -m 777 -v "${train_image_file}/$i/${i}_$j"
@@ -43,6 +44,7 @@ test_image_file="${local_dataset_path}/${file_type[1]}/${data_type[0]}"
 #mkdir -m 777 -v "${test_image_file}/0"
 test_label_file="${local_dataset_path}/${file_type[1]}/${data_type[1]}"
 #mv "${local_dataset_path}/target_8.json"  "${test_label_file}"
+echo "8"
 for j in $(seq 0 9)
 do
 #  mkdir -m 777 -v "${test_image_file}/0/0_$j"
@@ -58,6 +60,7 @@ validation_image_file="${local_dataset_path}/${file_type[2]}/${data_type[0]}"
 #mkdir -m 777 -v "${validation_image_file}/0"
 validation_label_file="${local_dataset_path}/${file_type[2]}/${data_type[1]}"
 #mv "${local_dataset_path}/target_9.json"  "${validation_label_file}"
+echo "9"
 for j in $(seq 0 9)
 do
 #  mkdir -m 777 -v "${validation_image_file}/0/0_$j"
