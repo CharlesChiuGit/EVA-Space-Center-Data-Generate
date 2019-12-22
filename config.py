@@ -54,6 +54,6 @@ PATCH_PATH = '/home/eva/space_center/moon_8K/Single_Image/'
 
 # hyperparameters
 TOTAL_IMAGE_NUM = args.total_number
-LEVEL_1_INDEX = args.level_1_index
-LEVEL_2_INDEX = args.level_2_index
+LEVEL_1_INDEX = int(args.level_1_index)
+LEVEL_2_INDEX = int(args.level_2_index)
 IMAGE_INDEX = (TOTAL_IMAGE_NUM / LEVEL_1_INDEX) / LEVEL_2_INDEX
