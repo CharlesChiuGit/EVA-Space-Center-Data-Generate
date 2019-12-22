@@ -49,6 +49,7 @@ if __name__ == '__main__':
     print(new_label_files)
     print(old_label_path)
     keys, datas = read_json(old_label_path)
+    print('Old data: ', datas[sys.argv[1]])
     for i in range(len(new_label_files)):
         [new_key], new_data = read_json(new_label_files[i])
         true_new_key = remove_filename_extension(sys.argv[1])
@@ -56,10 +57,11 @@ if __name__ == '__main__':
             print('New data: ', new_data[new_key])
             for key in keys:
                 if key == new_key:
+                    print(new_key)
                     datas[new_key] = new_data[new_key]
         else:
             logging.error('keys doesnot match!')
-    print('Renew data: ', datas[new_key])
+    # print('Renew data: ', datas[new_key])
 
 
 
