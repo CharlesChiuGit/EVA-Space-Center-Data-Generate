@@ -32,7 +32,7 @@ if __name__ == '__main__':
     old_labels_path = os.path.join(local_dataset_path, 'target_' + sys.argv[2] + '.json')
     print(new_label_files)
     key, data = read_json(old_labels_path)
-    print(key)
+    print(key[-1])
     # print(data)
     for i in range(len(new_label_files)):
         [new_key], data = read_json(new_label_files[i])
