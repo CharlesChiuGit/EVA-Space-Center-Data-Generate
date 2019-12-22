@@ -29,7 +29,7 @@ if __name__ == '__main__':
     print(datas[new_key])
     with open(old_label_path, 'w') as f:
         json.dump(datas, f)
-        logging.info('Finish saving {}}'.format(old_label_path))
+        logging.info('Finish saving {}'.format(old_label_path))
 
 
 
