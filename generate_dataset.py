@@ -51,7 +51,7 @@ def set_viewport(viewport_width, viewport_hight):
     """
     logging.info('Start setting viewport')
     viewport = (viewport_width, viewport_hight)
-    srf = pygame.display.set_mode(viewport, OPENGL | DOUBLEBUF)
+    srf = pygame.display.set_mode(viewport, pygame.OPENGL | pygame.DOUBLEBUF)
 
     return srf
 
