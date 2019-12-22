@@ -8,7 +8,7 @@ teamviewer_password = 'jy2u27'
 
 # Dateset name
 DATASET_NAME = 'Dataset_all_random'
-if sys.argv[2]:
+if sys.argv[2] == True:
     SINGLE_IMAGE = sys.argv[2]
 else:
     print("ERROR: SINGLE_IMAGE is not given!")
@@ -24,7 +24,7 @@ FOVY = 90.0  # in degrees
 Z_NEAR = 1.0
 Z_FAR = 100.0
 LOWER_BOUND = MOON_RADIUS + (OPENGL_1_METER * 200)  # 200m above moon surface
-UPPER_BOUND = MOON_RADIUS + (OPENGL_1_METER * 10000)   # 10,000m above moon surface
+UPPER_BOUND = MOON_RADIUS + (OPENGL_1_METER * 10000)  # 10,000m above moon surface
 
 # PATH
 if sys.argv[2]:
@@ -39,4 +39,4 @@ else:
 TOTAL_IMAGE_NUM = 200000
 LEVEL_1_INDEX = 10
 LEVEL_2_INDEX = 10
-IMAGE_INDEX = (TOTAL_IMAGE_NUM/LEVEL_1_INDEX)/LEVEL_2_INDEX
+IMAGE_INDEX = (TOTAL_IMAGE_NUM / LEVEL_1_INDEX) / LEVEL_2_INDEX
