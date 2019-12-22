@@ -19,6 +19,7 @@ if __name__ == '__main__':
     print(new_label_files)
     print(old_label_path)
     keys, datas = read_json(old_label_path)
+    print(datas['Dataset_all_random_50377'])
     for i in range(len(new_label_files)):
         [new_key], new_data = read_json(new_label_files[i])
         print('New data: ', new_data[new_key]['spherical'])
