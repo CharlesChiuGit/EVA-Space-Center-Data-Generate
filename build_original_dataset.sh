@@ -1,7 +1,9 @@
 #!/bin/bash
 
 dataset_name='Dataset_test_1'
-total_number='100'
+total_number='10'
+lv1_index="1"
+lv2_index="1"
 local_dataset_path="/data/${dataset_name}"
 regen_img_folder="$HOME/space_center/moon_8K/Regen_Image/"
 object="Moon_8K.obj"
@@ -9,22 +11,22 @@ git_folder="$HOME/space_center/moon_8K/EVA-Space-Center-Data-Generate"
 git pull
 # ----------------------------------------------
 #rm "../config.py"
-cp "config.py"  "../config.py"
-cp "generate_dataset'.py"  "../generate_dataset'.py"
-cp "generate_single_image.py" "../generate_single_image.py"
+cp "config.py"  "../"
+cp "generate_dataset'.py"  "../"
+cp "generate_single_image.py" "../"
 # ----------------------------------------------
 
 echo 'Start creating original dataset'
-cd "$HOME/space_center/moon_8K/" && python "generate_dataset'.py" -o "${object}" -dn "${dataset_name}" -n "${total_number}"
+cd "$HOME/space_center/moon_8K/" && python "generate_dataset.py" -o "${object}" -dn "${dataset_name}" -n "${total_number}" -lv1 "${lv1_index}" -lv2 "${lv2_index}"
 echo 'End creating original dataset'
 # ----------------------------------------------
 
 echo 'Start checking original dataset'
 
-for i in $(seq 0 9)
+for i in $(seq 0 "${lv1_index}")
 do
   echo "${i}"
-  for j in $(seq 0 9)
+  for j in $(seq 0 "${lv2_index}")
   do
     for img in "${local_dataset_path}/$i/${i}_$j"/*.png
     do

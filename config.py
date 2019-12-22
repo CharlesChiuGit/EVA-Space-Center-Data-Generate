@@ -13,6 +13,8 @@ def set_argument_parser():
     parser.add_argument('-d', '--defect_img_name', help='Give the defect image name')
     parser.add_argument('-i', '--target_index', help='Set target index')
     parser.add_argument('-n', '--total_number', help='Set total number of dataset')
+    parser.add_argument('-lv1', '--level_1_index', help='Set level_1_index')
+    parser.add_argument('-lv2', '--level_2_index', help='Set level_2_index')
 
     return parser.parse_args()
 
@@ -52,6 +54,6 @@ PATCH_PATH = '/home/eva/space_center/moon_8K/Single_Image/'
 
 # hyperparameters
 TOTAL_IMAGE_NUM = args.total_number
-LEVEL_1_INDEX = 10
-LEVEL_2_INDEX = 10
+LEVEL_1_INDEX = args.level_1_index
+LEVEL_2_INDEX = args.level_2_index
 IMAGE_INDEX = (TOTAL_IMAGE_NUM / LEVEL_1_INDEX) / LEVEL_2_INDEX
