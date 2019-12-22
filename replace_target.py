@@ -33,7 +33,7 @@ if __name__ == '__main__':
     print(new_label_files)
     key, data = read_json(old_labels_path)
     print(key)
-    print(data)
+    # print(data)
     for i in range(len(new_label_files)):
-        [key], data = read_json(new_label_files[i])
+        [new_key], data = read_json(new_label_files[i])
 
