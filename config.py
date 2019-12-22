@@ -3,7 +3,7 @@ import logging
 import argparse
 # set SDL to use the dummy NULL video driver,
 #   so it doesn't need a windowing system.
-os.environ["SDL_VIDEODRIVER"] = "dummy"
+# os.environ["SDL_VIDEODRIVER"] = "dummy"
 
 
 def set_argument_parser():
