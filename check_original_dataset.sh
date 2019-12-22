@@ -25,7 +25,7 @@ do
         IFS='/'
         read -r -a new_string <<< "${img}"
         IFS="$OIFS"
-        cd "../" && python generate_single_image.py ${object} ${new_string[5]}
+        cd "../" && python "generate_single_image.py" "${object}" "${new_string[5]}"
 #        rm "${local_dataset_path}/$i/${i}_$j/$img"
 #        cp "${single_img_folder}/$img" "${local_dataset_path}/$i/${i}_$j/"
       fi
