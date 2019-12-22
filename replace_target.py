@@ -1,20 +1,6 @@
-import cv2
 import json
-import logging
-import math
-import numpy as np
-import os
-import shutil
-import sys
 from glob import glob
-import ntpath
 from config import *
-
-
-def path_leaf(path):
-    head, tail = ntpath.split(path)
-
-    return tail or ntpath.basename(head)
 
 
 def read_json(file_path):
@@ -29,9 +15,9 @@ if __name__ == '__main__':
     patch_path = '/home/eva/space_center/moon_8K/Single_Image/'
     new_labels_path = os.path.join(patch_path, 'target_' + DATASET_NAME + '_*.json')
     new_label_files = sorted(glob(new_labels_path))
-    old_labels_path = os.path.join(local_dataset_path, 'target_' + sys.argv[2] + '.json')
+    old_label_path = os.path.join(local_dataset_path, 'target_' + sys.argv[2] + '.json')
     print(new_label_files)
-    keys, datas = read_json(old_labels_path)
+    keys, datas = read_json(old_label_path)
     # print(datas['Dataset_all_random_50377'])
     # print(data)
     for i in range(len(new_label_files)):
@@ -41,6 +27,8 @@ if __name__ == '__main__':
             if key == new_key:
                 datas[new_key] = new_data[new_key]['spherical']
     print(datas[new_key])
+    with open(os.path.join(old_label_path, 'target_{}.json'.format(sys.argv[2])), 'w') as f:
+        json.dump(datas, f)
 
 
 
