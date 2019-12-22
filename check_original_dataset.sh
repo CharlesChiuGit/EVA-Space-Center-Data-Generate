@@ -1,6 +1,6 @@
 #!/bin/bash
 
-local_dataset_path='/data/Dataset_all_random'
+local_dataset_path='/data/Dataset_six_random'
 single_img_folder='/home/eva/space_center/moon_8K/Single_Image/'
 object="Moon_8K.obj"
 
