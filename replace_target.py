@@ -8,6 +8,7 @@ def remove_filename_extension(base_name):
 
     return file_name
 
+
 def read_json(file_path):
     with open(file_path, 'r') as reader:
         data = json.loads(reader.read())

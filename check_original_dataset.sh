@@ -11,9 +11,9 @@ cp "generate_single_image.py" "../"
 rm "../config.py"
 cp "config.py" "../"
 
-for i in $(seq 5 5)
+for i in $(seq 0 9)
 do
-  for j in $(seq 0 0)
+  for j in $(seq 0 9)
   do
     for img in "${local_dataset_path}/$i/${i}_$j"/*.png
     do
