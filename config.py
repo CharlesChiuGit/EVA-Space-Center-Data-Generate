@@ -3,7 +3,7 @@ import logging
 import argparse
 # set SDL to use the dummy NULL video driver,
 #   so it doesn't need a windowing system.
-os.environ["SDL_VIDEODRIVER"] = "dummy"
+# os.environ["SDL_VIDEODRIVER"] = "dummy"
 
 
 def set_argument_parser():
@@ -54,9 +54,6 @@ PATCH_PATH = '/home/eva/space_center/moon_8K/Single_Image/'
 
 # hyperparameters
 TOTAL_IMAGE_NUM = int(args.total_number)
-print(type(TOTAL_IMAGE_NUM))
 LEVEL_1_INDEX = int(args.level_1_index)
-print(type(LEVEL_1_INDEX))
 LEVEL_2_INDEX = int(args.level_2_index)
-print(type(LEVEL_2_INDEX))
 IMAGE_INDEX = (TOTAL_IMAGE_NUM / LEVEL_1_INDEX) / LEVEL_2_INDEX
