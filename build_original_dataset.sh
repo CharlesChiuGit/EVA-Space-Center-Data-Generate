@@ -41,7 +41,7 @@ do
         cp "${img}" "${regen_img_folder}/defect_image"
         cp "${local_dataset_path}/target_$i.json" "${regen_img_folder}/defect_image/target_${i}_${new_string[5]}.json"
         cp "${regen_img_folder}/${new_string[5]}" "${img}"
-        cd "${git_folder}" && python "replace_target.py" -d "${new_string[5]}" -i "$i"
+        cd "${git_folder}" && python "replace_target.py" -d "${new_string[5]}" -i "$i" -o "${object}" -dn "${dataset_name}" -n "${total_number}" -lv1 "${lv1_index}" -lv2 "${lv2_index}"
       fi
     done
   done
