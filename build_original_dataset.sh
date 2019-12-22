@@ -46,7 +46,7 @@ do
     done
   done
 done
-cd "${git_folder}" && python "compress_file.py"
+cd "${git_folder}" && python "compress_file.py" -dn "${dataset_name}" -n "${total_number}" -lv1 "${lv1_index}" -lv2 "${lv2_index}"
 echo 'End checking original dataset'
 
 #echo 'End checking original dataset'
