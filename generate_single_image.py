@@ -191,7 +191,7 @@ if __name__ == '__main__':
     # create image
     sample_target = {}
     part_start = time.time()
-    logging.info('Start creating single image')
+    logging.info('Start creating single image' + SINGLE_IMAGE)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     glLoadIdentity()
 
