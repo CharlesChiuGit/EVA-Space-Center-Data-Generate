@@ -23,9 +23,9 @@ echo 'End creating original dataset'
 
 echo "Start checking original dataset ${dataset_name}"
 lv1_dummy="$(${lv1_index} - 1)"
-echo lv1_dummy
+echo "${lv1_dummy}"
 lv2_dummy="$(${lv2_index} - 1)"
-echo lv2_dummy
+echo "${lv2_dummy}"
 for i in $(seq 0 "${lv1_dummy}")
 do
   echo "${i}"
