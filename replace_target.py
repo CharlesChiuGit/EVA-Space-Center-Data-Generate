@@ -29,6 +29,7 @@ if __name__ == '__main__':
     print(datas[new_key])
     with open(os.path.join(old_label_path, 'target_{}.json'.format(sys.argv[2])), 'w') as f:
         json.dump(datas, f)
+        logging.info('Finish saving target_{}.json'.format(sys.argv[2]))
 
 
 
