@@ -18,7 +18,6 @@ do
     for img in "${local_dataset_path}/$i/${i}_$j"/*.png
 #    for img in $(ls "${local_dataset_path}/$i/${i}_$j/")
     do
-      echo "${img}"
       pngcheck -q "$img"
       retval=$?
       if [ $retval -ne 0 ]; then
