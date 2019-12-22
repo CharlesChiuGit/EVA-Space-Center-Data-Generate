@@ -3,10 +3,8 @@
 # LMB + move: rotate
 # RMB + move: pan
 # Scroll wheel: zoom in/out
-import cv2
 import json
 import math
-import numpy as np
 import pygame
 import random
 import time
@@ -151,15 +149,6 @@ def camera_direction(c_x, c_y, c_z, p_x, p_y, p_z):
     up = normalize(crossf(side, norm_forward))
 
     return up[0], up[1], up[2]
-
-
-def transfer_pygame_surface_to_cv2_ndarray(surface):
-    pygame_string = pygame.image.tostring(surface, 'RGB')
-    img = np.fromstring(pygame_string, dtype=np.uint8)
-    img = img.reshape((VIEWPORT[1], VIEWPORT[0], 3))
-    img = cv2.cvtColor(img, cv2.COLOR_RGB2BGR)
-
-    return img
 
 
 if __name__ == '__main__':
