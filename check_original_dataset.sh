@@ -7,6 +7,9 @@ object="Moon_8K.obj"
 echo 'Start checking original dataset'
 rm "../generate_single_image.py"
 cp "generate_single_image.py" "../"
+rm "../config.py"
+cp "config.py" "../"
+
 for i in $(seq 5 5)
 do
   for j in $(seq 0 0)
