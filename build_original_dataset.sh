@@ -23,10 +23,10 @@ echo 'End creating original dataset'
 
 echo 'Start checking original dataset'
 
-for i in $(seq 0 "${lv1_index}")
+for i in $(seq 0 "${lv1_index} - 1")
 do
   echo "${i}"
-  for j in $(seq 0 "${lv2_index}")
+  for j in $(seq 0 "${lv2_index} - 1")
   do
     for img in "${local_dataset_path}/$i/${i}_$j"/*.png
     do
