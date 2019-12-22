@@ -27,9 +27,9 @@ if __name__ == '__main__':
             if key == new_key:
                 datas[new_key] = new_data[new_key]['spherical']
     print(datas[new_key])
-    with open(os.path.join(old_label_path, 'target_{}.json'.format(sys.argv[2])), 'w') as f:
+    with open(old_label_path, 'w') as f:
         json.dump(datas, f)
-        logging.info('Finish saving target_{}.json'.format(sys.argv[2]))
+        logging.info('Finish saving {}}'.format(old_label_path))
 
 
 
