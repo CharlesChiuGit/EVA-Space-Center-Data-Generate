@@ -21,7 +21,6 @@ def set_argument_parser():
 
 # Set logger
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)-8s %(message)s', datefmt='%m-%d %H:%M:%S')
-teamviewer_password = 'jy2u27'
 
 # Dateset name
 args = set_argument_parser()
