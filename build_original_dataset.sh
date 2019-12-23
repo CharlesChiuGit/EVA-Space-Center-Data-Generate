@@ -8,9 +8,15 @@ local_dataset_path="/data/${dataset_name}"
 regen_img_folder="$HOME/space_center/moon_8K/Regen_Image/"
 object="Moon_8K.obj"
 git_folder="$HOME/space_center/moon_8K/EVA-Space-Center-Data-Generate"
-git pull
 # ----------------------------------------------
-#rm "../config.py"
+
+conda_dir="$HOME/anaconda2/etc/profile.d"
+# shellcheck source=/dev/null
+source "${conda_dir}/conda.sh"
+conda activate "space"
+cd "${git_folder}" && git pull
+# ----------------------------------------------
+
 cp "config.py"  ".."
 cp "generate_dataset.py"  ".."
 cp "generate_single_image.py" ".."
