@@ -202,7 +202,12 @@ if __name__ == '__main__':
 
     # Second Image
     SINGLE_IMAGE = "far_center"
+    # create image
+    sample_target = {}
+    part_start = time.time()
     logging.info('Start creating single image ' + SINGLE_IMAGE)
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+    glLoadIdentity()
     # WHERE does camera look at
     p_gamma, p_theta, p_phi, p_x, p_y, p_z = 0, 0, 0, 0, 0, 0
     # DIRECTION of camera
