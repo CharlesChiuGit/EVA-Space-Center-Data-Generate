@@ -124,10 +124,10 @@ def set_optical_axis_look_at(moon_radius):
     """
     Set optical axis' end point. p_gamma, p_theta, p_phi are sampled with random.uniform in their own range.
     """
-    p_gamma = random.uniform(0, 0.5 * moon_radius)
-    p_theta = math.acos(1 - 2 * random.uniform(0, 1))
-    p_phi = 2 * math.pi * random.uniform(0, 1)
-    # p_gamma, p_theta, p_phi = 0, 0, 0
+    # p_gamma = random.uniform(0, 0.5 * moon_radius)
+    # p_theta = math.acos(1 - 2 * random.uniform(0, 1))
+    # p_phi = 2 * math.pi * random.uniform(0, 1)
+    p_gamma, p_theta, p_phi = 0, 0, 0
     p_x, p_y, p_z = ball_coordinates_to_cassette_coordinates(p_gamma, p_theta, p_phi)
 
     return p_gamma, p_theta, p_phi, p_x, p_y, p_z
@@ -154,7 +154,7 @@ def camera_direction(c_x, c_y, c_z, p_x, p_y, p_z):
 
 
 if __name__ == '__main__':
-    SINGLE_IMAGE = "near_random"
+    SINGLE_IMAGE = "near_center"
     # PYGAME
     pygame.init()
     srf = set_viewport(VIEWPORT[0], VIEWPORT[1])
