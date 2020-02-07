@@ -1,6 +1,6 @@
 #!/bin/bash
 
-dataset_name='Dataset_test_1'
+dataset_name='dataset_hank'
 total_number=100
 lv1_index=10
 lv2_index=10
