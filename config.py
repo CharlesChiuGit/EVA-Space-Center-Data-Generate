@@ -42,7 +42,7 @@ FOVY = 120  # in degrees
 Z_NEAR = 1.0
 Z_FAR = 100.0
 LOWER_BOUND = MOON_RADIUS + (OPENGL_1_METER * 200)  # 200m above moon surface
-UPPER_BOUND = MOON_RADIUS + (OPENGL_1_METER * 201)  # 10,000m above moon surface
+UPPER_BOUND = MOON_RADIUS + (OPENGL_1_METER * 10000)  # 10,000m above moon surface
 
 # PATH
 PATH = os.path.join('/data', DATASET_NAME)
