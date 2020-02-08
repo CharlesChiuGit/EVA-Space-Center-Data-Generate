@@ -117,7 +117,7 @@ def set_optical_axis_look_at(moon_radius):
     p_gamma = 0
     p_theta = math.acos(1 - 2 * random.uniform(0, 1))
     p_phi = 2 * math.pi * random.uniform(0, 1)
-    p_theta, p_phi = 0.5*math.pi, math.pi
+    # p_theta, p_phi = 0.5*math.pi, math.pi
     p_x, p_y, p_z = ball_coordinates_to_cassette_coordinates(p_gamma, p_theta, p_phi)
 
     return p_gamma, p_theta, p_phi, p_x, p_y, p_z
