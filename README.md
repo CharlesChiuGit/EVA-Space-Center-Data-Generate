@@ -21,11 +21,11 @@
     - `u_z`: z componet of camera pose's normal vecter.
 - The range of this 9 parameters list below:
     - `c_gamma`: [1.74308766628, 1.75292031414] in OpenGL unit --> [1737.3,  1747.1] km, 200m ~ 10,000m above Moon surface.
-    - `c_theta`: [0, 2pi] radian
-    - `c_phi`: [0, pi] radian
+    - `c_theta`: [0, pi] radian
+    - `c_phi`: [0, 2pi] radian
     - `p_gamma`: [0, 1.742887] in OpenGL unit --> [0, 1737.1] km, radius of the Moon.
-    - `p_theta`: [0, 2pi] radian
-    - `p_phi`: [0, pi] radian
+    - `p_theta`: [0, pi] radian
+    - `p_phi`: [0, 2pi] radian
     - `u_x`: [-1, 1] no unit, since the normal vector is normalized.
     - `u_y`: [-1, 1] no unit , since the normal vector is normalized.
     - `u_z`: [-1, 1] no unit, since the normal vector is normalized.
