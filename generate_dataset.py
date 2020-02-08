@@ -99,11 +99,9 @@ def set_camera_position(lower_bound, upper_bound):
     """
     Set camera position. c_gamma, c_theta, c_phi are sampled with random.uniform in their own range.
     """
-    # c_gamma = random.uniform(lower_bound, upper_bound)
-    # c_theta = math.acos(1 - 2 * random.uniform(0, 1))
-    # c_phi = 2 * math.pi * random.uniform(0, 1)
-    c_gamma = upper_bound
-    c_theta, c_phi = 0, 0
+    c_gamma = random.uniform(lower_bound, upper_bound)
+    c_theta = math.acos(1 - 2 * random.uniform(0, 1))
+    c_phi = 2 * math.pi * random.uniform(0, 1)
     c_x, c_y, c_z = ball_coordinates_to_cassette_coordinates(c_gamma, c_theta, c_phi)
 
     return c_gamma, c_theta, c_phi, c_x, c_y, c_z
@@ -113,7 +111,8 @@ def set_optical_axis_look_at(moon_radius):
     """
     Set optical axis' end point. p_gamma, p_theta, p_phi are sampled with random.uniform in their own range.
     """
-    p_gamma = random.uniform(0, 0.25 * moon_radius)
+    range_of_p = 0.25
+    p_gamma = random.uniform(0, range_of_p * moon_radius)
     p_theta = math.acos(1 - 2 * random.uniform(0, 1))
     p_phi = 2 * math.pi * random.uniform(0, 1)
     p_x, p_y, p_z = ball_coordinates_to_cassette_coordinates(p_gamma, p_theta, p_phi)
@@ -187,8 +186,6 @@ if __name__ == '__main__':
                 sample_target[img_name] = {}
                 sample_target[img_name]['spherical'] = [c_gamma, c_theta, c_phi, p_gamma, p_theta, p_phi, u_x, u_y, u_z]
                 sample_target[img_name]['cartesian'] = [c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z]
-                print(sample_target[img_name]['spherical'])
-                print(sample_target[img_name]['cartesian'])
                 pygame.image.save(srf, os.path.join(PATH, level_2_directory, img_name + '.png'))
 
         logging.info('Finish creating Part_{}, time = {}'.format(i, (time.time() - part_start)))
