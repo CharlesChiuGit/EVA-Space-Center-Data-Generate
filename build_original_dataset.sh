@@ -1,6 +1,6 @@
 #!/bin/bash
 
-dataset_name='dataset_test_50k'
+dataset_name='dataset_test_znear'
 total_number=10
 lv1_index=1
 lv2_index=1
