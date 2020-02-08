@@ -1,6 +1,6 @@
 #!/bin/bash
 
-dataset_name='dataset_hank'
+dataset_name='dataset_test_fovy'
 lv1_index=10
 lv2_index=10
 counter=0
