@@ -189,6 +189,7 @@ if __name__ == '__main__':
                 sample_target[img_name] = {}
                 sample_target[img_name]['spherical'] = [c_gamma, c_theta, c_phi, p_gamma, p_theta, p_phi, u_x, u_y, u_z]
                 sample_target[img_name]['cartesian'] = [c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z]
+                print(sample_target)
                 pygame.image.save(srf, os.path.join(PATH, level_2_directory, img_name + '.png'))
 
         logging.info('Finish creating Part_{}, time = {}'.format(i, (time.time() - part_start)))
