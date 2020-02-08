@@ -39,7 +39,7 @@ OPENGL_1_METER = 0.001 / UNIT_REAL
 # Constraints
 VIEWPORT = [800, 600]
 FOVY = 10  # in degrees
-Z_NEAR = 5.0
+Z_NEAR = 1.0
 Z_FAR = 100.0
 LOWER_BOUND = MOON_RADIUS + (OPENGL_1_METER * 200)  # 200m above moon surface
 UPPER_BOUND = MOON_RADIUS + (OPENGL_1_METER * 50000)  # 10,000m above moon surface
