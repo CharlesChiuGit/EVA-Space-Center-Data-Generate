@@ -2,8 +2,8 @@
 
 dataset_name='dataset_test_fovy'
 total_number=100
-lv1_index=10
-lv2_index=10
+lv1_index=1
+lv2_index=1
 local_dataset_path="/data/${dataset_name}"
 regen_img_folder="$HOME/space_center/moon_8K/Regen_Image/"
 object="Moon_8K.obj"
