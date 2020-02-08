@@ -100,7 +100,7 @@ def set_camera_position(lower_bound, upper_bound):
     Set camera position. c_gamma, c_theta, c_phi are sampled with random.uniform in their own range.
     """
     # c_gamma = random.uniform(lower_bound, upper_bound)
-    c_gamma = lower_bound
+    c_gamma = upper_bound
     # c_theta = math.acos(1 - 2 * random.uniform(0, 1))
     # c_phi = 2 * math.pi * random.uniform(0, 1)
     c_theta, c_phi = 0, 0
