@@ -17,7 +17,7 @@ def mse(imageA, imageB):
 
 
 if __name__ == '__main__':
-    img1 = cv2.imread('D:/DownLoad/80k.png')
+    img1 = cv2.imread('D:/DownLoad/50k.png')
     img2 = cv2.imread('D:/DownLoad/200.png')
     # img3 = cv2.imread('D:/EVA-Space-Center-Data-Generate/src/Single_Image_negative_surface.png')
     # img4 = cv2.imread('D:/EVA-Space-Center-Data-Generate/src/Single_Image_positive_surface.png')

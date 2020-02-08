@@ -102,7 +102,7 @@ def set_camera_position(lower_bound, upper_bound):
     # c_gamma = random.uniform(lower_bound, upper_bound)
     # c_theta = math.acos(1 - 2 * random.uniform(0, 1))
     # c_phi = 2 * math.pi * random.uniform(0, 1)
-    c_gamma, c_theta, c_phi = lower_bound, 0, 0
+    c_gamma, c_theta, c_phi = upper_bound, 0, 0
     c_x, c_y, c_z = ball_coordinates_to_cassette_coordinates(c_gamma, c_theta, c_phi)
 
     return c_gamma, c_theta, c_phi, c_x, c_y, c_z
