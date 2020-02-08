@@ -113,8 +113,8 @@ def set_optical_axis_look_at(moon_radius):
     """
     Set optical axis' end point. p_gamma, p_theta, p_phi are sampled with random.uniform in their own range.
     """
-    p_gamma = random.uniform(0, 0.5 * moon_radius)  # no influences
-    # p_gamma = 0
+    # p_gamma = random.uniform(0, 0.5 * moon_radius)  # no influences
+    p_gamma = 0
     p_theta = math.acos(1 - 2 * random.uniform(0, 1))
     p_phi = 2 * math.pi * random.uniform(0, 1)
     p_theta, p_phi = 0.5*math.pi, math.pi
