@@ -1,7 +1,7 @@
 #!/bin/bash
 
 dataset_name='Dataset_test_P'
-total_number=10
+total_number=20
 lv1_index=1
 lv2_index=1
 local_dataset_path="/data/${dataset_name}"
