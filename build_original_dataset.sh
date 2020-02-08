@@ -1,6 +1,6 @@
 #!/bin/bash
 
-dataset_name='dataset_test_fovy90_7K'
+dataset_name='dataset_test_fovy90_14K'
 total_number=10
 lv1_index=1
 lv2_index=1
