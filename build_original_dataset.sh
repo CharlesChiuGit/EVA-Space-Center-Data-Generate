@@ -1,9 +1,9 @@
 #!/bin/bash
 
-dataset_name='Dataset_fovy120'
-total_number=200000
-lv1_index=10
-lv2_index=10
+dataset_name='Dataset_tset_highre'
+total_number=10
+lv1_index=1
+lv2_index=1
 local_dataset_path="/data/${dataset_name}"
 regen_img_folder="$HOME/space_center/moon_8K/Regen_Image/"
 object="Moon_8K.obj"
