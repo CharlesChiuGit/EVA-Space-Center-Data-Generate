@@ -1,6 +1,6 @@
 #!/bin/bash
 
-dataset_name='Dataset_tset_highre'
+dataset_name='Dataset_fovy120'
 lv1_index=10
 lv2_index=10
 counter=0

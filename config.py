@@ -37,12 +37,12 @@ MOON_RADIUS = 1.742887
 OPENGL_1_METER = 0.001 / UNIT_REAL
 
 # Constraints
-VIEWPORT = [1600, 1200]
+VIEWPORT = [800, 600]
 FOVY = 120  # in degrees
 Z_NEAR = 1.0
 Z_FAR = 100.0
 LOWER_BOUND = MOON_RADIUS + (OPENGL_1_METER * 200)  # 200m above moon surface
-UPPER_BOUND = MOON_RADIUS + (OPENGL_1_METER * 50000)  # 80,000m above moon surface
+UPPER_BOUND = MOON_RADIUS + (OPENGL_1_METER * 80000)  # 80,000m above moon surface
 
 # PATH
 PATH = os.path.join('/data', DATASET_NAME)
