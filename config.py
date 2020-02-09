@@ -49,7 +49,7 @@ PATH = os.path.join('/data', DATASET_NAME)
 if not os.path.exists(PATH):
     logging.info('Create dataset {}'.format(DATASET_NAME))
     os.makedirs(PATH)
-PATCH_PATH = '/home/eva/space_center/moon_8K/Single_Image/'
+PATCH_PATH = '/home/eva/space_center/moon_8K/Regen_Image/'
 
 # hyperparameters
 TOTAL_IMAGE_NUM = int(args.total_number)
