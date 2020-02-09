@@ -44,7 +44,7 @@ do
         IFS='/'
         read -r -a new_string <<< "${img}"
         IFS="$OIFS"
-        python "generate_single_image.py" -o "${object}" -d "${new_string[5]}" -i "$i" -o "${object}" -dn "${dataset_name}" -n "${total_number}" -lv1 "${lv1_index}" -lv2 "${lv2_index}"
+        cd "$HOME/space_center/moon_8K/" && python "generate_single_image.py" -o "${object}" -d "${new_string[5]}" -i "$i" -o "${object}" -dn "${dataset_name}" -n "${total_number}" -lv1 "${lv1_index}" -lv2 "${lv2_index}"
         cp "${img}" "${regen_img_folder}/defect_image"
         cp "${local_dataset_path}/target_$i.json" "${regen_img_folder}/defect_image/target_${i}_${new_string[5]}.json"
         cp "${regen_img_folder}/${new_string[5]}" "${img}"
