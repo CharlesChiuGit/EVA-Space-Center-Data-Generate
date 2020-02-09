@@ -18,14 +18,14 @@ check_partical_dataset(){
   index=$2
   counter=$3
   image_file="${local_dataset_path}/${type}/${data_type[0]}"
-  mkdir -m 777 -v "${image_file}/${counter}"
+#  mkdir -m 777 -v "${image_file}/${counter}"
   label_file="${local_dataset_path}/${type}/${data_type[1]}"
-  mv "${local_dataset_path}/target_${index}.json"  "${label_file}"
+#  mv "${local_dataset_path}/target_${index}.json"  "${label_file}"
   echo "${index}"
   for j in $(seq 0 "$((lv2_index - 1))")
   do
-    mkdir -m 777 -v "${image_file}/${counter}/${counter}_$j"
-    tar -C "${image_file}/${counter}/${counter}_$j" -xzf "${local_dataset_path}/${file_type[3]}/${index}_$j.tar.gz"
+#    mkdir -m 777 -v "${image_file}/${counter}/${counter}_$j"
+#    tar -C "${image_file}/${counter}/${counter}_$j" -xzf "${local_dataset_path}/${file_type[3]}/${index}_$j.tar.gz"
     for img in "${image_file}/${counter}/${counter}_$j"/*.png
     do
 #      echo "$img"
