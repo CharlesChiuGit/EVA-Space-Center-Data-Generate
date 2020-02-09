@@ -10,11 +10,11 @@ def set_argument_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument('-dn', '--dataset_name', help='Set Dataset name')
     parser.add_argument('-o', '--object', help='Choose a object model')
-    parser.add_argument('-d', '--defect_img_name', help='Give the defect image name')
-    parser.add_argument('-i', '--target_index', help='Set target index')
+    parser.add_argument('-d', '--defect_img_name', help='Give the defect image name, Dataset_XXX_defect_img_ind.png')
+    parser.add_argument('-i', '--target_index', help='Set which target index, target_X.json')
     parser.add_argument('-n', '--total_number', help='Set total number of dataset')
-    parser.add_argument('-lv1', '--level_1_index', help='Set level_1_index')
-    parser.add_argument('-lv2', '--level_2_index', help='Set level_2_index')
+    parser.add_argument('-lv1', '--level_1_index', help='Set how many partial you want to divide')
+    parser.add_argument('-lv2', '--level_2_index', help='Set how many smaller partial you want to divide')
 
     return parser.parse_args()
 
