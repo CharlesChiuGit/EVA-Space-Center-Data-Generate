@@ -22,9 +22,9 @@ cp "generate_dataset.py"  ".."
 cp "generate_single_image.py" ".."
 # ----------------------------------------------
 
-echo 'Start creating original dataset'
-cd "$HOME/space_center/moon_8K/" && python "generate_dataset.py" -o "${object}" -dn "${dataset_name}" -n "${total_number}" -lv1 "${lv1_index}" -lv2 "${lv2_index}"
-echo 'End creating original dataset'
+#echo 'Start creating original dataset'
+#cd "$HOME/space_center/moon_8K/" && python "generate_dataset.py" -o "${object}" -dn "${dataset_name}" -n "${total_number}" -lv1 "${lv1_index}" -lv2 "${lv2_index}"
+#echo 'End creating original dataset'
 # ----------------------------------------------
 
 echo "Start checking original dataset ${dataset_name}"
@@ -57,14 +57,14 @@ cd "${git_folder}" && python "compress_file.py" -dn "${dataset_name}" -n "${tota
 echo 'End checking original dataset'
 # ----------------------------------------------
 
-# build remote dataset after creat original dataset
-local_private_key="$HOME/.ssh/eva_59"
-remote_IP='charleschiu@140.113.86.58'
-ssh -i "${local_private_key}" "${remote_IP}" bash << "EOF"
-  git_folder="$HOME/EVA-Space-Center-Data-Generate"
-  remote_script="build_local_dataset.sh"
-  cd "${git_folder}"
-  git pull
-  bash ${remote_script}
-  exit
-EOF
+## build remote dataset after creat original dataset
+#local_private_key="$HOME/.ssh/eva_59"
+#remote_IP='charleschiu@140.113.86.58'
+#ssh -i "${local_private_key}" "${remote_IP}" bash << "EOF"
+#  git_folder="$HOME/EVA-Space-Center-Data-Generate"
+#  remote_script="build_local_dataset.sh"
+#  cd "${git_folder}"
+#  git pull
+#  bash ${remote_script}
+#  exit
+#EOF
