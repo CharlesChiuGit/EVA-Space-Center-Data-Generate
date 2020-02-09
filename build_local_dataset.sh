@@ -13,7 +13,7 @@ data_type=('images' 'labels')
 git pull
 # ----------------------------------------------
 
-chech_partical_dataset(){
+check_partical_dataset(){
   type=$1
   index=$2
   counter=$3
@@ -59,24 +59,24 @@ scp -i "${local_private_key}" "${remote_IP}:${remote_dataset_path}/${file_type[3
 scp -i "${local_private_key}" "${remote_IP}:${remote_dataset_path}/tar*" "${local_dataset_path}"
 # ----------------------------------------------
 
-echo 'Start decompressing'
+#echo 'Start decompressing'
 
-for i in $(seq 0 2)
-do
-  mkdir -m 777 -v "${local_dataset_path}/${file_type[i]}"
-  mkdir -m 777 -v "${local_dataset_path}/${file_type[i]}/${data_type[0]}"
-  mkdir -m 777 -v "${local_dataset_path}/${file_type[i]}/${data_type[1]}"
-done
+#for i in $(seq 0 2)
+#do
+#  mkdir -m 777 -v "${local_dataset_path}/${file_type[i]}"
+#  mkdir -m 777 -v "${local_dataset_path}/${file_type[i]}/${data_type[0]}"
+#  mkdir -m 777 -v "${local_dataset_path}/${file_type[i]}/${data_type[1]}"
+#done
 
 echo "checking train dataset"
-for i in $(seq 0 "$((lv1_index - 3))"); do chech_partical_dataset "${file_type[0]}" "$i" "${counter}" && counter=$((counter+1)); done
+for i in $(seq 0 "$((lv1_index - 3))"); do check_partical_dataset "${file_type[0]}" "$i" "${counter}" && counter=$((counter+1)); done
 
 counter=0
 echo "checking test dataset"
-chech_partical_dataset "${file_type[1]}" "$((lv1_index - 2))" "${counter}"
+check_partical_dataset "${file_type[1]}" "$((lv1_index - 2))" "${counter}"
 
 echo "checking validation dataset"
-chech_partical_dataset "${file_type[2]}" "$((lv1_index - 1))" "${counter}"
+check_partical_dataset "${file_type[2]}" "$((lv1_index - 1))" "${counter}"
 
 echo 'End decompressing'
 echo 'End building local dataset'
