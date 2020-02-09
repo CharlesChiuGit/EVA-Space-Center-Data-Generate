@@ -57,14 +57,14 @@ cd "${git_folder}" && python "compress_file.py" -dn "${dataset_name}" -n "${tota
 echo 'End checking original dataset'
 # ----------------------------------------------
 
-## build remote dataset after creat original dataset
-#local_private_key="$HOME/.ssh/eva_59"
-#remote_IP='charleschiu@140.113.86.58'
-#ssh -i "${local_private_key}" "${remote_IP}" bash << "EOF"
-#  git_folder="$HOME/EVA-Space-Center-Data-Generate"
-#  remote_script="build_local_dataset.sh"
-#  cd "${git_folder}"
-#  git pull
-#  bash ${remote_script}
-#  exit
-#EOF
+# build remote dataset after creat original dataset
+local_private_key="$HOME/.ssh/eva_59"
+remote_IP='charleschiu@140.113.86.58'
+ssh -i "${local_private_key}" "${remote_IP}" bash << "EOF"
+  git_folder="$HOME/EVA-Space-Center-Data-Generate"
+  remote_script="build_local_dataset.sh"
+  cd "${git_folder}"
+  git pull
+  bash ${remote_script}
+  exit
+EOF

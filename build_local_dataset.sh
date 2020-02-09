@@ -18,14 +18,14 @@ check_partical_dataset(){
   index=$2
   counter=$3
   image_file="${local_dataset_path}/${type}/${data_type[0]}"
-#  mkdir -m 777 -v "${image_file}/${counter}"
+  mkdir -m 777 -v "${image_file}/${counter}"
   label_file="${local_dataset_path}/${type}/${data_type[1]}"
-#  mv "${local_dataset_path}/target_${index}.json"  "${label_file}"
+  mv "${local_dataset_path}/target_${index}.json"  "${label_file}"
   echo "${index}"
   for j in $(seq 0 "$((lv2_index - 1))")
   do
-#    mkdir -m 777 -v "${image_file}/${counter}/${counter}_$j"
-#    tar -C "${image_file}/${counter}/${counter}_$j" -xzf "${local_dataset_path}/${file_type[3]}/${index}_$j.tar.gz"
+    mkdir -m 777 -v "${image_file}/${counter}/${counter}_$j"
+    tar -C "${image_file}/${counter}/${counter}_$j" -xzf "${local_dataset_path}/${file_type[3]}/${index}_$j.tar.gz"
     for img in "${image_file}/${counter}/${counter}_$j"/*.png
     do
 #      echo "$img"
@@ -52,21 +52,21 @@ replace_defect_img_name(){
 }
 # ----------------------------------------------
 
-#echo 'Start building local dataset'
-#mkdir -m 777 -v "${local_dataset_path}"
-#mkdir -m 777 -v "${local_dataset_path}/${file_type[3]}"
-#scp -i "${local_private_key}" "${remote_IP}:${remote_dataset_path}/${file_type[3]}/*.tar.gz" "${local_dataset_path}/${file_type[3]}"
-#scp -i "${local_private_key}" "${remote_IP}:${remote_dataset_path}/tar*" "${local_dataset_path}"
-# ----------------------------------------------
+echo 'Start building local dataset'
+mkdir -m 777 -v "${local_dataset_path}"
+mkdir -m 777 -v "${local_dataset_path}/${file_type[3]}"
+scp -i "${local_private_key}" "${remote_IP}:${remote_dataset_path}/${file_type[3]}/*.tar.gz" "${local_dataset_path}/${file_type[3]}"
+scp -i "${local_private_key}" "${remote_IP}:${remote_dataset_path}/tar*" "${local_dataset_path}"
+ ----------------------------------------------
 
-#echo 'Start decompressing'
+echo 'Start decompressing'
 
-#for i in $(seq 0 2)
-#do
-#  mkdir -m 777 -v "${local_dataset_path}/${file_type[i]}"
-#  mkdir -m 777 -v "${local_dataset_path}/${file_type[i]}/${data_type[0]}"
-#  mkdir -m 777 -v "${local_dataset_path}/${file_type[i]}/${data_type[1]}"
-#done
+for i in $(seq 0 2)
+do
+  mkdir -m 777 -v "${local_dataset_path}/${file_type[i]}"
+  mkdir -m 777 -v "${local_dataset_path}/${file_type[i]}/${data_type[0]}"
+  mkdir -m 777 -v "${local_dataset_path}/${file_type[i]}/${data_type[1]}"
+done
 
 echo "checking train dataset"
 for i in $(seq 0 "$((lv1_index - 3))"); do check_partical_dataset "${file_type[0]}" "$i" "${counter}" && counter=$((counter+1)); done
