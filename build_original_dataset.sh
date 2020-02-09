@@ -27,32 +27,32 @@ cp "generate_single_image.py" ".."
 #echo 'End creating original dataset'
 # ----------------------------------------------
 
-echo "Start checking original dataset ${dataset_name}"
-
-for i in $(seq 0 "$((lv1_index - 1))")
-do
-  echo "${i}"
-  for j in $(seq 0 "$((lv2_index - 1))")
-  do
-    for img in "${local_dataset_path}/$i/${i}_$j"/*.png
-    do
-#      echo "${img}"
-      pngcheck -q "${img}"
-      retval=$?
-      if [ $retval -ne 0 ]; then
-        OIFS="$IFS"
-        IFS='/'
-        read -r -a new_string <<< "${img}"
-        IFS="$OIFS"
-        cd "$HOME/space_center/moon_8K/" && python "generate_single_image.py" -o "${object}" -d "${new_string[5]}" -i "$i" -o "${object}" -dn "${dataset_name}" -n "${total_number}" -lv1 "${lv1_index}" -lv2 "${lv2_index}"
-        cp "${img}" "${regen_img_folder}/defect_image"
-        cp "${local_dataset_path}/target_$i.json" "${regen_img_folder}/defect_image/target_${i}_${new_string[5]}.json"
-        cp "${regen_img_folder}/${new_string[5]}" "${img}"
-        cd "${git_folder}" && python "replace_target.py" -d "${new_string[5]}" -i "$i" -o "${object}" -dn "${dataset_name}" -n "${total_number}" -lv1 "${lv1_index}" -lv2 "${lv2_index}"
-      fi
-    done
-  done
-done
+#echo "Start checking original dataset ${dataset_name}"
+#
+#for i in $(seq 0 "$((lv1_index - 1))")
+#do
+#  echo "${i}"
+#  for j in $(seq 0 "$((lv2_index - 1))")
+#  do
+#    for img in "${local_dataset_path}/$i/${i}_$j"/*.png
+#    do
+##      echo "${img}"
+#      pngcheck -q "${img}"
+#      retval=$?
+#      if [ $retval -ne 0 ]; then
+#        OIFS="$IFS"
+#        IFS='/'
+#        read -r -a new_string <<< "${img}"
+#        IFS="$OIFS"
+#        cd "$HOME/space_center/moon_8K/" && python "generate_single_image.py" -o "${object}" -d "${new_string[5]}" -i "$i" -o "${object}" -dn "${dataset_name}" -n "${total_number}" -lv1 "${lv1_index}" -lv2 "${lv2_index}"
+#        cp "${img}" "${regen_img_folder}/defect_image"
+#        cp "${local_dataset_path}/target_$i.json" "${regen_img_folder}/defect_image/target_${i}_${new_string[5]}.json"
+#        cp "${regen_img_folder}/${new_string[5]}" "${img}"
+#        cd "${git_folder}" && python "replace_target.py" -d "${new_string[5]}" -i "$i" -o "${object}" -dn "${dataset_name}" -n "${total_number}" -lv1 "${lv1_index}" -lv2 "${lv2_index}"
+#      fi
+#    done
+#  done
+#done
 cd "${git_folder}" && python "compress_file.py" -dn "${dataset_name}" -n "${total_number}" -lv1 "${lv1_index}" -lv2 "${lv2_index}"
 echo 'End checking original dataset'
 # ----------------------------------------------
