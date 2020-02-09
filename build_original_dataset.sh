@@ -5,7 +5,7 @@ total_number=200000
 lv1_index=10
 lv2_index=10
 local_dataset_path="/data/${dataset_name}"
-regen_img_folder="$HOME/space_center/moon_8K/Regen_Image/"
+regen_img_folder="$HOME/space_center/moon_8K/Regen_Image"
 object="Moon_8K.obj"
 git_folder="$HOME/space_center/moon_8K/EVA-Space-Center-Data-Generate"
 # ----------------------------------------------
