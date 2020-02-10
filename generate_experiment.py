@@ -155,7 +155,7 @@ def camera_direction(c_x, c_y, c_z, p_x, p_y, p_z):
 
 
 if __name__ == '__main__':
-    EXPERIMENT_IMAGE = "200_m"
+    EXPERIMENT_IMAGE = "near"
     # PYGAME
     pygame.init()
     srf = set_viewport(VIEWPORT[0], VIEWPORT[1])
@@ -178,7 +178,7 @@ if __name__ == '__main__':
     glLoadIdentity()
 
     # CAMERA location
-    c_gamma, c_theta, c_phi = MOON_RADIUS + (OPENGL_1_METER * 200), 0, 0
+    c_gamma, c_theta, c_phi = MOON_RADIUS + (OPENGL_1_METER * 10), 0, 0
     c_x, c_y, c_z = ball_coordinates_to_cassette_coordinates(c_gamma, c_theta, c_phi)
     # WHERE does camera look at
     p_gamma, p_theta, p_phi = 0, 0, 0
@@ -206,7 +206,7 @@ if __name__ == '__main__':
     logging.info('Finish saving target')
 
     ############################ Second Image
-    EXPERIMENT_IMAGE = "10k_m"
+    EXPERIMENT_IMAGE = "far"
     # create image
     sample_target = {}
     part_start = time.time()
@@ -214,7 +214,7 @@ if __name__ == '__main__':
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     glLoadIdentity()
     # CAMERA location
-    c_gamma, c_theta, c_phi = MOON_RADIUS + (OPENGL_1_METER * 10000), 0, 0
+    c_gamma, c_theta, c_phi = MOON_RADIUS + (OPENGL_1_METER * 10000000), 0, 0
     c_x, c_y, c_z = ball_coordinates_to_cassette_coordinates(c_gamma, c_theta, c_phi)
     # WHERE does camera look at
     p_gamma, p_theta, p_phi = 0, 0, 0
