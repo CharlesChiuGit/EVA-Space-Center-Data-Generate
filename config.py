@@ -1,6 +1,8 @@
 import os
 import logging
 import argparse
+
+
 # set SDL to use the dummy NULL video driver,
 #   so it doesn't need a windowing system.
 # os.environ["SDL_VIDEODRIVER"] = "dummy"
@@ -27,14 +29,14 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)-8s %(me
 
 # Dateset name
 args = set_argument_parser()
-DATASET_NAME = args.dataset_name
-if args.do_experiment:
-    SINGLE_IMAGE = args.experiment_name
+OBJECT = args.object
 if not args.do_experiment:
+    DATASET_NAME = args.dataset_name
+    TARGET_INDEX = args.target_index
     SINGLE_IMAGE = args.defect_img_name
     if args.defect_img_name:
         logging.info('Defect Image Name: {}'.format(args.defect_img_name))
-TARGET_INDEX = args.target_index
+
 OBJECT = args.object
 
 # Units
@@ -51,8 +53,6 @@ LOWER_BOUND = MOON_RADIUS + (OPENGL_1_METER * 200)  # 200m above moon surface
 UPPER_BOUND = MOON_RADIUS + (OPENGL_1_METER * 10000)  # 10,000m above moon surface
 
 # PATH
-if args.do_experiment:
-    PATCH_PATH = '~eva/space_center/moon_8K/Experiment/'
 if not args.do_experiment:
     PATH = os.path.join('/data', DATASET_NAME)
     PATCH_PATH = '~eva/space_center/moon_8K/Regen_Image/'
@@ -65,3 +65,8 @@ TOTAL_IMAGE_NUM = int(args.total_number)
 LEVEL_1_INDEX = int(args.level_1_index)
 LEVEL_2_INDEX = int(args.level_2_index)
 IMAGE_INDEX = (TOTAL_IMAGE_NUM / LEVEL_1_INDEX) / LEVEL_2_INDEX
+
+# Experiment
+if args.do_experiment:
+    EXPERIMENT_PATH = '~eva/space_center/moon_8K/Experiment/'
+    EXPERIMENT_IMAGE = args.experiment_name

@@ -19,7 +19,7 @@ from pygame.locals import *
 
 
 def check_directory(directory):
-    directory_path = os.path.join(PATCH_PATH, directory)
+    directory_path = os.path.join(EXPERIMENT_PATH, directory)
     if not os.path.exists(directory_path):
         logging.info('Create directory {}'.format(directory))
         os.makedirs(directory_path)
@@ -111,10 +111,10 @@ def set_camera_position(lower_bound, upper_bound):
     """
     Set camera position. c_gamma, c_theta, c_phi are sampled with random.uniform in their own range.
     """
-    # c_gamma = random.uniform(lower_bound, upper_bound)
-    c_gamma = lower_bound
+    c_gamma = random.uniform(lower_bound, upper_bound)
     c_theta = math.acos(1 - 2 * random.uniform(0, 1))
     c_phi = 2 * math.pi * random.uniform(0, 1)
+    # c_gamma, c_theta, c_phi = lower_bound, 0, 0
     c_x, c_y, c_z = ball_coordinates_to_cassette_coordinates(c_gamma, c_theta, c_phi)
 
     return c_gamma, c_theta, c_phi, c_x, c_y, c_z
@@ -124,9 +124,11 @@ def set_optical_axis_look_at(moon_radius):
     """
     Set optical axis' end point. p_gamma, p_theta, p_phi are sampled with random.uniform in their own range.
     """
-    p_gamma = random.uniform(0, 0.5 * moon_radius)
+    range_of_p = 0.25
+    p_gamma = random.uniform(0, range_of_p * moon_radius)
     p_theta = math.acos(1 - 2 * random.uniform(0, 1))
     p_phi = 2 * math.pi * random.uniform(0, 1)
+    # p_gamma, p_theta, p_phi = 0, 0, 0
     p_x, p_y, p_z = ball_coordinates_to_cassette_coordinates(p_gamma, p_theta, p_phi)
 
     return p_gamma, p_theta, p_phi, p_x, p_y, p_z
@@ -153,7 +155,7 @@ def camera_direction(c_x, c_y, c_z, p_x, p_y, p_z):
 
 
 if __name__ == '__main__':
-    SINGLE_IMAGE = "near_random"
+    EXPERIMENT_IMAGE = "200_m"
     # PYGAME
     pygame.init()
     srf = set_viewport(VIEWPORT[0], VIEWPORT[1])
@@ -171,14 +173,16 @@ if __name__ == '__main__':
     # create image
     sample_target = {}
     part_start = time.time()
-    logging.info('Start creating single image ' + SINGLE_IMAGE)
+    logging.info('Start creating experiment image ' + EXPERIMENT_IMAGE)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     glLoadIdentity()
 
     # CAMERA location
-    c_gamma, c_theta, c_phi, c_x, c_y, c_z = set_camera_position(LOWER_BOUND, UPPER_BOUND)
+    c_gamma, c_theta, c_phi = 200, 0, 0
+    c_x, c_y, c_z = ball_coordinates_to_cassette_coordinates(c_gamma, c_theta, c_phi)
     # WHERE does camera look at
-    p_gamma, p_theta, p_phi, p_x, p_y, p_z = set_optical_axis_look_at(MOON_RADIUS)
+    p_gamma, p_theta, p_phi = 0, 0, 0
+    p_x, p_y, p_z = ball_coordinates_to_cassette_coordinates(p_gamma, p_theta, p_phi)
     # DIRECTION of camera
     u_x, u_y, u_z = camera_direction(c_x, c_y, c_z, p_x, p_y, p_z)
 
@@ -188,7 +192,7 @@ if __name__ == '__main__':
     glCallList(obj.gl_list)
 
     # SAVE target and image
-    img_name = remove_filename_extension(SINGLE_IMAGE)
+    img_name = remove_filename_extension(EXPERIMENT_IMAGE)
     sample_target[img_name] = {}
     sample_target[img_name]['spherical'] = [c_gamma, c_theta, c_phi, p_gamma, p_theta, p_phi, u_x, u_y, u_z]
     sample_target[img_name]['cartesian'] = [c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z]
@@ -201,16 +205,19 @@ if __name__ == '__main__':
     logging.info('Finish saving target')
 
     ############################ Second Image
-    SINGLE_IMAGE = "far_random"
+    EXPERIMENT_IMAGE = "10k_m"
     # create image
     sample_target = {}
     part_start = time.time()
-    logging.info('Start creating single image ' + SINGLE_IMAGE)
+    logging.info('Start creating experiment image ' + EXPERIMENT_IMAGE)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     glLoadIdentity()
     # CAMERA location
-    c_gamma = UPPER_BOUND
+    c_gamma, c_theta, c_phi = 10000, 0, 0
     c_x, c_y, c_z = ball_coordinates_to_cassette_coordinates(c_gamma, c_theta, c_phi)
+    # WHERE does camera look at
+    p_gamma, p_theta, p_phi = 0, 0, 0
+    p_x, p_y, p_z = ball_coordinates_to_cassette_coordinates(p_gamma, p_theta, p_phi)
     # DIRECTION of camera
     u_x, u_y, u_z = camera_direction(c_x, c_y, c_z, p_x, p_y, p_z)
     # take the shoot
@@ -218,7 +225,7 @@ if __name__ == '__main__':
     gluLookAt(c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z)
     glCallList(obj.gl_list)
     # SAVE target and image
-    img_name = remove_filename_extension(SINGLE_IMAGE)
+    img_name = remove_filename_extension(EXPERIMENT_IMAGE)
     sample_target[img_name] = {}
     sample_target[img_name]['spherical'] = [c_gamma, c_theta, c_phi, p_gamma, p_theta, p_phi, u_x, u_y, u_z]
     sample_target[img_name]['cartesian'] = [c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z]
@@ -231,18 +238,19 @@ if __name__ == '__main__':
     logging.info('Finish saving target')
 
     ##################################### Third Image
-    SINGLE_IMAGE = "near_center"
+    EXPERIMENT_IMAGE = "30k_m"
     # create image
     sample_target = {}
     part_start = time.time()
-    logging.info('Start creating single image ' + SINGLE_IMAGE)
+    logging.info('Start creating experiment image ' + EXPERIMENT_IMAGE)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     glLoadIdentity()
     # CAMERA location
-    c_gamma = LOWER_BOUND
+    c_gamma, c_theta, c_phi = 30000, 0, 0
     c_x, c_y, c_z = ball_coordinates_to_cassette_coordinates(c_gamma, c_theta, c_phi)
     # WHERE does camera look at
-    p_gamma, p_theta, p_phi, p_x, p_y, p_z = 0, 0, 0, 0, 0, 0
+    p_gamma, p_theta, p_phi = 0, 0, 0
+    p_x, p_y, p_z = ball_coordinates_to_cassette_coordinates(p_gamma, p_theta, p_phi)
     # DIRECTION of camera
     u_x, u_y, u_z = camera_direction(c_x, c_y, c_z, p_x, p_y, p_z)
     # take the shoot
@@ -250,7 +258,7 @@ if __name__ == '__main__':
     gluLookAt(c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z)
     glCallList(obj.gl_list)
     # SAVE target and image
-    img_name = remove_filename_extension(SINGLE_IMAGE)
+    img_name = remove_filename_extension(EXPERIMENT_IMAGE)
     sample_target[img_name] = {}
     sample_target[img_name]['spherical'] = [c_gamma, c_theta, c_phi, p_gamma, p_theta, p_phi, u_x, u_y, u_z]
     sample_target[img_name]['cartesian'] = [c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z]
@@ -263,18 +271,19 @@ if __name__ == '__main__':
     logging.info('Finish saving target')
 
     ##################################### Forth Image
-    SINGLE_IMAGE = "far_center"
+    EXPERIMENT_IMAGE = "50k_m"
     # create image
     sample_target = {}
     part_start = time.time()
-    logging.info('Start creating single image ' + SINGLE_IMAGE)
+    logging.info('Start creating experiment image ' + EXPERIMENT_IMAGE)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
     glLoadIdentity()
     # CAMERA location
-    c_gamma = UPPER_BOUND
+    c_gamma, c_theta, c_phi = 50000, 0, 0
     c_x, c_y, c_z = ball_coordinates_to_cassette_coordinates(c_gamma, c_theta, c_phi)
     # WHERE does camera look at
-    p_gamma, p_theta, p_phi, p_x, p_y, p_z = 0, 0, 0, 0, 0, 0
+    p_gamma, p_theta, p_phi = 0, 0, 0
+    p_x, p_y, p_z = ball_coordinates_to_cassette_coordinates(p_gamma, p_theta, p_phi)
     # DIRECTION of camera
     u_x, u_y, u_z = camera_direction(c_x, c_y, c_z, p_x, p_y, p_z)
     # take the shoot
@@ -282,7 +291,7 @@ if __name__ == '__main__':
     gluLookAt(c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z)
     glCallList(obj.gl_list)
     # SAVE target and image
-    img_name = remove_filename_extension(SINGLE_IMAGE)
+    img_name = remove_filename_extension(EXPERIMENT_IMAGE)
     sample_target[img_name] = {}
     sample_target[img_name]['spherical'] = [c_gamma, c_theta, c_phi, p_gamma, p_theta, p_phi, u_x, u_y, u_z]
     sample_target[img_name]['cartesian'] = [c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z]
