@@ -69,5 +69,5 @@ IMAGE_INDEX = (TOTAL_IMAGE_NUM / LEVEL_1_INDEX) / LEVEL_2_INDEX
 # Experiment
 if args.do_experiment:
     logging.info('Do Experiment')
-    EXPERIMENT_PATH = '~/space_center/moon_8K/Experiment/'
+    EXPERIMENT_PATH = '~eva/space_center/moon_8K/Experiment/'
     EXPERIMENT_IMAGE = args.experiment_name
