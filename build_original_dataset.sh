@@ -25,7 +25,7 @@ cp "generate_single_image.py" ".."
 echo 'Start creating original dataset'
 cd "$HOME/space_center/moon_8K/" && python "generate_dataset.py" -o "${object}" -dn "${dataset_name}" -n "${total_number}" -lv1 "${lv1_index}" -lv2 "${lv2_index}"
 echo 'End creating original dataset'
- ----------------------------------------------
+# ----------------------------------------------
 
 echo "Start checking original dataset ${dataset_name}"
 
@@ -40,20 +40,21 @@ do
       pngcheck -q "${img}"
       retval=$?
       if [ $retval -ne 0 ]; then
+        echo "${img}"
         OIFS="$IFS"
         IFS='/'
         read -r -a new_string <<< "${img}"
         IFS="$OIFS"
-        cd "$HOME/space_center/moon_8K/" && python "generate_single_image.py" -o "${object}" -d "${new_string[5]}" -i "$i" -o "${object}" -dn "${dataset_name}" -n "${total_number}" -lv1 "${lv1_index}" -lv2 "${lv2_index}"
+        cd "$HOME/space_center/moon_8K/" && python "generate_single_image.py" -d "${new_string[5]}" -i "$i" -dn "${dataset_name}"
         cp "${img}" "${regen_img_folder}/defect_image"
         cp "${local_dataset_path}/target_$i.json" "${regen_img_folder}/defect_image/target_${i}_${new_string[5]}.json"
         cp "${regen_img_folder}/${new_string[5]}" "${img}"
-        cd "${git_folder}" && python "replace_target.py" -d "${new_string[5]}" -i "$i" -o "${object}" -dn "${dataset_name}" -n "${total_number}" -lv1 "${lv1_index}" -lv2 "${lv2_index}"
+        cd "${git_folder}" && python "replace_target.py" -d "${new_string[5]}" -i "$i" -dn "${dataset_name}"
       fi
     done
   done
 done
-cd "${git_folder}" && python "compress_file.py" -dn "${dataset_name}" -n "${total_number}" -lv1 "${lv1_index}" -lv2 "${lv2_index}"
+cd "${git_folder}" && python "compress_file.py" -dn "${dataset_name}" -lv1 "${lv1_index}" -lv2 "${lv2_index}"
 echo 'End checking original dataset'
 # ----------------------------------------------
 

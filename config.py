@@ -9,12 +9,15 @@ import argparse
 def set_argument_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument('-dn', '--dataset_name', help='Set Dataset name')
-    parser.add_argument('-o', '--object', help='Choose a object model')
-    parser.add_argument('-d', '--defect_img_name', help='Give the defect image name, Dataset_XXX_defect_img_ind.png')
-    parser.add_argument('-i', '--target_index', help='Set which target index, target_X.json')
-    parser.add_argument('-n', '--total_number', help='Set total number of dataset')
-    parser.add_argument('-lv1', '--level_1_index', help='Set how many partial you want to divide')
-    parser.add_argument('-lv2', '--level_2_index', help='Set how many smaller partial you want to divide')
+    parser.add_argument('-o', '--object', default='Moon_8K.obj', help='Choose a object model')
+    parser.add_argument('-d', '--defect_img_name', default='Dataset_test_0.png', help='Give the defect image name')
+    parser.add_argument('-i', '--target_index', default=000, help='Which target index, target_X.json')
+    parser.add_argument('-n', '--total_number', default=1, help='Total number of dataset')
+    parser.add_argument('-lv1', '--level_1_index', default=1, help='How many partial you want to divide')
+    parser.add_argument('-lv2', '--level_2_index', default=1, help='How many smaller partial you want to divide')
+    parser.add_argument('-e', '--do_experiment', action="store_true", default='False',
+                        help='Set True if you want to do experiment')
+    parser.add_argument('-en', '--experiment_name', default='test', help='Generate single experiment image')
 
     return parser.parse_args()
 
@@ -25,9 +28,12 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)-8s %(me
 # Dateset name
 args = set_argument_parser()
 DATASET_NAME = args.dataset_name
-SINGLE_IMAGE = args.defect_img_name
-if args.defect_img_name:
-    logging.info('Defect Image Name: {}'.format(args.defect_img_name))
+if args.do_experiment:
+    SINGLE_IMAGE = args.experiment_name
+if not args.do_experiment:
+    SINGLE_IMAGE = args.defect_img_name
+    if args.defect_img_name:
+        logging.info('Defect Image Name: {}'.format(args.defect_img_name))
 TARGET_INDEX = args.target_index
 OBJECT = args.object
 
@@ -45,11 +51,14 @@ LOWER_BOUND = MOON_RADIUS + (OPENGL_1_METER * 200)  # 200m above moon surface
 UPPER_BOUND = MOON_RADIUS + (OPENGL_1_METER * 10000)  # 10,000m above moon surface
 
 # PATH
-PATH = os.path.join('/data', DATASET_NAME)
-if not os.path.exists(PATH):
-    logging.info('Create dataset {}'.format(DATASET_NAME))
-    os.makedirs(PATH)
-PATCH_PATH = '/home/eva/space_center/moon_8K/Regen_Image/'
+if args.do_experiment:
+    PATCH_PATH = '~eva/space_center/moon_8K/Experiment/'
+if not args.do_experiment:
+    PATH = os.path.join('/data', DATASET_NAME)
+    PATCH_PATH = '~eva/space_center/moon_8K/Regen_Image/'
+    if not os.path.exists(PATH):
+        logging.info('Create dataset {}'.format(DATASET_NAME))
+        os.makedirs(PATH)
 
 # hyperparameters
 TOTAL_IMAGE_NUM = int(args.total_number)
