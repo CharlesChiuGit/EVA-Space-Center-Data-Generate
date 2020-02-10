@@ -196,11 +196,11 @@ if __name__ == '__main__':
     sample_target[img_name] = {}
     sample_target[img_name]['spherical'] = [c_gamma, c_theta, c_phi, p_gamma, p_theta, p_phi, u_x, u_y, u_z]
     sample_target[img_name]['cartesian'] = [c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z]
-    pygame.image.save(srf, os.path.join(PATCH_PATH, img_name + '.png'))
+    pygame.image.save(srf, os.path.join(EXPERIMENT_PATH, img_name + '.png'))
 
     logging.info('Finish creating image, time = {}'.format(time.time() - part_start))
     logging.info('Start saving target')
-    with open(os.path.join(PATCH_PATH, 'target_' + img_name + '.json'), 'a') as f:
+    with open(os.path.join(EXPERIMENT_PATH, 'target_' + img_name + '.json'), 'a') as f:
         json.dump(sample_target, f)
     logging.info('Finish saving target')
 
@@ -229,11 +229,11 @@ if __name__ == '__main__':
     sample_target[img_name] = {}
     sample_target[img_name]['spherical'] = [c_gamma, c_theta, c_phi, p_gamma, p_theta, p_phi, u_x, u_y, u_z]
     sample_target[img_name]['cartesian'] = [c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z]
-    pygame.image.save(srf, os.path.join(PATCH_PATH, img_name + '.png'))
+    pygame.image.save(srf, os.path.join(EXPERIMENT_PATH, img_name + '.png'))
 
     logging.info('Finish creating image, time = {}'.format(time.time() - part_start))
     logging.info('Start saving target')
-    with open(os.path.join(PATCH_PATH, 'target_' + img_name + '.json'), 'a') as f:
+    with open(os.path.join(EXPERIMENT_PATH, 'target_' + img_name + '.json'), 'a') as f:
         json.dump(sample_target, f)
     logging.info('Finish saving target')
 
@@ -262,11 +262,11 @@ if __name__ == '__main__':
     sample_target[img_name] = {}
     sample_target[img_name]['spherical'] = [c_gamma, c_theta, c_phi, p_gamma, p_theta, p_phi, u_x, u_y, u_z]
     sample_target[img_name]['cartesian'] = [c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z]
-    pygame.image.save(srf, os.path.join(PATCH_PATH, img_name + '.png'))
+    pygame.image.save(srf, os.path.join(EXPERIMENT_PATH, img_name + '.png'))
 
     logging.info('Finish creating image, time = {}'.format(time.time() - part_start))
     logging.info('Start saving target')
-    with open(os.path.join(PATCH_PATH, 'target_' + img_name + '.json'), 'a') as f:
+    with open(os.path.join(EXPERIMENT_PATH, 'target_' + img_name + '.json'), 'a') as f:
         json.dump(sample_target, f)
     logging.info('Finish saving target')
 
@@ -295,10 +295,10 @@ if __name__ == '__main__':
     sample_target[img_name] = {}
     sample_target[img_name]['spherical'] = [c_gamma, c_theta, c_phi, p_gamma, p_theta, p_phi, u_x, u_y, u_z]
     sample_target[img_name]['cartesian'] = [c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z]
-    pygame.image.save(srf, os.path.join(PATCH_PATH, img_name + '.png'))
+    pygame.image.save(srf, os.path.join(EXPERIMENT_PATH, img_name + '.png'))
 
     logging.info('Finish creating image, time = {}'.format(time.time() - part_start))
     logging.info('Start saving target')
-    with open(os.path.join(PATCH_PATH, 'target_' + img_name + '.json'), 'a') as f:
+    with open(os.path.join(EXPERIMENT_PATH, 'target_' + img_name + '.json'), 'a') as f:
         json.dump(sample_target, f)
     logging.info('Finish saving target')
