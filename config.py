@@ -17,8 +17,7 @@ def set_argument_parser():
     parser.add_argument('-n', '--total_number', default=1, help='Total number of dataset')
     parser.add_argument('-lv1', '--level_1_index', default=1, help='How many partial you want to divide')
     parser.add_argument('-lv2', '--level_2_index', default=1, help='How many smaller partial you want to divide')
-    parser.add_argument('-e', '--do_experiment', action="store_true", default='False',
-                        help='Set True if you want to do experiment')
+    parser.add_argument('-e', '--do_experiment', action="store_true", help='Set True if you want to do experiment')
     parser.add_argument('-en', '--experiment_name', default='test', help='Generate single experiment image')
 
     return parser.parse_args()
