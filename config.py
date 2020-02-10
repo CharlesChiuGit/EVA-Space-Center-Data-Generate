@@ -36,8 +36,6 @@ if not args.do_experiment:
     if args.defect_img_name:
         logging.info('Defect Image Name: {}'.format(args.defect_img_name))
 
-OBJECT = args.object
-
 # Units
 UNIT_REAL = 996.679647  # in km
 MOON_RADIUS = 1.742887
