@@ -54,7 +54,7 @@ UPPER_BOUND = MOON_RADIUS + (OPENGL_1_METER * 10000)  # 10,000m above moon surfa
 # PATH
 if not args.do_experiment:
     PATH = os.path.join('/data', DATASET_NAME)
-    PATCH_PATH = '~eva/space_center/moon_8K/Regen_Image/'
+    PATCH_PATH = '~/space_center/moon_8K/Regen_Image/'
     if not os.path.exists(PATH):
         logging.info('Create dataset {}'.format(DATASET_NAME))
         os.makedirs(PATH)
@@ -66,9 +66,8 @@ LEVEL_2_INDEX = int(args.level_2_index)
 IMAGE_INDEX = (TOTAL_IMAGE_NUM / LEVEL_1_INDEX) / LEVEL_2_INDEX
 
 # Experiment
-print(args.do_experiment)
 if args.do_experiment:
     logging.info('Do Experiment')
-    EXPERIMENT_PATH = '~eva/space_center/moon_8K/Experiment/'
+    EXPERIMENT_PATH = '~/space_center/moon_8K/Experiment/'
     print(EXPERIMENT_PATH)
     EXPERIMENT_IMAGE = args.experiment_name
