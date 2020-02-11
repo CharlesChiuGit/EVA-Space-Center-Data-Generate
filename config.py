@@ -12,8 +12,7 @@ def set_argument_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument('-dn', '--dataset_name', help='Set Dataset name')
     parser.add_argument('-o', '--object', default='Moon_8K.obj', help='Choose a object model')
-    parser.add_argument('-d', '--defect_img_path', default='/data/Dataset_test/0/0_0/Dataset_test_0.png',
-                        help='Give the defect image path')
+    parser.add_argument('-d', '--defect_img_path', help='Give the defect image path')
     parser.add_argument('-ti', '--target_index', default=000, help='Which target index is the defect image in')
     parser.add_argument('-n', '--dataset_amount', default=1, help='Total amount of dataset')
     parser.add_argument('-bp', '--big_partition', default=1, help='How many big partial you want to divide')

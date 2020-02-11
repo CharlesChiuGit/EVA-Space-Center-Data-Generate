@@ -32,6 +32,7 @@ check_partical_dataset(){
       pngcheck -q "$img"
       retval=$?
       if [ $retval -ne 0 ]; then
+        echo "$img"
         echo "Error: Defect Image"
         replace_defect_img_name "$img"
       fi
@@ -46,7 +47,7 @@ replace_defect_img_name(){
   IFS='/'
   read -r -a new_list <<< "${local_image_path}"
   IFS="$OIFS"
-  remote_image_path="${remote_IP}:${remote_dataset_path}/${new_list[3]}/${new_list[4]}/${new_list[5]}"
+  remote_image_path="${remote_IP}:${remote_dataset_path}/${new_list[5]}/${new_list[6]}/${new_list[7]}"
   scp -i "${local_private_key}" "${remote_image_path}" "${local_image_path}"
   echo "Error ${img} replaced!"
 }

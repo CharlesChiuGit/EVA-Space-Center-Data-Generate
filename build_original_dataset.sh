@@ -1,9 +1,9 @@
 #!/bin/bash
 
-dataset_name='Dataset_test_2' # remember to change dataset_name and so on in EOF below
+dataset_name='Dataset_test_3' # remember to change dataset_name and so on in EOF below
 big_partition=10
 small_partition=10
-dataset_amount=10000
+dataset_amount=100
 local_dataset_path="/data/${dataset_name}"
 object="Moon_8K.obj"
 git_folder="$HOME/space_center/moon_8K/EVA-Space-Center-Data-Generate"
@@ -46,17 +46,17 @@ do
   do
     for img in "${local_dataset_path}/$i/${i}_$j"/*.png
     do
-      echo "${img}"
+#      echo "${img}"
       pngcheck -q "${img}"
       retval=$?
-#      if [ $retval -ne 0 ]; then
-#        regenerate_defect_image "${img}" "$i"
-#      fi
+      if [ $retval -ne 0 ]; then
+        regenerate_defect_image "${img}" "$i"
+      fi
     done
   done
 done
-cd "${git_folder}" || exit
-python "compress_file.py" -dn "${dataset_name}" -bp "${big_partition}" -sp "${small_partition}"
+#cd "${git_folder}" || exit
+#python "compress_file.py" -dn "${dataset_name}" -bp "${big_partition}" -sp "${small_partition}"
 echo 'End checking original dataset'
 # ----------------------------------------------
 
@@ -68,7 +68,7 @@ ssh -i "${local_private_key}" "${remote_IP}" bash << "EOF"
   remote_script="build_local_dataset.sh"
   cd "${git_folder}"
   git pull
-  dataset_name='Dataset_test_2'
+  dataset_name='Dataset_test_3'
   big_partition=10
   small_partition=10
   bash ${remote_script} ${dataset_name} ${big_partition} ${small_partition}
