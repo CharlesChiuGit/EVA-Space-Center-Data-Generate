@@ -13,6 +13,18 @@ data_type=('images' 'labels')
 git pull
 # ----------------------------------------------
 
+reindex_test_valid_small_partition_folder(){
+  big_partition=$1
+  small_partition=$2
+  OIFS="$IFS"
+  IFS='_'
+  read -r -a new_list <<< "${small_partition}"
+  IFS="$OIFS"
+  new_small_partition="${big_partition}_${new_list[1]}"
+  echo new_small_partition
+}
+
+
 check_partical_dataset(){
   type=$1
   index=$2
@@ -50,8 +62,12 @@ replace_defect_img_name(){
   if [ "${new_list[4]}" == "train" ]; then
     remote_image_path="${remote_IP}:${remote_dataset_path}/${new_list[6]}/${new_list[7]}/${new_list[8]}"
   elif [ "${new_list[4]}" == "test" ]; then
-    remote_image_path="${remote_IP}:${remote_dataset_path}/8/${new_list[7]}/${new_list[8]}"
+    new_small_partition=$(reindex_test_valid_small_partition_folder "$8" "${new_list[7]}")
+    local new_small_partition
+    remote_image_path="${remote_IP}:${remote_dataset_path}/8/${new_small_partition}/${new_list[8]}"
   else
+    new_small_partition=$(reindex_test_valid_small_partition_folder "$9" "${new_list[7]}")
+    local new_small_partition
     remote_image_path="${remote_IP}:${remote_dataset_path}/9/${new_list[7]}/${new_list[8]}"
   fi
   echo "${remote_image_path}"
