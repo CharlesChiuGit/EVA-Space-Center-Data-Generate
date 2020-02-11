@@ -33,9 +33,9 @@ OBJECT = args.object
 if not args.do_experiment:
     DATASET_NAME = args.dataset_name
     TARGET_INDEX = args.target_index
-    DEFECT_IMAGE = args.defect_img_name
-    if args.defect_img_name:
-        logging.info('Defect Image Name: {}'.format(args.defect_img_name))
+    DEFECT_IMAGE = args.defect_img_path
+    if args.defect_img_path:
+        logging.info('Defect Image Name: {}'.format(args.defect_img_path))
 
 # Units
 UNIT_REAL = 996.679647  # in km
@@ -48,7 +48,7 @@ FOVY = 120  # in degrees
 Z_NEAR = 1.0
 Z_FAR = 100.0
 LOWER_BOUND = MOON_RADIUS + (OPENGL_1_METER * 200)  # 200m above moon surface
-UPPER_BOUND = MOON_RADIUS + (OPENGL_1_METER * 10000)  # 10,000m above moon surface
+UPPER_BOUND = MOON_RADIUS + (OPENGL_1_METER * 80000)  # 80,000m above moon surface
 
 # PATH
 if not args.do_experiment:
