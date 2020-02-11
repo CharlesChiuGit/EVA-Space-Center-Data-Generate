@@ -1,8 +1,8 @@
 #!/bin/bash
 
-dataset_name='Dataset_fovy120_10k'
-lv1_index=10
-lv2_index=10
+dataset_name="$1"
+lv1_index="$2"
+lv2_index="$3"
 counter=0
 remote_dataset_path="/data/${dataset_name}"
 remote_IP='eva@140.113.86.59'

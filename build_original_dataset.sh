@@ -1,11 +1,10 @@
 #!/bin/bash
 
-dataset_name='Dataset_fovy120_10k'
-total_number=100000
+dataset_name='Dataset_test_new'
+total_number=100
 lv1_index=10
 lv2_index=10
 local_dataset_path="/data/${dataset_name}"
-regen_img_folder="$HOME/space_center/moon_8K/Regen_Image"
 object="Moon_8K.obj"
 git_folder="$HOME/space_center/moon_8K/EVA-Space-Center-Data-Generate"
 # ----------------------------------------------
@@ -26,7 +25,7 @@ echo 'Start creating original dataset'
 cd "$HOME/space_center/moon_8K/" && python "generate_dataset.py" -o "${object}" -dn "${dataset_name}" -n "${total_number}" -lv1 "${lv1_index}" -lv2 "${lv2_index}"
 echo 'End creating original dataset'
 # ----------------------------------------------
-
+# Define function
 regenerate_defect_image(){
   defect_image=$1
   target_index=$2
@@ -66,6 +65,6 @@ ssh -i "${local_private_key}" "${remote_IP}" bash << "EOF"
   remote_script="build_local_dataset.sh"
   cd "${git_folder}"
   git pull
-  bash ${remote_script}
+  bash ${remote_script} ${dataset_name} ${lv1_index} ${lv2_index}
   exit
 EOF
