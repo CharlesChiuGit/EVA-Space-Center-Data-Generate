@@ -1,9 +1,9 @@
 #!/bin/bash
 
-dataset_name='Dataset_test_new'
-total_number=100
-lv1_index=10
-lv2_index=10
+dataset_name='Dataset_test_new_1' # remember to change dataset_name and so on in EOF below
+big_partition=10
+small_partition=10
+dataset_amount=100
 local_dataset_path="/data/${dataset_name}"
 object="Moon_8K.obj"
 git_folder="$HOME/space_center/moon_8K/EVA-Space-Center-Data-Generate"
@@ -22,7 +22,8 @@ cp "regenerate_defect_image.py" ".."
 # ----------------------------------------------
 
 echo 'Start creating original dataset'
-cd "$HOME/space_center/moon_8K/" && python "generate_dataset.py" -o "${object}" -dn "${dataset_name}" -n "${total_number}" -lv1 "${lv1_index}" -lv2 "${lv2_index}"
+cd "$HOME/space_center/moon_8K/" || exit
+python "generate_dataset.py" -dn "${dataset_name}" -n "${dataset_amount}" -lv1 "${big_partition}" -lv2 "${small_partition}"
 echo 'End creating original dataset'
 # ----------------------------------------------
 # Define function
@@ -37,10 +38,10 @@ regenerate_defect_image(){
 
 echo "Start checking original dataset ${dataset_name}"
 
-for i in $(seq 0 "$((lv1_index - 1))")
+for i in $(seq 0 "$((big_partition - 1))")
 do
   echo "${i}"
-  for j in $(seq 0 "$((lv2_index - 1))")
+  for j in $(seq 0 "$((small_partition - 1))")
   do
     for img in "${local_dataset_path}/$i/${i}_$j"/*.png
     do
@@ -53,7 +54,7 @@ do
     done
   done
 done
-cd "${git_folder}" && python "compress_file.py" -dn "${dataset_name}" -lv1 "${lv1_index}" -lv2 "${lv2_index}"
+cd "${git_folder}" && python "compress_file.py" -dn "${dataset_name}" -lv1 "${big_partition}" -lv2 "${small_partition}"
 echo 'End checking original dataset'
 # ----------------------------------------------
 
@@ -66,8 +67,8 @@ ssh -i "${local_private_key}" "${remote_IP}" bash << "EOF"
   cd "${git_folder}"
   git pull
   dataset_name='Dataset_test_new'
-  lv1_index=10
-  lv2_index=10
-  bash ${remote_script} ${dataset_name} ${lv1_index} ${lv2_index}
+  big_partition=10
+  small_partition=10
+  bash ${remote_script} ${dataset_name} ${big_partition} ${small_partition}
   exit
 EOF
