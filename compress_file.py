@@ -11,8 +11,8 @@ def check_directory(directory):
 
 
 def compress_file(directory):
-    lv2_dir = directory.split('/')[-1]
-    archive_name = os.path.expanduser(os.path.join(PATH, 'compressed_file', lv2_dir))
+    small_dir = directory.split('/')[-1]
+    archive_name = os.path.expanduser(os.path.join(PATH, 'compressed_file', small_dir))
     root_dir = os.path.join(PATH, directory)
     gztar_file_name = shutil.make_archive(archive_name, 'gztar', root_dir)
     print(gztar_file_name)
@@ -22,12 +22,10 @@ if __name__ == '__main__':
     logging.info('Start compressing')
     part_start = time.time()
 
-    for i in range(LEVEL_1_INDEX):
-        level_l_directory = '{}'.format(i)
-        check_directory(level_l_directory)
-        for j in range(LEVEL_2_INDEX):
-            level_2_directory = os.path.join(level_l_directory, '{}_{}'.format(i, j))
-            check_directory(level_2_directory)
-            compress_file(level_2_directory)
+    for i in range(BIG_PARTITION):
+        for j in range(SMALL_PARTITION):
+            small_partition_directory = os.path.join('{}/{}_{}'.format(i, i, j))
+            check_directory(small_partition_directory)
+            compress_file(small_partition_directory)
 
     logging.info('Finish compressing, time = {}'.format((time.time() - part_start)))
