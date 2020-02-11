@@ -63,11 +63,11 @@ replace_defect_img(){
   if [ "${new_list[4]}" == "train" ]; then
     remote_image_path="${remote_IP}:${remote_dataset_path}/${new_list[6]}/${new_list[7]}/${new_list[8]}"
   elif [ "${new_list[4]}" == "test" ]; then
-    reindex_test_valid_small_partition_folder "$8" "${new_list[7]}"
+    reindex_test_valid_small_partition_folder "8" "${new_list[7]}"
     local new_small_partition
     remote_image_path="${remote_IP}:${remote_dataset_path}/8/${new_small_partition}/${new_list[8]}"
   else
-    reindex_test_valid_small_partition_folder "$9" "${new_list[7]}"
+    reindex_test_valid_small_partition_folder "9" "${new_list[7]}"
     local new_small_partition
     remote_image_path="${remote_IP}:${remote_dataset_path}/9/${new_list[7]}/${new_list[8]}"
   fi
