@@ -56,14 +56,19 @@ def set_viewport(viewport_width, viewport_hight):
     return srf
 
 
-def set_light_property():
+def set_light_property(light_position):
     """
     Set light poroperty.
     """
     logging.info('Start setting light property')
-    glLightfv(GL_LIGHT0, GL_POSITION, (-40, 200, 100, 0.0))
+    glLightfv(GL_LIGHT0, GL_POSITION, light_position)
     glLightfv(GL_LIGHT0, GL_AMBIENT, (0.2, 0.2, 0.2, 1.0))
     glLightfv(GL_LIGHT0, GL_DIFFUSE, (0.5, 0.5, 0.5, 1.0))
+    glEnable(GL_LIGHT0)
+    glEnable(GL_LIGHTING)
+    glEnable(GL_COLOR_MATERIAL)
+    glEnable(GL_DEPTH_TEST)
+    glShadeModel(GL_SMOOTH)  # most obj files expect to be smooth-shaded
 
 
 def set_filed_of_vision(fovy, viewport, zNear, zFar):
@@ -150,12 +155,8 @@ if __name__ == '__main__':
     obj = OBJ(OBJECT, swapyz=True)
     clock = pygame.time.Clock()
     # set up OPENGL env
-    set_light_property()
-    glEnable(GL_LIGHT0)
-    glEnable(GL_LIGHTING)
-    glEnable(GL_COLOR_MATERIAL)
-    glEnable(GL_DEPTH_TEST)
-    glShadeModel(GL_SMOOTH)  # most obj files expect to be smooth-shaded
+    light_position = (-40, 200, 100, 0.0)
+    set_light_property(light_position)
     set_filed_of_vision(FOVY, VIEWPORT, Z_NEAR, Z_FAR)
     # create image
     for i in range(LEVEL_1_INDEX):

@@ -29,6 +29,13 @@ echo 'End creating original dataset'
 
 echo "Start checking original dataset ${dataset_name}"
 
+
+regenerate_defect_image(){
+  defect_image=$1
+  echo "${defect_image}"
+
+}
+
 for i in $(seq 0 "$((lv1_index - 1))")
 do
   echo "${i}"
@@ -40,12 +47,11 @@ do
       pngcheck -q "${img}"
       retval=$?
       if [ $retval -ne 0 ]; then
-        echo "${img}"
         OIFS="$IFS"
         IFS='/'
-        read -r -a new_string <<< "${img}"
-        IFS="$OIFS"
-        cd "$HOME/space_center/moon_8K/" && python "generate_single_image.py" -d "${new_string[5]}" -i "$i" -dn "${dataset_name}"
+#        read -r -a new_string <<< "${img}"
+#        IFS="$OIFS"
+#        cd "$HOME/space_center/moon_8K/" && python "generate_single_image.py" -d "${new_string[5]}" -i "$i" -dn "${dataset_name}"
         cp "${img}" "${regen_img_folder}/defect_image"
         cp "${local_dataset_path}/target_$i.json" "${regen_img_folder}/defect_image/target_${i}_${new_string[5]}.json"
         cp "${regen_img_folder}/${new_string[5]}" "${img}"

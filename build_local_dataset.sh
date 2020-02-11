@@ -57,7 +57,7 @@ mkdir -m 777 -v "${local_dataset_path}"
 mkdir -m 777 -v "${local_dataset_path}/${file_type[3]}"
 scp -i "${local_private_key}" "${remote_IP}:${remote_dataset_path}/${file_type[3]}/*.tar.gz" "${local_dataset_path}/${file_type[3]}"
 scp -i "${local_private_key}" "${remote_IP}:${remote_dataset_path}/tar*" "${local_dataset_path}"
- ----------------------------------------------
+# ----------------------------------------------
 
 echo 'Start decompressing'
 

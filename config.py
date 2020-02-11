@@ -32,7 +32,7 @@ OBJECT = args.object
 if not args.do_experiment:
     DATASET_NAME = args.dataset_name
     TARGET_INDEX = args.target_index
-    SINGLE_IMAGE = args.defect_img_name
+    DEFECT_IMAGE = args.defect_img_name
     if args.defect_img_name:
         logging.info('Defect Image Name: {}'.format(args.defect_img_name))
 
@@ -54,6 +54,7 @@ if not args.do_experiment:
     DATASET_NAME = args.dataset_name
     PATH = os.path.join('/data', DATASET_NAME)
     PATCH_PATH = '/home/eva/space_center/moon_8K/Regen_Image/'
+    DEFECT_PATH = '/home/eva/space_center/moon_8K/Regen_Image/defect_image/'
     if not os.path.exists(PATH):
         logging.info('Create dataset {}'.format(DATASET_NAME))
         os.makedirs(PATH)
