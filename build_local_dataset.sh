@@ -96,6 +96,7 @@ counter=0
 echo "checking test dataset"
 check_partical_dataset "${file_type[1]}" "$((big_partition - 2))" "${counter}"
 
+counter=0
 echo "checking validation dataset"
 check_partical_dataset "${file_type[2]}" "$((big_partition - 1))" "${counter}"
 
