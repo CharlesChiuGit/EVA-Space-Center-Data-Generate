@@ -47,7 +47,13 @@ replace_defect_img_name(){
   IFS='/'
   read -r -a new_list <<< "${local_image_path}"
   IFS="$OIFS"
-  remote_image_path="${remote_IP}:${remote_dataset_path}/${new_list[6]}/${new_list[7]}/${new_list[8]}"
+  if [ "${new_list[4]}" == "train" ]; then
+    remote_image_path="${remote_IP}:${remote_dataset_path}/${new_list[6]}/${new_list[7]}/${new_list[8]}"
+  elif [ "${new_list[4]}" == "test" ]; then
+    remote_image_path="${remote_IP}:${remote_dataset_path}/8/${new_list[7]}/${new_list[8]}"
+  else
+    remote_image_path="${remote_IP}:${remote_dataset_path}/9/${new_list[7]}/${new_list[8]}"
+  fi
   echo "${remote_image_path}"
   scp -i "${local_private_key}" "${remote_image_path}" "${local_image_path}"
   echo "Error ${img} replaced!"
