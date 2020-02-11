@@ -16,18 +16,12 @@ import pygame
 from pygame.constants import *
 from pygame.locals import *
 
-try:
-    from pathlib import Path
-except ImportError:
-    from pathlib2 import Path  # python 2 backport
-
 
 def check_directory(directory):
     directory_path = os.path.join(PATH, directory)
     if not os.path.exists(directory_path):
         logging.info('Create directory {}'.format(directory))
-        # os.makedirs(directory_path)
-        Path(directory_path).mkdir(exist_ok=True)
+        os.makedirs(directory_path)
 
 
 def normalize(coord):
