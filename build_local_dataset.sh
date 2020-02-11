@@ -20,9 +20,7 @@ reindex_test_valid_small_partition_folder(){
   IFS='_'
   read -r -a new_list <<< "${small_partition}"
   IFS="$OIFS"
-  echo "${new_list[1]}"
   new_small_partition="${big_partition}_${new_list[1]}"
-  echo "${new_small_partition}"
 }
 
 
@@ -64,12 +62,10 @@ replace_defect_img(){
     remote_image_path="${remote_IP}:${remote_dataset_path}/${new_list[6]}/${new_list[7]}/${new_list[8]}"
   elif [ "${new_list[4]}" == "test" ]; then
     reindex_test_valid_small_partition_folder "8" "${new_list[7]}"
-    local new_small_partition
     remote_image_path="${remote_IP}:${remote_dataset_path}/8/${new_small_partition}/${new_list[8]}"
   else
     reindex_test_valid_small_partition_folder "9" "${new_list[7]}"
-    local new_small_partition
-    remote_image_path="${remote_IP}:${remote_dataset_path}/9/${new_list[7]}/${new_list[8]}"
+    remote_image_path="${remote_IP}:${remote_dataset_path}/9/${new_small_partition}/${new_list[8]}"
   fi
   echo "${remote_image_path}"
   scp -i "${local_private_key}" "${remote_image_path}" "${local_image_path}"
