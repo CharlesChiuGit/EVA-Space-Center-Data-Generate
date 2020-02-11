@@ -49,9 +49,9 @@ do
       echo "${img}"
       pngcheck -q "${img}"
       retval=$?
-      if [ $retval -ne 0 ]; then
-        regenerate_defect_image "${img}" "$i"
-      fi
+#      if [ $retval -ne 0 ]; then
+#        regenerate_defect_image "${img}" "$i"
+#      fi
     done
   done
 done
