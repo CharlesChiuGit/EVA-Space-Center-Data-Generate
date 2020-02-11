@@ -1,6 +1,6 @@
 #!/bin/bash
 
-dataset_name='Dataset_test_new_2' # remember to change dataset_name and so on in EOF below
+dataset_name='Dataset_test_new_3' # remember to change dataset_name and so on in EOF below
 big_partition=10
 small_partition=10
 dataset_amount=100
@@ -68,7 +68,7 @@ ssh -i "${local_private_key}" "${remote_IP}" bash << "EOF"
   remote_script="build_local_dataset.sh"
   cd "${git_folder}"
   git pull
-  dataset_name='Dataset_test_new_2'
+  dataset_name='Dataset_test_new_3'
   big_partition=10
   small_partition=10
   bash ${remote_script} ${dataset_name} ${big_partition} ${small_partition}
