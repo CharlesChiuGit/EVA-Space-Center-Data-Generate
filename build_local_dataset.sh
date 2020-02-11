@@ -21,7 +21,7 @@ reindex_test_valid_small_partition_folder(){
   read -r -a new_list <<< "${small_partition}"
   IFS="$OIFS"
   new_small_partition="${big_partition}_${new_list[1]}"
-  echo new_small_partition
+  echo "$new_small_partition"
 }
 
 
