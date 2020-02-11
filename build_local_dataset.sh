@@ -20,7 +20,9 @@ reindex_test_valid_small_partition_folder(){
   IFS='_'
   read -r -a new_list <<< "${small_partition}"
   IFS="$OIFS"
+  echo "${new_list[1]}"
   new_small_partition="${big_partition}_${new_list[1]}"
+  echo "${new_small_partition}"
 }
 
 
@@ -45,14 +47,14 @@ check_partical_dataset(){
       if [ $retval -ne 0 ]; then
         echo "$img"
         echo "Error: Defect Image"
-        replace_defect_img_name "$img"
+        replace_defect_img "$img"
       fi
     done
   done
 }
 
 
-replace_defect_img_name(){
+replace_defect_img(){
   local_image_path=$1
   OIFS="$IFS"
   IFS='/'
