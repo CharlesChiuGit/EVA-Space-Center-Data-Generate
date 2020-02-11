@@ -62,9 +62,11 @@ replace_defect_img(){
     remote_image_path="${remote_IP}:${remote_dataset_path}/${new_list[6]}/${new_list[7]}/${new_list[8]}"
   elif [ "${new_list[4]}" == "test" ]; then
     reindex_test_valid_small_partition_folder "8" "${new_list[7]}"
+    echo "${new_list[8]}"
     remote_image_path="${remote_IP}:${remote_dataset_path}/8/${new_small_partition}/${new_list[8]}"
   else
     reindex_test_valid_small_partition_folder "9" "${new_list[7]}"
+    echo "${new_list[8]}"
     remote_image_path="${remote_IP}:${remote_dataset_path}/9/${new_small_partition}/${new_list[8]}"
   fi
   echo "${remote_image_path}"
@@ -98,7 +100,7 @@ check_partical_dataset "${file_type[1]}" "$((big_partition - 2))" "${counter}"
 
 counter=0
 echo "checking validation dataset"
-check_partical_dataset "${file_type[2]}" "$((big_partition - 1))" "${counter}"
+check_partical_dataset "${file_type[2]}" "$((10 - 1))" "${counter}"
 
 echo 'End decompressing'
 echo 'End building local dataset'
