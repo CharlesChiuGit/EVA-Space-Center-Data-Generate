@@ -5,7 +5,6 @@
 # Scroll wheel: zoom in/out
 import json
 import math
-import pygame
 import random
 import time
 from OpenGL.GL import *
@@ -13,34 +12,41 @@ from OpenGL.GLU import *
 from config import *
 # IMPORT OBJECT LOADER
 from objloader import OBJ
+import pygame
 from pygame.constants import *
 from pygame.locals import *
+
+try:
+    from pathlib import Path
+except ImportError:
+    from pathlib2 import Path  # python 2 backport
 
 
 def check_directory(directory):
     directory_path = os.path.join(PATH, directory)
     if not os.path.exists(directory_path):
         logging.info('Create directory {}'.format(directory))
-        os.makedirs(directory_path)
+        # os.makedirs(directory_path)
+        Path(directory_path).mkdir(exist_ok=True)
 
 
 def normalize(coord):
-    temp = [0,0,0]
+    temp = [0, 0, 0]
     temp[0] = coord[0]
     temp[1] = coord[1]
     temp[2] = coord[2]
-    l = (temp[0]**2 + temp[1]**2 + temp[2]**2) ** 0.5
+    l = (temp[0] ** 2 + temp[1] ** 2 + temp[2] ** 2) ** 0.5
     temp[0] /= l
     temp[1] /= l
     temp[2] /= l
     return temp
 
 
-def crossf(a,b):
-    temp = [0,0,0]
-    temp[0] = a[1]*b[2] - a[2]*b[1]
-    temp[1] = a[2]*b[0] - a[0]*b[2]
-    temp[2] = a[0]*b[1] - a[1]*b[0]
+def crossf(a, b):
+    temp = [0, 0, 0]
+    temp[0] = a[1] * b[2] - a[2] * b[1]
+    temp[1] = a[2] * b[0] - a[0] * b[2]
+    temp[2] = a[0] * b[1] - a[1] * b[0]
     return temp
 
 
@@ -159,17 +165,15 @@ if __name__ == '__main__':
     set_light_property(light_position)
     set_filed_of_vision(FOVY, VIEWPORT, Z_NEAR, Z_FAR)
     # create image
-    for i in range(LEVEL_1_INDEX):
+    for i in range(BIG_PARTITION):
         sample_target = {}
         # sample_image = {}
         logging.info('Start creating Part_{}'.format(i))
         part_start = time.time()
-        level_l_directory = '{}'.format(i)
-        check_directory(level_l_directory)
-        for j in range(LEVEL_2_INDEX):
-            level_2_directory = os.path.join(level_l_directory, '{}_{}'.format(i, j))
-            check_directory(level_2_directory)
-            for k in range(IMAGE_INDEX):  # make 1000 images
+        for j in range(SMALL_PARTITION):
+            small_partition_directory = os.path.join('{}/{}_{}'.format(i, i, j))
+            check_directory(small_partition_directory)
+            for k in range(IMAGES_PER_SMALL_PARTITION):
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
                 glLoadIdentity()
 
@@ -184,15 +188,15 @@ if __name__ == '__main__':
                 glCallList(obj.gl_list)
 
                 # SAVE target and image
-                img_name = DATASET_NAME + '_{}'.format((i * IMAGE_INDEX * LEVEL_2_INDEX) + (j * IMAGE_INDEX) + k)
-                # sample_image[img_name] = img.tolist()
+                img_name = DATASET_NAME + '_{}'.format((i * IMAGES_PER_SMALL_PARTITION * SMALL_PARTITION) +
+                                                       (j * IMAGES_PER_SMALL_PARTITION) + k)
                 sample_target[img_name] = {}
                 sample_target[img_name]['spherical'] = [c_gamma, c_theta, c_phi, p_gamma, p_theta, p_phi, u_x, u_y, u_z]
                 sample_target[img_name]['cartesian'] = [c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z]
-                pygame.image.save(srf, os.path.join(PATH, level_2_directory, img_name + '.png'))
+                pygame.image.save(srf, os.path.join(PATH, small_partition_directory, img_name + '.png'))
 
         logging.info('Finish creating Part_{}, time = {}'.format(i, (time.time() - part_start)))
         logging.info('Start saving target_{}'.format(i))
         with open(os.path.join(PATH, 'target_{}.json'.format(i)), 'a') as f:
-            json.dump(sample_target, f)
+            json.dump(sorted(sample_target), f)
         logging.info('Finish saving target_{}'.format(i))

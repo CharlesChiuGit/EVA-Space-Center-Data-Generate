@@ -12,11 +12,12 @@ def set_argument_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument('-dn', '--dataset_name', help='Set Dataset name')
     parser.add_argument('-o', '--object', default='Moon_8K.obj', help='Choose a object model')
-    parser.add_argument('-d', '--defect_img_name', default='Dataset_test_0.png', help='Give the defect image name')
-    parser.add_argument('-i', '--target_index', default=000, help='Which target index, target_X.json')
-    parser.add_argument('-n', '--total_number', default=1, help='Total number of dataset')
-    parser.add_argument('-lv1', '--level_1_index', default=1, help='How many partial you want to divide')
-    parser.add_argument('-lv2', '--level_2_index', default=1, help='How many smaller partial you want to divide')
+    parser.add_argument('-d', '--defect_img_path', default='/data/Dataset_test/0/0_0/Dataset_test_0.png',
+                        help='Give the defect image path')
+    parser.add_argument('-ti', '--target_index', default=000, help='Which target index is the defect image in')
+    parser.add_argument('-n', '--dataset_amount', default=1, help='Total amount of dataset')
+    parser.add_argument('-bp', '--big_partition', default=1, help='How many big partial you want to divide')
+    parser.add_argument('-sp', '--small_partition', default=1, help='How many small partial you want to divide')
     parser.add_argument('-e', '--do_experiment', action="store_true", help='Set True if you want to do experiment')
     parser.add_argument('-en', '--experiment_name', default='test', help='Generate single experiment image')
 
@@ -60,10 +61,10 @@ if not args.do_experiment:
         os.makedirs(PATH)
 
 # hyperparameters
-TOTAL_IMAGE_NUM = int(args.total_number)
-LEVEL_1_INDEX = int(args.level_1_index)
-LEVEL_2_INDEX = int(args.level_2_index)
-IMAGE_INDEX = (TOTAL_IMAGE_NUM / LEVEL_1_INDEX) / LEVEL_2_INDEX
+DATASET_AMOUNT = int(args.dataset_amount)
+BIG_PARTITION = int(args.big_partition)
+SMALL_PARTITION = int(args.small_partition)
+IMAGES_PER_SMALL_PARTITION = (DATASET_AMOUNT / BIG_PARTITION) / SMALL_PARTITION
 
 # Experiment
 if args.do_experiment:

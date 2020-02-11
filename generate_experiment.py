@@ -5,7 +5,6 @@
 # Scroll wheel: zoom in/out
 import json
 import math
-import pygame
 import random
 import time
 import ntpath
@@ -14,6 +13,7 @@ from OpenGL.GLU import *
 from config import *
 # IMPORT OBJECT LOADER
 from objloader import OBJ
+import pygame
 from pygame.constants import *
 from pygame.locals import *
 

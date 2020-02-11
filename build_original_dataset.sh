@@ -23,7 +23,7 @@ cp "regenerate_defect_image.py" ".."
 
 echo 'Start creating original dataset'
 cd "$HOME/space_center/moon_8K/" || exit
-python "generate_dataset.py" -dn "${dataset_name}" -n "${dataset_amount}" -lv1 "${big_partition}" -lv2 "${small_partition}"
+python "generate_dataset.py" -dn "${dataset_name}" -n "${dataset_amount}" -bp "${big_partition}" -sp "${small_partition}"
 echo 'End creating original dataset'
 # ----------------------------------------------
 # Define function
@@ -32,7 +32,7 @@ regenerate_defect_image(){
   target_index=$2
   echo "${defect_image}"
   cd "$HOME/space_center/moon_8K/" || exit
-  python "regenerate_defect_image.py" -d "${defect_image}" -i "${target_index}" -dn "${dataset_name}"
+  python "regenerate_defect_image.py" -d "${defect_image}" -ti "${target_index}" -dn "${dataset_name}"
 }
 
 # ----------------------------------------------
@@ -56,7 +56,7 @@ do
   done
 done
 cd "${git_folder}" || exit
-python "compress_file.py" -dn "${dataset_name}" -lv1 "${big_partition}" -lv2 "${small_partition}"
+python "compress_file.py" -dn "${dataset_name}" -bp "${big_partition}" -sp "${small_partition}"
 echo 'End checking original dataset'
 # ----------------------------------------------
 

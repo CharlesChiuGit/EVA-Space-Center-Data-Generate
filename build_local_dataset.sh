@@ -1,8 +1,8 @@
 #!/bin/bash
 
 dataset_name=$1
-lv1_index=$2
-lv2_index=$3
+big_partition=$2
+small_partition=$3
 counter=0
 remote_dataset_path="/data/${dataset_name}"
 remote_IP='eva@140.113.86.59'
@@ -22,7 +22,7 @@ check_partical_dataset(){
   label_file="${local_dataset_path}/${type}/${data_type[1]}"
   mv "${local_dataset_path}/target_${index}.json"  "${label_file}"
   echo "${index}"
-  for j in $(seq 0 "$((lv2_index - 1))")
+  for j in $(seq 0 "$((small_partition - 1))")
   do
     mkdir -m 777 -v "${image_file}/${counter}/${counter}_$j"
     tar -C "${image_file}/${counter}/${counter}_$j" -xzf "${local_dataset_path}/${file_type[3]}/${index}_$j.tar.gz"
@@ -69,14 +69,14 @@ do
 done
 
 echo "checking train dataset"
-for i in $(seq 0 "$((lv1_index - 3))"); do check_partical_dataset "${file_type[0]}" "$i" "${counter}" && counter=$((counter+1)); done
+for i in $(seq 0 "$((big_partition - 3))"); do check_partical_dataset "${file_type[0]}" "$i" "${counter}" && counter=$((counter+1)); done
 
 counter=0
 echo "checking test dataset"
-check_partical_dataset "${file_type[1]}" "$((lv1_index - 2))" "${counter}"
+check_partical_dataset "${file_type[1]}" "$((big_partition - 2))" "${counter}"
 
 echo "checking validation dataset"
-check_partical_dataset "${file_type[2]}" "$((lv1_index - 1))" "${counter}"
+check_partical_dataset "${file_type[2]}" "$((big_partition - 1))" "${counter}"
 
 echo 'End decompressing'
 echo 'End building local dataset'
