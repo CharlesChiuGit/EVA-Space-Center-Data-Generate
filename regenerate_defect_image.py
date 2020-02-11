@@ -80,9 +80,7 @@ if __name__ == '__main__':
 
     # Move old defect image to /home/eva/space_center/moon_8K/Regen_Image/defect_image/
     defect_path = shutil.move(DEFECT_IMAGE, DEFECT_PATH)
-    print(DEFECT_PATH)
-    print(defect_path)
-    logging.info('{} move to {}'.format(DEFECT_IMAGE, defect_path))
+    logging.info('{} move to {}'.format(DEFECT_IMAGE, DEFECT_PATH))
 
     # SAVE regenerated image
     pygame.image.save(srf, os.path.join(PATCH_PATH, defect_image + '.png'))
