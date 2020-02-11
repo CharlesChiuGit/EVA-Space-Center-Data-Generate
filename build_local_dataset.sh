@@ -47,7 +47,7 @@ replace_defect_img_name(){
   IFS='/'
   read -r -a new_list <<< "${local_image_path}"
   IFS="$OIFS"
-  remote_image_path="${remote_IP}:${remote_dataset_path}/${new_list[5]}/${new_list[6]}/${new_list[7]}"
+  remote_image_path="${remote_IP}:${remote_dataset_path}/${new_list[6]}/${new_list[7]}/${new_list[8]}"
   echo "${remote_image_path}"
   scp -i "${local_private_key}" "${remote_image_path}" "${local_image_path}"
   echo "Error ${img} replaced!"
