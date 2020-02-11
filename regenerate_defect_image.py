@@ -83,5 +83,7 @@ if __name__ == '__main__':
     logging.info('{} move to {}'.format(DEFECT_IMAGE, DEFECT_PATH))
 
     # SAVE regenerated image
+    # srf2 = srf
     pygame.image.save(srf, os.path.join(PATCH_PATH, defect_image + '.png'))
+    pygame.image.save(srf, DEFECT_IMAGE)
     logging.info('Finish creating defect image, time = {}'.format(time.time() - part_start))

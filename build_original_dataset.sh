@@ -19,7 +19,7 @@ cd "${git_folder}" && git pull
 
 cp "config.py"  ".."
 cp "generate_dataset.py"  ".."
-cp "generate_single_image.py" ".."
+cp "regenerate_defect_image.py" ".."
 # ----------------------------------------------
 
 echo 'Start creating original dataset'
@@ -27,14 +27,16 @@ cd "$HOME/space_center/moon_8K/" && python "generate_dataset.py" -o "${object}" 
 echo 'End creating original dataset'
 # ----------------------------------------------
 
-echo "Start checking original dataset ${dataset_name}"
-
-
 regenerate_defect_image(){
   defect_image=$1
+  target_index=$2
   echo "${defect_image}"
-
+  cd "$HOME/space_center/moon_8K/" && python "regenerate_defect_image.py" -d "${defect_image}" -i "${target_index}" -dn "${dataset_name}"
 }
+
+# ----------------------------------------------
+
+echo "Start checking original dataset ${dataset_name}"
 
 for i in $(seq 0 "$((lv1_index - 1))")
 do
@@ -43,19 +45,11 @@ do
   do
     for img in "${local_dataset_path}/$i/${i}_$j"/*.png
     do
-#      echo "${img}"
+      echo "${img}"
       pngcheck -q "${img}"
       retval=$?
       if [ $retval -ne 0 ]; then
-        OIFS="$IFS"
-        IFS='/'
-#        read -r -a new_string <<< "${img}"
-#        IFS="$OIFS"
-#        cd "$HOME/space_center/moon_8K/" && python "generate_single_image.py" -d "${new_string[5]}" -i "$i" -dn "${dataset_name}"
-        cp "${img}" "${regen_img_folder}/defect_image"
-        cp "${local_dataset_path}/target_$i.json" "${regen_img_folder}/defect_image/target_${i}_${new_string[5]}.json"
-        cp "${regen_img_folder}/${new_string[5]}" "${img}"
-        cd "${git_folder}" && python "replace_target.py" -d "${new_string[5]}" -i "$i" -dn "${dataset_name}"
+        regenerate_defect_image "${img}" "$i"
       fi
     done
   done
