@@ -55,8 +55,8 @@ replace_defect_img_name(){
 echo 'Start building local dataset'
 mkdir -p -m 777 -v "${local_dataset_path}"
 mkdir -p -m 777 -v "${local_dataset_path}/${file_type[3]}"
-#scp -i "${local_private_key}" "${remote_IP}:${remote_dataset_path}/${file_type[3]}/*.tar.gz" "${local_dataset_path}/${file_type[3]}"
-#scp -i "${local_private_key}" "${remote_IP}:${remote_dataset_path}/tar*" "${local_dataset_path}"
+scp -i "${local_private_key}" "${remote_IP}:${remote_dataset_path}/${file_type[3]}/*.tar.gz" "${local_dataset_path}/${file_type[3]}"
+scp -i "${local_private_key}" "${remote_IP}:${remote_dataset_path}/target*" "${local_dataset_path}"
 # ----------------------------------------------
 
 echo 'Start decompressing'
