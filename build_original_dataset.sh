@@ -65,6 +65,9 @@ ssh -i "${local_private_key}" "${remote_IP}" bash << "EOF"
   remote_script="build_local_dataset.sh"
   cd "${git_folder}"
   git pull
+  dataset_name='Dataset_test_new'
+  lv1_index=10
+  lv2_index=10
   bash ${remote_script} ${dataset_name} ${lv1_index} ${lv2_index}
   exit
 EOF
