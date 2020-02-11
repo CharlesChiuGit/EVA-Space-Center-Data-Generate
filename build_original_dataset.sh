@@ -1,6 +1,6 @@
 #!/bin/bash
 
-dataset_name='Dataset_test_new_1' # remember to change dataset_name and so on in EOF below
+dataset_name='Dataset_test_new_2' # remember to change dataset_name and so on in EOF below
 big_partition=10
 small_partition=10
 dataset_amount=100
@@ -31,7 +31,8 @@ regenerate_defect_image(){
   defect_image=$1
   target_index=$2
   echo "${defect_image}"
-  cd "$HOME/space_center/moon_8K/" && python "regenerate_defect_image.py" -d "${defect_image}" -i "${target_index}" -dn "${dataset_name}"
+  cd "$HOME/space_center/moon_8K/" || exit
+  python "regenerate_defect_image.py" -d "${defect_image}" -i "${target_index}" -dn "${dataset_name}"
 }
 
 # ----------------------------------------------
@@ -54,7 +55,8 @@ do
     done
   done
 done
-cd "${git_folder}" && python "compress_file.py" -dn "${dataset_name}" -lv1 "${big_partition}" -lv2 "${small_partition}"
+cd "${git_folder}" || exit
+python "compress_file.py" -dn "${dataset_name}" -lv1 "${big_partition}" -lv2 "${small_partition}"
 echo 'End checking original dataset'
 # ----------------------------------------------
 
@@ -66,7 +68,7 @@ ssh -i "${local_private_key}" "${remote_IP}" bash << "EOF"
   remote_script="build_local_dataset.sh"
   cd "${git_folder}"
   git pull
-  dataset_name='Dataset_test_new'
+  dataset_name='Dataset_test_new_2'
   big_partition=10
   small_partition=10
   bash ${remote_script} ${dataset_name} ${big_partition} ${small_partition}
