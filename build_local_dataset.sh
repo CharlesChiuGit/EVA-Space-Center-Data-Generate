@@ -38,8 +38,11 @@ check_partical_dataset(){
     for img in "${image_file}/${counter}/${counter}_$j"/*.png
     do
       echo "$img"
-      echo "$img" && pngcheck -v -q "$img"
+      pngcheck -v -q "$img"
       retval=$?
+      if [ $retval == 0 ]; then
+        echo "image pass pngcheck!"
+      fi
       if [ $retval -ne 0 ]; then
         echo "$img"
         echo "Error: Defect Image"
