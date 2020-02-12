@@ -38,7 +38,7 @@ check_partical_dataset(){
     for img in "${image_file}/${counter}/${counter}_$j"/*.png
     do
       echo "$img"
-      pngcheck -v -q "$img"
+      echo "$img" && pngcheck -v -q "$img"
       retval=$?
       if [ $retval -ne 0 ]; then
         echo "$img"
