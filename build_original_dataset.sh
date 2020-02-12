@@ -47,7 +47,7 @@ do
     for img in "${local_dataset_path}/$i/${i}_$j"/*.png
     do
 #      echo "${img}"
-      pngcheck -q "${img}"
+      pngcheck -v -q "${img}"
       retval=$?
       if [ $retval -ne 0 ]; then
         regenerate_defect_image "${img}" "$i"
