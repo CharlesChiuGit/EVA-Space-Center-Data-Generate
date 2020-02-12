@@ -55,8 +55,8 @@ do
     done
   done
 done
-#cd "${git_folder}" || exit
-#python "compress_file.py" -dn "${dataset_name}" -bp "${big_partition}" -sp "${small_partition}"
+cd "${git_folder}" || exit
+python "compress_file.py" -dn "${dataset_name}" -bp "${big_partition}" -sp "${small_partition}"
 echo 'End checking original dataset'
 # ----------------------------------------------
 
