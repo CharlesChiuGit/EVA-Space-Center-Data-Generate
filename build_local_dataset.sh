@@ -32,7 +32,7 @@ check_partical_dataset(){
   label_file="${local_dataset_path}/${type}/${data_type[1]}"
   mv "${local_dataset_path}/target_${index}.json"  "${label_file}"
   echo "${index}"
-  echi="${small_partition}"
+  echo "${small_partition}"
   for j in $(seq 0 "$((small_partition - 1))")
   do
 #    mkdir -m 777 -v "${image_file}/${counter}/${counter}_$j"
