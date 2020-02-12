@@ -21,10 +21,10 @@ cp "generate_dataset.py"  ".."
 cp "regenerate_defect_image.py" ".."
 # ----------------------------------------------
 
-echo 'Start creating original dataset'
-cd "$HOME/space_center/moon_8K/" || exit
-python "generate_dataset.py" -dn "${dataset_name}" -n "${dataset_amount}" -bp "${big_partition}" -sp "${small_partition}"
-echo 'End creating original dataset'
+#echo 'Start creating original dataset'
+#cd "$HOME/space_center/moon_8K/" || exit
+#python "generate_dataset.py" -dn "${dataset_name}" -n "${dataset_amount}" -bp "${big_partition}" -sp "${small_partition}"
+#echo 'End creating original dataset'
 # ----------------------------------------------
 # Define function
 regenerate_defect_image(){
