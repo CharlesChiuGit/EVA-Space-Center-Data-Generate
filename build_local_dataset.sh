@@ -41,12 +41,12 @@ check_partical_dataset(){
       pngcheck -v -q "$img"
       retval=$?
       if [ $retval == 0 ]; then
-        echo "image pass pngcheck!"
+        echo "$img" && echo "image pass pngcheck!"
       fi
       if [ $retval -ne 0 ]; then
         echo "$img"
         echo "Error: Defect Image"
-        replace_defect_img "$img"
+        echo "$img" && replace_defect_img "$img"
       fi
     done
   done
