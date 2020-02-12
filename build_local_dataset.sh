@@ -37,7 +37,7 @@ check_partical_dataset(){
     tar -C "${image_file}/${counter}/${counter}_$j" -xzf "${local_dataset_path}/${file_type[3]}/${index}_$j.tar.gz"
     for img in "${image_file}/${counter}/${counter}_$j"/*.png
     do
-#      echo "$img"
+      echo "$img"
       pngcheck -v -q "$img"
       retval=$?
       if [ $retval -ne 0 ]; then
