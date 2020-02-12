@@ -14,10 +14,10 @@ git pull
 
 reindex_test_valid_small_partition_folder(){
   big_partition=$1
-  small_partition=$2
+  small_partition_index=$2
   OIFS="$IFS"
   IFS='_'
-  read -r -a new_list <<< "${small_partition}"
+  read -r -a new_list <<< "${small_partition_index}"
   IFS="$OIFS"
   new_small_partition="${big_partition}_${new_list[1]}"
 }
