@@ -9,7 +9,7 @@ import time
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from config import *
-from helper_funtion import *
+from helper_function import *
 # IMPORT OBJECT LOADER
 from objloader import OBJ
 import pygame

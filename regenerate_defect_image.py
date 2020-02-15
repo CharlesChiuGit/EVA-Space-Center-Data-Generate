@@ -3,7 +3,7 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 from config import *
 import shutil
-from helper_funtion import *
+from helper_function import *
 # Import Objloader & Pygame
 from objloader import OBJ
 import pygame

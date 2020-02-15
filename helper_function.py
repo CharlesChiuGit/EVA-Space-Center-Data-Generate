@@ -79,3 +79,4 @@ def download_file_from_remote_device(remote_path, local_path):
     transport, sftp = build_session(remote_ip, remote_user)
     sftp.get(remote_path, local_path)
     transport.close()
+

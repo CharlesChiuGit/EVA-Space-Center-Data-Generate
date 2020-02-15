@@ -1,6 +1,6 @@
 import cv2
 from glob import glob
-from helper_funtion import *
+from helper_function import *
 from config import *
 
 
