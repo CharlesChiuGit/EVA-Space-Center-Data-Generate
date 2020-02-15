@@ -19,7 +19,7 @@ cd "${git_folder}" && git pull
 cp "config.py"  ".."
 cp "generate_dataset.py"  ".."
 cp "regenerate_defect_image.py" ".."
-cp "helper_function.py" ".."
+#cp "helper_function.py" ".."
 # ----------------------------------------------
 
 echo 'Start creating original dataset'
