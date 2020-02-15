@@ -1,9 +1,9 @@
 #!/bin/bash
 
-dataset_name='Dataset_test_3' # remember to change dataset_name and so on in EOF below
-big_partition=10
-small_partition=10
+dataset_name='Dataset_test_4' # remember to change dataset_name and so on in EOF below
 dataset_amount=1000
+big_partition=1
+small_partition=1
 local_dataset_path="/data/${dataset_name}"
 object="Moon_8K.obj"
 git_folder="$HOME/space_center/moon_8K/EVA-Space-Center-Data-Generate"
@@ -69,10 +69,10 @@ ssh -i "${local_private_key}" "${remote_IP}" bash << "EOF"
   remote_script="build_local_dataset.sh"
   cd "${git_folder}"
   git pull
-  dataset_name='Dataset_test_3'
-  big_partition=10
-  small_partition=10
-  dataset_amount=10000
+  dataset_name='Dataset_test_4'
+  dataset_amount=1000
+  big_partition=1
+  small_partition=1
   bash ${remote_script} ${dataset_name} ${big_partition} ${small_partition} ${dataset_amount}
   exit
 EOF
