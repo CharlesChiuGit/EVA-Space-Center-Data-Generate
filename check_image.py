@@ -39,6 +39,8 @@ def check_train_images():
             images_path = dataset_path + '%d/%d_%d/' % (i, i, j)
             images = glob(images_path + '%s*' % DATASET_NAME)
             if len(images) != DATASET_AMOUNT / (SMALL_PARTITION * BIG_PARTITION):
+                print(DATASET_AMOUNT)
+                print(SMALL_PARTITION * BIG_PARTITION)
                 print(DATASET_AMOUNT / (SMALL_PARTITION * BIG_PARTITION))
                 error_messages.append('Number of images incorrect: %s = %d' % (images_path, len(images)))
             for image in images:
