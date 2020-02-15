@@ -63,7 +63,7 @@ def build_session(remote_ip, remote_user):
     private_key = paramiko.RSAKey.from_private_key_file("/home/charleschiu/.ssh/eva_58")
     transport = paramiko.Transport((remote_ip, 22))
     transport.connect(username=remote_user, pkey=private_key)
-    sftp = paramiko.SFTPClient.from_transport(t)
+    sftp = paramiko.SFTPClient.from_transport(transport)
     return transport, sftp
 
 
