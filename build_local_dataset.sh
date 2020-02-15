@@ -3,6 +3,7 @@
 dataset_name=$1
 big_partition=$2
 small_partition=$3
+dataset_amount=$4
 remote_dataset_path="/data/${dataset_name}"
 remote_IP='eva@140.113.86.59'
 local_dataset_path="/data/space/${dataset_name}"
@@ -109,7 +110,7 @@ echo 'End decompressing'
 # ----------------------------------------------
 
 echo "Start checking dataset"
-python "check_image.py" -dn "${dataset_name}" -bp "${big_partition}" -sp "${small_partition}"
+python "check_image.py" -dn "${dataset_name}" -bp "${big_partition}" -sp "${small_partition}" -n "${dataset_amount}"
 
 echo 'End building local dataset'
 

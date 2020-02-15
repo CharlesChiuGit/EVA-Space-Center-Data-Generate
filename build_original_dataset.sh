@@ -72,6 +72,7 @@ ssh -i "${local_private_key}" "${remote_IP}" bash << "EOF"
   dataset_name='Dataset_test_1'
   big_partition=10
   small_partition=10
-  bash ${remote_script} ${dataset_name} ${big_partition} ${small_partition}
+  dataset_amount=100
+  bash ${remote_script} ${dataset_name} ${big_partition} ${small_partition} ${dataset_amount}
   exit
 EOF
