@@ -35,6 +35,7 @@ def check_train_images():
     dataset_path = '/data/space/' + DATASET_NAME + '/train/images/'
     for i in range(8):
         for j in range(10):
+            print(i)
             images_path = dataset_path + '%d/%d_%d/' % (i, i, j)
             images = glob(images_path + '%s*' % DATASET_NAME)
             if len(images) != DATASET_AMOUNT / 100:
