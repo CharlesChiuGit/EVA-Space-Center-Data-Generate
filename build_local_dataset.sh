@@ -12,18 +12,18 @@ data_type=('images' 'labels')
 git pull
 # ----------------------------------------------
 
-reindex_test_valid_small_partition_folder(){
-  big_partition=$1
-  small_partition_index=$2
-  OIFS="$IFS"
-  IFS='_'
-  read -r -a new_list <<< "${small_partition_index}"
-  IFS="$OIFS"
-  new_small_partition="${big_partition}_${new_list[1]}"
-}
+#reindex_test_valid_small_partition_folder(){
+#  big_partition=$1
+#  small_partition_index=$2
+#  OIFS="$IFS"
+#  IFS='_'
+#  read -r -a new_list <<< "${small_partition_index}"
+#  IFS="$OIFS"
+#  new_small_partition="${big_partition}_${new_list[1]}"
+#}
 
 
-check_partical_dataset(){
+decompresse_partical_dataset(){
   type=$1
   index=$2
   counter=$3
@@ -35,45 +35,45 @@ check_partical_dataset(){
   do
     mkdir -m 777 -v "${image_file}/${counter}/${counter}_$j"
     tar -C "${image_file}/${counter}/${counter}_$j" -xzf "${local_dataset_path}/${file_type[3]}/${index}_$j.tar.gz"
-    for img in "${image_file}/${counter}/${counter}_$j"/*.png
-    do
-      echo "$img"
-      pngcheck -v -q "$img"
-      retval=$?
-      if [ $retval == 0 ]; then
-        echo "image pass pngcheck!"
-      fi
-      if [ $retval -ne 0 ]; then
-        echo "Error: Defect Image"
-        echo "$img" && replace_defect_img "$img"
-      fi
-    done
+#    for img in "${image_file}/${counter}/${counter}_$j"/*.png
+#    do
+#      echo "$img"
+#      pngcheck -v -q "$img"
+#      retval=$?
+#      if [ $retval == 0 ]; then
+#        echo "image pass pngcheck!"
+#      fi
+#      if [ $retval -ne 0 ]; then
+#        echo "Error: Defect Image"
+#        echo "$img" && replace_defect_img "$img"
+#      fi
+#    done
   done
 }
 
 
-replace_defect_img(){
-  local_image_path=$1
-  OIFS="$IFS"
-  IFS='/'
-  read -r -a new_list <<< "${local_image_path}"
-  IFS="$OIFS"
-  image_index="${new_list[8]}"
-  if [ "${new_list[4]}" == "train" ]; then
-    remote_image_path="${remote_IP}:${remote_dataset_path}/${new_list[6]}/${new_list[7]}/${image_index}"
-  elif [ "${new_list[4]}" == "test" ]; then
-    reindex_test_valid_small_partition_folder "8" "${new_list[7]}"
-    echo "${image_index}"
-    remote_image_path="${remote_IP}:${remote_dataset_path}/8/${new_small_partition}/${image_index}"
-  else
-    reindex_test_valid_small_partition_folder "9" "${new_list[7]}"
-    echo "${image_index}"
-    remote_image_path="${remote_IP}:${remote_dataset_path}/9/${new_small_partition}/${image_index}"
-  fi
-  echo "${remote_image_path}"
-  scp -i "${local_private_key}" "${remote_image_path}" "${local_image_path}"
-  echo "Error ${img} replaced!"
-}
+#replace_defect_img(){
+#  local_image_path=$1
+#  OIFS="$IFS"
+#  IFS='/'
+#  read -r -a new_list <<< "${local_image_path}"
+#  IFS="$OIFS"
+#  image_index="${new_list[8]}"
+#  if [ "${new_list[4]}" == "train" ]; then
+#    remote_image_path="${remote_IP}:${remote_dataset_path}/${new_list[6]}/${new_list[7]}/${image_index}"
+#  elif [ "${new_list[4]}" == "test" ]; then
+#    reindex_test_valid_small_partition_folder "8" "${new_list[7]}"
+#    echo "${image_index}"
+#    remote_image_path="${remote_IP}:${remote_dataset_path}/8/${new_small_partition}/${image_index}"
+#  else
+#    reindex_test_valid_small_partition_folder "9" "${new_list[7]}"
+#    echo "${image_index}"
+#    remote_image_path="${remote_IP}:${remote_dataset_path}/9/${new_small_partition}/${image_index}"
+#  fi
+#  echo "${remote_image_path}"
+#  scp -i "${local_private_key}" "${remote_image_path}" "${local_image_path}"
+#  echo "Error ${img} replaced!"
+#}
 # ----------------------------------------------
 
 echo 'Start building local dataset'
@@ -93,19 +93,24 @@ do
 done
 
 counter=0
-echo "checking train dataset"
-for i in $(seq 0 "$((big_partition - 3))"); do check_partical_dataset "${file_type[0]}" "$i" "${counter}" && counter=$((counter+1)); done
+echo "decompressing train dataset"
+for i in $(seq 0 "$((big_partition - 3))"); do decompresse_partical_dataset "${file_type[0]}" "$i" "${counter}" && counter=$((counter+1)); done
 
 counter=0
-echo "checking test dataset"
-check_partical_dataset "${file_type[1]}" "$((big_partition - 2))" "${counter}"
+echo "decompressing test dataset"
+decompresse_partical_dataset "${file_type[1]}" "$((big_partition - 2))" "${counter}"
 
 counter=0
 big_partition=$2
-echo "checking validation dataset"
-check_partical_dataset "${file_type[2]}" "$((big_partition - 1))" "${counter}"
+echo "decompressing validation dataset"
+decompresse_partical_dataset "${file_type[2]}" "$((big_partition - 1))" "${counter}"
 
 echo 'End decompressing'
+# ----------------------------------------------
+
+echo "Start checking dataset"
+python "check_image.py" -dn "${dataset_name}" -bp "${big_partition}" -sp "${small_partition}"
+
 echo 'End building local dataset'
 
 #train_image_file="${local_dataset_path}/${file_type[0]}/${data_type[0]}"

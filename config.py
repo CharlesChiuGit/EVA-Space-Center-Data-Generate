@@ -12,8 +12,8 @@ def set_argument_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument('-dn', '--dataset_name', help='Set Dataset name')
     parser.add_argument('-o', '--object', default='Moon_8K.obj', help='Choose a object model')
-    parser.add_argument('-d', '--defect_img_path', help='Give the defect image path')
-    parser.add_argument('-ti', '--target_index', default=000, help='Which target index is the defect image in')
+    parser.add_argument('-d', '--defective_img_path', help='Give the defective image path')
+    parser.add_argument('-ti', '--target_index', default=000, help='Which target index is the defective image in')
     parser.add_argument('-n', '--dataset_amount', default=1, help='Total amount of dataset')
     parser.add_argument('-bp', '--big_partition', default=1, help='How many big partial you want to divide')
     parser.add_argument('-sp', '--small_partition', default=1, help='How many small partial you want to divide')
@@ -32,9 +32,9 @@ OBJECT = args.object
 if not args.do_experiment:
     DATASET_NAME = args.dataset_name
     TARGET_INDEX = args.target_index
-    DEFECT_IMAGE = args.defect_img_path
-    if args.defect_img_path:
-        logging.info('Defect Image Name: {}'.format(args.defect_img_path))
+    DEFECTIVE_IMAGE = args.defective_img_path
+    if args.defective_img_path:
+        logging.info('Defective Image Name: {}'.format(args.defective_img_path))
 
 # Units
 UNIT_REAL = 996.679647  # in km
@@ -54,9 +54,9 @@ if not args.do_experiment:
     DATASET_NAME = args.dataset_name
     PATH = os.path.join('/data', DATASET_NAME)
     PATCH_PATH = '/home/eva/space_center/moon_8K/Regen_Image/'
-    DEFECT_PATH = '/home/eva/space_center/moon_8K/Regen_Image/defect_image/'
+    DEFECTIVE_PATH = '/home/eva/space_center/moon_8K/Regen_Image/defect_image/'
     if not os.path.exists(PATH):
-        logging.info('Create dataset {}'.format(DATASET_NAME))
+        logging.info('This is dataset {}'.format(DATASET_NAME))
         os.makedirs(PATH)
 
 # hyperparameters
