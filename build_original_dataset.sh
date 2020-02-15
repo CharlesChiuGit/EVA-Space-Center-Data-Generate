@@ -1,6 +1,6 @@
 #!/bin/bash
 
-dataset_name='Dataset_fovy120_10k' # remember to change dataset_name and so on in EOF below
+dataset_name='Dataset_test_1' # remember to change dataset_name and so on in EOF below
 big_partition=10
 small_partition=10
 dataset_amount=100
@@ -21,10 +21,10 @@ cp "generate_dataset.py"  ".."
 cp "regenerate_defect_image.py" ".."
 # ----------------------------------------------
 
-#echo 'Start creating original dataset'
-#cd "$HOME/space_center/moon_8K/" || exit
-#python "generate_dataset.py" -dn "${dataset_name}" -n "${dataset_amount}" -bp "${big_partition}" -sp "${small_partition}"
-#echo 'End creating original dataset'
+echo 'Start creating original dataset'
+cd "$HOME/space_center/moon_8K/" || exit
+python "generate_dataset.py" -dn "${dataset_name}" -n "${dataset_amount}" -bp "${big_partition}" -sp "${small_partition}"
+echo 'End creating original dataset'
 # ----------------------------------------------
 # Define function
 regenerate_defect_image(){
@@ -68,7 +68,7 @@ ssh -i "${local_private_key}" "${remote_IP}" bash << "EOF"
   remote_script="build_local_dataset.sh"
   cd "${git_folder}"
   git pull
-  dataset_name='Dataset_fovy120_10k'
+  dataset_name='Dataset_test_1'
   big_partition=10
   small_partition=10
   bash ${remote_script} ${dataset_name} ${big_partition} ${small_partition}
