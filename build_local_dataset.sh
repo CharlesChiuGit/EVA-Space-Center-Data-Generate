@@ -10,6 +10,12 @@ local_dataset_path="/data/space/${dataset_name}"
 local_private_key="$HOME/.ssh/eva_58"
 file_type=('train' 'test' 'validation' 'compressed_file')
 data_type=('images' 'labels')
+
+# ----------------------------------------------
+conda_dir="$HOME/anaconda3/etc/profile.d/"
+# shellcheck source=/dev/null
+source "${conda_dir}/conda.sh"
+conda activate "base"
 git pull
 # ----------------------------------------------
 
