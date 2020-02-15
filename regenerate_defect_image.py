@@ -1,10 +1,9 @@
-import json
 import time
-import ntpath
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from config import *
 import shutil
+from helper_funtion import *
 # Import Objloader & Pygame
 from objloader import OBJ
 import pygame
@@ -14,36 +13,11 @@ from pygame.locals import *
 from generate_dataset import set_viewport, set_light_property, set_filed_of_vision
 
 
-def remove_filename_extension(base_name):
-    file_name = os.path.splitext(base_name)[0]
-
-    return file_name
-
-
-def remove_extra_path(extra_path):
-    image_name = extra_path.split('/')[-1]
-
-    return image_name
-
-
-def read_json(file_path):
-    with open(file_path, 'r') as reader:
-        data = json.loads(reader.read())
-
-    return data.keys(), data
-
-
-def path_leaf(path):
-    head, tail = ntpath.split(path)
-
-    return tail or ntpath.basename(head)
-
-
-def find_defect_image_target_value(defect_image):
+def find_defect_image_target_value(defective_image):
     label_path = os.path.join(PATH, 'target_' + TARGET_INDEX + '.json')
     with open(label_path, 'r') as reader:
         data = json.loads(reader.read())
-    [c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z] = data[defect_image]['cartesian']
+    [c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z] = data[defective_image]['cartesian']
 
     return c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z
 

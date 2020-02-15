@@ -3,25 +3,18 @@
 # LMB + move: rotate
 # RMB + move: pan
 # Scroll wheel: zoom in/out
-import json
 import math
 import random
 import time
 from OpenGL.GL import *
 from OpenGL.GLU import *
 from config import *
+from helper_funtion import *
 # IMPORT OBJECT LOADER
 from objloader import OBJ
 import pygame
 from pygame.constants import *
 from pygame.locals import *
-
-
-def check_directory(directory):
-    directory_path = os.path.join(PATH, directory)
-    if not os.path.exists(directory_path):
-        logging.info('Create directory {}'.format(directory))
-        os.makedirs(directory_path)
 
 
 def normalize(coord):
