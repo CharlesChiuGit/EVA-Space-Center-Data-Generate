@@ -84,35 +84,35 @@ decompresse_partical_dataset(){
 # ----------------------------------------------
 
 echo 'Start building local dataset'
-#mkdir -m 777 -v "${local_dataset_path}"
-#mkdir -m 777 -v "${local_dataset_path}/${file_type[3]}"
-#scp -i "${local_private_key}" "${remote_IP}:${remote_dataset_path}/${file_type[3]}/*.tar.gz" "${local_dataset_path}/${file_type[3]}"
-#scp -i "${local_private_key}" "${remote_IP}:${remote_dataset_path}/target*" "${local_dataset_path}"
+mkdir -m 777 -v "${local_dataset_path}"
+mkdir -m 777 -v "${local_dataset_path}/${file_type[3]}"
+scp -i "${local_private_key}" "${remote_IP}:${remote_dataset_path}/${file_type[3]}/*.tar.gz" "${local_dataset_path}/${file_type[3]}"
+scp -i "${local_private_key}" "${remote_IP}:${remote_dataset_path}/target*" "${local_dataset_path}"
 # ----------------------------------------------
 
-#echo 'Start decompressing'
-#
-#for i in $(seq 0 2)
-#do
-#  mkdir -m 777 -v "${local_dataset_path}/${file_type[i]}"
-#  mkdir -m 777 -v "${local_dataset_path}/${file_type[i]}/${data_type[0]}"
-#  mkdir -m 777 -v "${local_dataset_path}/${file_type[i]}/${data_type[1]}"
-#done
-#
-#counter=0
-#echo "decompressing train dataset"
-#for i in $(seq 0 "$((big_partition - 3))"); do decompresse_partical_dataset "${file_type[0]}" "$i" "${counter}" && counter=$((counter+1)); done
-#
-#counter=0
-#echo "decompressing test dataset"
-#decompresse_partical_dataset "${file_type[1]}" "$((big_partition - 2))" "${counter}"
-#
-#counter=0
-#big_partition=$2
-#echo "decompressing validation dataset"
-#decompresse_partical_dataset "${file_type[2]}" "$((big_partition - 1))" "${counter}"
-#
-#echo 'End decompressing'
+echo 'Start decompressing'
+
+for i in $(seq 0 2)
+do
+  mkdir -m 777 -v "${local_dataset_path}/${file_type[i]}"
+  mkdir -m 777 -v "${local_dataset_path}/${file_type[i]}/${data_type[0]}"
+  mkdir -m 777 -v "${local_dataset_path}/${file_type[i]}/${data_type[1]}"
+done
+
+counter=0
+echo "decompressing train dataset"
+for i in $(seq 0 "$((big_partition - 3))"); do decompresse_partical_dataset "${file_type[0]}" "$i" "${counter}" && counter=$((counter+1)); done
+
+counter=0
+echo "decompressing test dataset"
+decompresse_partical_dataset "${file_type[1]}" "$((big_partition - 2))" "${counter}"
+
+counter=0
+big_partition=$2
+echo "decompressing validation dataset"
+decompresse_partical_dataset "${file_type[2]}" "$((big_partition - 1))" "${counter}"
+
+echo 'End decompressing'
 # ----------------------------------------------
 
 echo "Start checking dataset"
