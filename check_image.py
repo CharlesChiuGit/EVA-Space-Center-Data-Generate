@@ -33,12 +33,12 @@ def check_dataset_images():
 def check_train_images():
     error_messages = []
     dataset_path = '/data/space/' + DATASET_NAME + '/train/images/'
-    for i in range(8):
+    for i in range(BIG_PARTITION - 2):
         print(i)
-        for j in range(10):
+        for j in range(SMALL_PARTITION):
             images_path = dataset_path + '%d/%d_%d/' % (i, i, j)
             images = glob(images_path + '%s*' % DATASET_NAME)
-            if len(images) != DATASET_AMOUNT / 100:
+            if len(images) != DATASET_AMOUNT / (SMALL_PARTITION * BIG_PARTITION):
                 error_messages.append('Number of images incorrect: %s = %d' % (images_path, len(images)))
             for image in images:
                 img = cv2.imread(image, 0)
@@ -55,10 +55,10 @@ def check_test_images():
     error_messages = []
     dataset_path = '/data/space/' + DATASET_NAME + '/test/images/'
     for i in range(1):
-        for j in range(10):
+        for j in range(SMALL_PARTITION):
             images_path = dataset_path + '%d/%d_%d/' % (i, i, j)
             images = glob(images_path + '%s*' % DATASET_NAME)
-            if len(images) != DATASET_AMOUNT / 100:
+            if len(images) != DATASET_AMOUNT / (SMALL_PARTITION * BIG_PARTITION):
                 error_messages.append('Number of images incorrect: %s = %d' % (images_path, len(images)))
             for image in images:
                 img = cv2.imread(image, 0)
@@ -75,10 +75,10 @@ def check_validation_images():
     error_messages = []
     dataset_path = '/data/space/' + DATASET_NAME + '/validation/images/'
     for i in range(1):
-        for j in range(10):
+        for j in range(SMALL_PARTITION):
             images_path = dataset_path + '%d/%d_%d/' % (i, i, j)
             images = glob(images_path + '%s*' % DATASET_NAME)
-            if len(images) != DATASET_AMOUNT / 100:
+            if len(images) != DATASET_AMOUNT / (SMALL_PARTITION * BIG_PARTITION):
                 error_messages.append('Number of images incorrect: %s = %d' % (images_path, len(images)))
             for image in images:
                 img = cv2.imread(image, 0)
