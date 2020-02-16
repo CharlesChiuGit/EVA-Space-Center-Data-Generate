@@ -1,10 +1,10 @@
 #!/bin/bash
 
-dataset_name='Dataset_test_6' # remember to change dataset_name and so on in EOF below
-dataset_amount=5000
+dataset_name='Dataset_test_7' # remember to change dataset_name and so on in EOF below
+dataset_amount=1000
 big_partition=10
 small_partition=10
-local_dataset_path="/data/${dataset_name}"
+#local_dataset_path="/data/${dataset_name}"
 object="Moon_8K.obj"
 git_folder="$HOME/space_center/moon_8K/EVA-Space-Center-Data-Generate"
 # ----------------------------------------------
@@ -19,7 +19,7 @@ cd "${git_folder}" && git pull
 cp "config.py"  ".."
 cp "generate_dataset.py"  ".."
 cp "regenerate_defect_image.py" ".."
-cp "chech_original_dataset.py" ".."
+cp "check_original_dataset.py" ".."
 #cp "helper_function.py" ".."
 # ----------------------------------------------
 
@@ -40,8 +40,8 @@ echo 'End creating original dataset'
 # ----------------------------------------------
 
 echo "Start checking original dataset"
-
-python "chech_original_dataset.py" -dn "${dataset_name}" -bp "${big_partition}" -sp "${small_partition}" -n "${dataset_amount}"
+cd "$HOME/space_center/moon_8K/" || exit
+python "check_original_dataset.py" -dn "${dataset_name}" -bp "${big_partition}" -sp "${small_partition}" -n "${dataset_amount}"
 #for i in $(seq 0 "$((big_partition - 1))")
 #do
 #  echo "${i}"
@@ -71,8 +71,8 @@ ssh -i "${local_private_key}" "${remote_IP}" bash << "EOF"
   remote_script="build_local_dataset.sh"
   cd "${git_folder}"
   git pull
-  dataset_name='Dataset_test_6'
-  dataset_amount=5000
+  dataset_name='Dataset_test_7'
+  dataset_amount=1000
   big_partition=10
   small_partition=10
   bash ${remote_script} ${dataset_name} ${big_partition} ${small_partition} ${dataset_amount}
