@@ -1,7 +1,7 @@
 #!/bin/bash
 
-dataset_name='Dataset_test_5' # remember to change dataset_name and so on in EOF below
-dataset_amount=100
+dataset_name='Dataset_test_6' # remember to change dataset_name and so on in EOF below
+dataset_amount=10000
 big_partition=10
 small_partition=10
 local_dataset_path="/data/${dataset_name}"
@@ -19,6 +19,7 @@ cd "${git_folder}" && git pull
 cp "config.py"  ".."
 cp "generate_dataset.py"  ".."
 cp "regenerate_defect_image.py" ".."
+cp "chech_original_dataset.py" ".."
 #cp "helper_function.py" ".."
 # ----------------------------------------------
 
@@ -28,17 +29,17 @@ python "generate_dataset.py" -dn "${dataset_name}" -n "${dataset_amount}" -bp "$
 echo 'End creating original dataset'
 # ----------------------------------------------
 # Define function
-regenerate_defect_image(){
-  defect_image=$1
-  target_index=$2
-  echo "${defect_image}"
-  cd "$HOME/space_center/moon_8K/" || exit
-  python "regenerate_defect_image.py" -d "${defect_image}" -ti "${target_index}" -dn "${dataset_name}"
-}
+#regenerate_defect_image(){
+#  defect_image=$1
+#  target_index=$2
+#  echo "${defect_image}"
+#  cd "$HOME/space_center/moon_8K/" || exit
+#  python "regenerate_defect_image.py" -d "${defect_image}" -ti "${target_index}" -dn "${dataset_name}"
+#}
 
 # ----------------------------------------------
 
-echo "Start checking original dataset ${dataset_name}"
+echo "Start checking original dataset"
 
 python "chech_original_dataset.py" -dn "${dataset_name}" -bp "${big_partition}" -sp "${small_partition}" -n "${dataset_amount}"
 #for i in $(seq 0 "$((big_partition - 1))")
@@ -70,8 +71,8 @@ ssh -i "${local_private_key}" "${remote_IP}" bash << "EOF"
   remote_script="build_local_dataset.sh"
   cd "${git_folder}"
   git pull
-  dataset_name='Dataset_test_5'
-  dataset_amount=100
+  dataset_name='Dataset_test_6'
+  dataset_amount=10000
   big_partition=10
   small_partition=10
   bash ${remote_script} ${dataset_name} ${big_partition} ${small_partition} ${dataset_amount}
