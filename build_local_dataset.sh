@@ -116,7 +116,7 @@ echo 'End decompressing'
 # ----------------------------------------------
 
 echo "Start checking dataset"
-python "check_image.py" -dn "${dataset_name}" -bp "${big_partition}" -sp "${small_partition}" -n "${dataset_amount}"
+python "check_local_dataset.py" -dn "${dataset_name}" -bp "${big_partition}" -sp "${small_partition}" -n "${dataset_amount}"
 
 echo 'End building local dataset'
 

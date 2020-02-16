@@ -1,9 +1,9 @@
 #!/bin/bash
 
-dataset_name='Dataset_test_4' # remember to change dataset_name and so on in EOF below
-dataset_amount=1000
-big_partition=1
-small_partition=1
+dataset_name='Dataset_test_5' # remember to change dataset_name and so on in EOF below
+dataset_amount=100
+big_partition=10
+small_partition=10
 local_dataset_path="/data/${dataset_name}"
 object="Moon_8K.obj"
 git_folder="$HOME/space_center/moon_8K/EVA-Space-Center-Data-Generate"
@@ -40,22 +40,23 @@ regenerate_defect_image(){
 
 echo "Start checking original dataset ${dataset_name}"
 
-for i in $(seq 0 "$((big_partition - 1))")
-do
-  echo "${i}"
-  for j in $(seq 0 "$((small_partition - 1))")
-  do
-    for img in "${local_dataset_path}/$i/${i}_$j"/*.png
-    do
-#      echo "${img}"
-      pngcheck -v -q "${img}"
-      retval=$?
-      if [ $retval -ne 0 ]; then
-        regenerate_defect_image "${img}" "$i"
-      fi
-    done
-  done
-done
+python "chech_original_dataset.py" -dn "${dataset_name}" -bp "${big_partition}" -sp "${small_partition}" -n "${dataset_amount}"
+#for i in $(seq 0 "$((big_partition - 1))")
+#do
+#  echo "${i}"
+#  for j in $(seq 0 "$((small_partition - 1))")
+#  do
+#    for img in "${local_dataset_path}/$i/${i}_$j"/*.png
+#    do
+##      echo "${img}"
+#      pngcheck -v -q "${img}"
+#      retval=$?
+#      if [ $retval -ne 0 ]; then
+#        regenerate_defect_image "${img}" "$i"
+#      fi
+#    done
+#  done
+#done
 cd "${git_folder}" || exit
 python "compress_file.py" -dn "${dataset_name}" -bp "${big_partition}" -sp "${small_partition}"
 echo 'End checking original dataset'
@@ -69,10 +70,10 @@ ssh -i "${local_private_key}" "${remote_IP}" bash << "EOF"
   remote_script="build_local_dataset.sh"
   cd "${git_folder}"
   git pull
-  dataset_name='Dataset_test_4'
-  dataset_amount=1000
-  big_partition=1
-  small_partition=1
+  dataset_name='Dataset_test_5'
+  dataset_amount=100
+  big_partition=10
+  small_partition=10
   bash ${remote_script} ${dataset_name} ${big_partition} ${small_partition} ${dataset_amount}
   exit
 EOF
