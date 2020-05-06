@@ -1,6 +1,7 @@
 import os
 import logging
 import argparse
+import math
 
 
 # set SDL to use the dummy NULL video driver,
@@ -37,17 +38,19 @@ if not args.do_experiment:
         logging.info('Defective Image Name: {}'.format(args.defective_img_path))
 
 # Units
-UNIT_REAL = 996.679647  # in km
-MOON_RADIUS = 1.742887
-OPENGL_1_METER = 0.001 / UNIT_REAL
+MODEL_SCALE = 1000  # in km (moon_radius:1737.1 km / model_average_radius:1.7426323333333331)
+MOON_RADIUS = 1.74590086  # (x:1.74223 + z:1.745721 + y:1.739946) / 3
+OPENGL_1_METER = 0.001 / MODEL_SCALE
 
 # Constraints
-VIEWPORT = [800, 600]
+VIEWPORT = [600, 600]
 FOVY = 120  # in degrees
-Z_NEAR = 1.0
-Z_FAR = 100.0
-LOWER_BOUND = MOON_RADIUS + (OPENGL_1_METER * 200)  # 200m above moon surface
-UPPER_BOUND = MOON_RADIUS + (OPENGL_1_METER * 10000)  # 80,000m above moon surface
+Z_NEAR = 1.0  # at z=0, in meter
+Z_FAR = 100.0  # z!=0, in meter
+depth_from_zNear = 10  # range:[Z_NEAR, Z_FAR]
+PIXEL_TO_METER = VIEWPORT[1] / ((2 * math.tan(FOVY/2 * math.pi))*(Z_NEAR + depth_from_zNear))
+LOWER_BOUND = MOON_RADIUS + 0.0002  # 200m above moon surface
+UPPER_BOUND = MOON_RADIUS + 0.08  # 80,000m above moon surface
 
 # PATH
 if not args.do_experiment:

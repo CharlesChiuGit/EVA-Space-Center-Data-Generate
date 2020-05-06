@@ -7,15 +7,35 @@ import json
 import math
 import random
 import time
+import logging
 import ntpath
+import os
+from PIL import Image
+from PIL import ImageOps
 from OpenGL.GL import *
 from OpenGL.GLU import *
-from config import *
+# from config import *
 # IMPORT OBJECT LOADER
 from objloader import OBJ
 import pygame
 from pygame.constants import *
 from pygame.locals import *
+
+EXPERIMENT_PATH = "D:/Experiment"
+# # Units
+UNIT_REAL = 1000  # in km (moon_radius:1737.1 km / model_average_radius:1.7426323333333331)
+MOON_RADIUS = 1.74590086
+OPENGL_1_METER = 0.001 / UNIT_REAL
+
+# Constraints
+VIEWPORT = [800, 800]
+FOVY = 120  # in degrees
+Z_NEAR = 1.0
+Z_FAR = 100.0
+LOWER_BOUND = MOON_RADIUS + 0.0002  # 200m above moon surface
+UPPER_BOUND = MOON_RADIUS + 0.08  # 80,000m above moon surface
+
+OBJECT = "D:/EVA-Lab/Moon_8K_model/Moon_8K.obj"
 
 
 def check_directory(directory):
@@ -38,22 +58,22 @@ def remove_filename_extension(base_name):
 
 
 def normalize(coord):
-    temp = [0,0,0]
+    temp = [0, 0, 0]
     temp[0] = coord[0]
     temp[1] = coord[1]
     temp[2] = coord[2]
-    l = (temp[0]**2 + temp[1]**2 + temp[2]**2) ** 0.5
+    l = (temp[0] ** 2 + temp[1] ** 2 + temp[2] ** 2) ** 0.5
     temp[0] /= l
     temp[1] /= l
     temp[2] /= l
     return temp
 
 
-def crossf(a,b):
-    temp = [0,0,0]
-    temp[0] = a[1]*b[2] - a[2]*b[1]
-    temp[1] = a[2]*b[0] - a[0]*b[2]
-    temp[2] = a[0]*b[1] - a[1]*b[0]
+def crossf(a, b):
+    temp = [0, 0, 0]
+    temp[0] = a[1] * b[2] - a[2] * b[1]
+    temp[1] = a[2] * b[0] - a[0] * b[2]
+    temp[2] = a[0] * b[1] - a[1] * b[0]
     return temp
 
 
@@ -178,7 +198,7 @@ if __name__ == '__main__':
     glLoadIdentity()
 
     # CAMERA location
-    c_gamma, c_theta, c_phi = MOON_RADIUS + (OPENGL_1_METER * 10), 0, 0
+    c_gamma, c_theta, c_phi = MOON_RADIUS + (OPENGL_1_METER * 10), 0 * math.pi, 0 * math.pi
     c_x, c_y, c_z = ball_coordinates_to_cassette_coordinates(c_gamma, c_theta, c_phi)
     # WHERE does camera look at
     p_gamma, p_theta, p_phi = 0, 0, 0
@@ -193,113 +213,120 @@ if __name__ == '__main__':
     glCallList(obj.gl_list)
 
     # SAVE target and image
-    img_name = remove_filename_extension(EXPERIMENT_IMAGE)
-    sample_target[img_name] = {}
-    sample_target[img_name]['spherical'] = [c_gamma, c_theta, c_phi, p_gamma, p_theta, p_phi, u_x, u_y, u_z]
-    sample_target[img_name]['cartesian'] = [c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z]
+    # img_name = remove_filename_extension(EXPERIMENT_IMAGE)
+    img_name = 'OpenGL_FOV{3}_c{0}_at{1}_up{2}'.format((c_gamma, c_theta, c_phi),
+                                                    (p_x, p_y, p_z),
+                                                    (u_x, u_y, u_z), FOVY)
+    # sample_target[img_name] = {}
+    # sample_target[img_name]['spherical'] = [c_gamma, c_theta, c_phi, p_gamma, p_theta, p_phi, u_x, u_y, u_z]
+    # sample_target[img_name]['cartesian'] = [c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z]
     pygame.image.save(srf, os.path.join(EXPERIMENT_PATH, img_name + '.png'))
 
-    logging.info('Finish creating image, time = {}'.format(time.time() - part_start))
-    logging.info('Start saving target')
-    with open(os.path.join(EXPERIMENT_PATH, 'target_' + img_name + '.json'), 'a') as f:
-        json.dump(sample_target, f)
-    logging.info('Finish saving target')
+    images = Image.open(os.path.join(EXPERIMENT_PATH, img_name + '.png'))
+    images = ImageOps.mirror(images)
+    images.save(os.path.join(EXPERIMENT_PATH, img_name + '.png'))
 
-    ############################ Second Image
-    EXPERIMENT_IMAGE = "far"
-    # create image
-    sample_target = {}
-    part_start = time.time()
-    logging.info('Start creating experiment image ' + EXPERIMENT_IMAGE)
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-    glLoadIdentity()
-    # CAMERA location
-    c_gamma, c_theta, c_phi = MOON_RADIUS + (OPENGL_1_METER * 10000000), 0, 0
-    c_x, c_y, c_z = ball_coordinates_to_cassette_coordinates(c_gamma, c_theta, c_phi)
-    # WHERE does camera look at
-    p_gamma, p_theta, p_phi = 0, 0, 0
-    p_x, p_y, p_z = ball_coordinates_to_cassette_coordinates(p_gamma, p_theta, p_phi)
-    # DIRECTION of camera
-    u_x, u_y, u_z = camera_direction(c_x, c_y, c_z, p_x, p_y, p_z)
-    # take the shoot
-    print(c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z)
-    gluLookAt(c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z)
-    glCallList(obj.gl_list)
-    # SAVE target and image
-    img_name = remove_filename_extension(EXPERIMENT_IMAGE)
-    sample_target[img_name] = {}
-    sample_target[img_name]['spherical'] = [c_gamma, c_theta, c_phi, p_gamma, p_theta, p_phi, u_x, u_y, u_z]
-    sample_target[img_name]['cartesian'] = [c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z]
-    pygame.image.save(srf, os.path.join(EXPERIMENT_PATH, img_name + '.png'))
+    # logging.info('Finish creating image, time = {}'.format(time.time() - part_start))
+    # logging.info('Start saving target')
+    # with open(os.path.join(EXPERIMENT_PATH, 'target_' + img_name + '.json'), 'a') as f:
+    #     json.dump(sample_target, f)
+    # logging.info('Finish saving target')
 
-    logging.info('Finish creating image, time = {}'.format(time.time() - part_start))
-    logging.info('Start saving target')
-    with open(os.path.join(EXPERIMENT_PATH, 'target_' + img_name + '.json'), 'a') as f:
-        json.dump(sample_target, f)
-    logging.info('Finish saving target')
-
-    ##################################### Third Image
-    EXPERIMENT_IMAGE = "30k_m"
-    # create image
-    sample_target = {}
-    part_start = time.time()
-    logging.info('Start creating experiment image ' + EXPERIMENT_IMAGE)
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-    glLoadIdentity()
-    # CAMERA location
-    c_gamma, c_theta, c_phi = MOON_RADIUS + (OPENGL_1_METER * 30000), 0, 0
-    c_x, c_y, c_z = ball_coordinates_to_cassette_coordinates(c_gamma, c_theta, c_phi)
-    # WHERE does camera look at
-    p_gamma, p_theta, p_phi = 0, 0, 0
-    p_x, p_y, p_z = ball_coordinates_to_cassette_coordinates(p_gamma, p_theta, p_phi)
-    # DIRECTION of camera
-    u_x, u_y, u_z = camera_direction(c_x, c_y, c_z, p_x, p_y, p_z)
-    # take the shoot
-    print(c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z)
-    gluLookAt(c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z)
-    glCallList(obj.gl_list)
-    # SAVE target and image
-    img_name = remove_filename_extension(EXPERIMENT_IMAGE)
-    sample_target[img_name] = {}
-    sample_target[img_name]['spherical'] = [c_gamma, c_theta, c_phi, p_gamma, p_theta, p_phi, u_x, u_y, u_z]
-    sample_target[img_name]['cartesian'] = [c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z]
-    pygame.image.save(srf, os.path.join(EXPERIMENT_PATH, img_name + '.png'))
-
-    logging.info('Finish creating image, time = {}'.format(time.time() - part_start))
-    logging.info('Start saving target')
-    with open(os.path.join(EXPERIMENT_PATH, 'target_' + img_name + '.json'), 'a') as f:
-        json.dump(sample_target, f)
-    logging.info('Finish saving target')
-
-    ##################################### Forth Image
-    EXPERIMENT_IMAGE = "50k_m"
-    # create image
-    sample_target = {}
-    part_start = time.time()
-    logging.info('Start creating experiment image ' + EXPERIMENT_IMAGE)
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-    glLoadIdentity()
-    # CAMERA location
-    c_gamma, c_theta, c_phi = MOON_RADIUS + (OPENGL_1_METER * 50000), 0, 0
-    c_x, c_y, c_z = ball_coordinates_to_cassette_coordinates(c_gamma, c_theta, c_phi)
-    # WHERE does camera look at
-    p_gamma, p_theta, p_phi = 0, 0, 0
-    p_x, p_y, p_z = ball_coordinates_to_cassette_coordinates(p_gamma, p_theta, p_phi)
-    # DIRECTION of camera
-    u_x, u_y, u_z = camera_direction(c_x, c_y, c_z, p_x, p_y, p_z)
-    # take the shoot
-    print(c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z)
-    gluLookAt(c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z)
-    glCallList(obj.gl_list)
-    # SAVE target and image
-    img_name = remove_filename_extension(EXPERIMENT_IMAGE)
-    sample_target[img_name] = {}
-    sample_target[img_name]['spherical'] = [c_gamma, c_theta, c_phi, p_gamma, p_theta, p_phi, u_x, u_y, u_z]
-    sample_target[img_name]['cartesian'] = [c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z]
-    pygame.image.save(srf, os.path.join(EXPERIMENT_PATH, img_name + '.png'))
-
-    logging.info('Finish creating image, time = {}'.format(time.time() - part_start))
-    logging.info('Start saving target')
-    with open(os.path.join(EXPERIMENT_PATH, 'target_' + img_name + '.json'), 'a') as f:
-        json.dump(sample_target, f)
-    logging.info('Finish saving target')
+    # ############################ Second Image
+    # EXPERIMENT_IMAGE = "far"
+    # # create image
+    # sample_target = {}
+    # part_start = time.time()
+    # logging.info('Start creating experiment image ' + EXPERIMENT_IMAGE)
+    # glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+    # glLoadIdentity()
+    # # CAMERA location
+    # c_gamma, c_theta, c_phi = MOON_RADIUS + (OPENGL_1_METER * 10000000), 0, 0
+    # c_x, c_y, c_z = ball_coordinates_to_cassette_coordinates(c_gamma, c_theta, c_phi)
+    # # WHERE does camera look at
+    # p_gamma, p_theta, p_phi = 0, 0, 0
+    # p_x, p_y, p_z = ball_coordinates_to_cassette_coordinates(p_gamma, p_theta, p_phi)
+    # # DIRECTION of camera
+    # u_x, u_y, u_z = camera_direction(c_x, c_y, c_z, p_x, p_y, p_z)
+    # # take the shoot
+    # print(c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z)
+    # gluLookAt(c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z)
+    # glCallList(obj.gl_list)
+    # # SAVE target and image
+    # img_name = remove_filename_extension(EXPERIMENT_IMAGE)
+    # sample_target[img_name] = {}
+    # sample_target[img_name]['spherical'] = [c_gamma, c_theta, c_phi, p_gamma, p_theta, p_phi, u_x, u_y, u_z]
+    # sample_target[img_name]['cartesian'] = [c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z]
+    # pygame.image.save(srf, os.path.join(EXPERIMENT_PATH, img_name + '.png'))
+    #
+    # logging.info('Finish creating image, time = {}'.format(time.time() - part_start))
+    # logging.info('Start saving target')
+    # with open(os.path.join(EXPERIMENT_PATH, 'target_' + img_name + '.json'), 'a') as f:
+    #     json.dump(sample_target, f)
+    # logging.info('Finish saving target')
+    #
+    # ##################################### Third Image
+    # EXPERIMENT_IMAGE = "30k_m"
+    # # create image
+    # sample_target = {}
+    # part_start = time.time()
+    # logging.info('Start creating experiment image ' + EXPERIMENT_IMAGE)
+    # glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+    # glLoadIdentity()
+    # # CAMERA location
+    # c_gamma, c_theta, c_phi = MOON_RADIUS + (OPENGL_1_METER * 30000), 0, 0
+    # c_x, c_y, c_z = ball_coordinates_to_cassette_coordinates(c_gamma, c_theta, c_phi)
+    # # WHERE does camera look at
+    # p_gamma, p_theta, p_phi = 0, 0, 0
+    # p_x, p_y, p_z = ball_coordinates_to_cassette_coordinates(p_gamma, p_theta, p_phi)
+    # # DIRECTION of camera
+    # u_x, u_y, u_z = camera_direction(c_x, c_y, c_z, p_x, p_y, p_z)
+    # # take the shoot
+    # print(c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z)
+    # gluLookAt(c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z)
+    # glCallList(obj.gl_list)
+    # # SAVE target and image
+    # img_name = remove_filename_extension(EXPERIMENT_IMAGE)
+    # sample_target[img_name] = {}
+    # sample_target[img_name]['spherical'] = [c_gamma, c_theta, c_phi, p_gamma, p_theta, p_phi, u_x, u_y, u_z]
+    # sample_target[img_name]['cartesian'] = [c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z]
+    # pygame.image.save(srf, os.path.join(EXPERIMENT_PATH, img_name + '.png'))
+    #
+    # logging.info('Finish creating image, time = {}'.format(time.time() - part_start))
+    # logging.info('Start saving target')
+    # with open(os.path.join(EXPERIMENT_PATH, 'target_' + img_name + '.json'), 'a') as f:
+    #     json.dump(sample_target, f)
+    # logging.info('Finish saving target')
+    #
+    # ##################################### Forth Image
+    # EXPERIMENT_IMAGE = "50k_m"
+    # # create image
+    # sample_target = {}
+    # part_start = time.time()
+    # logging.info('Start creating experiment image ' + EXPERIMENT_IMAGE)
+    # glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+    # glLoadIdentity()
+    # # CAMERA location
+    # c_gamma, c_theta, c_phi = MOON_RADIUS + (OPENGL_1_METER * 50000), 0, 0
+    # c_x, c_y, c_z = ball_coordinates_to_cassette_coordinates(c_gamma, c_theta, c_phi)
+    # # WHERE does camera look at
+    # p_gamma, p_theta, p_phi = 0, 0, 0
+    # p_x, p_y, p_z = ball_coordinates_to_cassette_coordinates(p_gamma, p_theta, p_phi)
+    # # DIRECTION of camera
+    # u_x, u_y, u_z = camera_direction(c_x, c_y, c_z, p_x, p_y, p_z)
+    # # take the shoot
+    # print(c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z)
+    # gluLookAt(c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z)
+    # glCallList(obj.gl_list)
+    # # SAVE target and image
+    # img_name = remove_filename_extension(EXPERIMENT_IMAGE)
+    # sample_target[img_name] = {}
+    # sample_target[img_name]['spherical'] = [c_gamma, c_theta, c_phi, p_gamma, p_theta, p_phi, u_x, u_y, u_z]
+    # sample_target[img_name]['cartesian'] = [c_x, c_y, c_z, p_x, p_y, p_z, u_x, u_y, u_z]
+    # pygame.image.save(srf, os.path.join(EXPERIMENT_PATH, img_name + '.png'))
+    #
+    # logging.info('Finish creating image, time = {}'.format(time.time() - part_start))
+    # logging.info('Start saving target')
+    # with open(os.path.join(EXPERIMENT_PATH, 'target_' + img_name + '.json'), 'a') as f:
+    #     json.dump(sample_target, f)
+    # logging.info('Finish saving target')
